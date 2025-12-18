@@ -27,7 +27,7 @@ html,body{height:100%;margin:0;background:linear-gradient(180deg,#071029 0%, #0b
 .hero-actions{display:flex;gap:.75rem}
 .btn{background:linear-gradient(90deg,var(--accent),#4f46e5);padding:.6rem 1rem;border-radius:10px;color:white;text-decoration:none;font-weight:600}
 .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04)}
-.btn.small{padding:.45rem .75rem;font-size:.9rem}
+.btn.small{padding:.45rem .75rem;font-size:.9rem;display:inline-block}
 .btn.outline{background:transparent;border:1px solid rgba(255,255,255,0.06)}
 
 .hero-art{width:100%;max-height:320px;object-fit:cover;border-radius:14px;box-shadow:0 8px 30px rgba(2,6,23,0.7)}
@@ -35,26 +35,85 @@ html,body{height:100%;margin:0;background:linear-gradient(180deg,#071029 0%, #0b
 .section-title{font-size:1.4rem;margin:0 0 .25rem}
 .section-sub{color:var(--muted);margin:0 0 1.25rem}
 
+/* Grid and cards */
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
-.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015));border-radius:var(--radius);overflow:hidden;box-shadow:0 6px 18px rgba(2,6,23,0.6);transition:transform .28s ease,box-shadow .28s ease}
-.card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(2,6,23,0.8)}
-.card-media img{width:100%;height:180px;object-fit:cover;display:block}
+.card{
+  display:block;                      /* allows <a class="card"> to be block-level and clickable */
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015));
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:0 6px 18px rgba(2,6,23,0.6);
+  transition:transform .28s ease,box-shadow .28s ease;
+  color:inherit;
+  text-decoration:none;
+}
+
+/* Hover / focus for clickable card */
+.card:hover,
+.card:focus {
+  transform:translateY(-6px);
+  box-shadow:0 18px 40px rgba(2,6,23,0.8);
+  outline: none;
+}
+.card:focus-visible {
+  box-shadow: 0 0 0 4px rgba(124,58,237,0.12), 0 18px 40px rgba(2,6,23,0.8);
+}
+
+/* Media container using ::before for aspect ratio control */
+.card-media{
+  position:relative;
+  overflow:hidden;
+}
+.card-media::before{
+  content:"";
+  display:block;
+  padding-top:56%;            /* default horizontal aspect (adjust if needed) */
+  transition: padding-top .22s ease;
+}
+.card-media img{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition: transform .22s ease;
+}
+
+/* On hover/focus, make media square and slightly zoom image */
+.card:hover .card-media::before,
+.card:focus .card-media::before{
+  padding-top:100%; /* becomes square */
+}
+.card:hover .card-media img,
+.card:focus .card-media img{
+  transform: scale(1.04);
+}
+
 .card-body{padding:1rem;display:flex;flex-direction:column;gap:.5rem}
 .game-logo{height:42px;object-fit:contain}
 .card-actions{display:flex;gap:.5rem;margin-top:.5rem}
 
+/* Team cards: they reuse the .card class but team images use their own fixed boxes,
+   so they are not affected by the .card-media aspect-ratio rules. */
+.team-card { background: transparent; box-shadow:none; }
+.team-card .card-body { padding-top:0; padding-bottom:0; }
+
+/* About */
 .about{padding-top:2rem;padding-bottom:2rem}
 .about-inner{display:flex;gap:2rem;align-items:center}
 .about-text{flex:1;color:var(--muted)}
 .about-visual img{width:150px;border-radius:12px}
 
+/* Contact and footer */
 .contact address{color:var(--muted);line-height:1.6}
 .note{color:var(--muted);margin-top:1rem}
-
 .site-footer{border-top:1px solid rgba(255,255,255,0.03);margin-top:3rem;padding:1.25rem 0;background:transparent}
 .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:1rem}
 .footer-inner img{height:40px}
 
+/* Mobile / responsive rules */
 @media (max-width:1000px){
   .hero{grid-template-columns:1fr}
   .grid{grid-template-columns:repeat(2,1fr)}
@@ -64,24 +123,49 @@ html,body{height:100%;margin:0;background:linear-gradient(180deg,#071029 0%, #0b
   .grid{grid-template-columns:1fr}
   .hero-art{display:none}
   .container{padding:1rem}
+  /* on small screens make images square by default for better vertical rhythm */
+  .card-media::before{padding-top:100%}
 }
-/* --- Privacy policy styles --- */
-.policy { color: #e6eef8; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
-.policy h1 { font-size: 1.6rem; margin: 0 0 6px; color: #ffffff; }
-.policy h2 { font-size: 1.15rem; margin-top: 18px; color: #ffffff; border-left: 4px solid rgba(124,58,237,0.9); padding-left:12px; }
-.policy h3 { font-size: 1rem; margin-top:12px; color: #dbeafe; }
-.policy p { color: #cbd5e1; line-height:1.65; margin: 10px 0; }
-.policy .muted { color: #94a3b8; margin: 0 0 6px; }
-.policy ul.policy-list { margin:8px 0 12px 20px; color:#cbd5e1; }
-.policy ul.policy-list li { margin:6px 0; }
-.policy-sep { border:0; height:1px; background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03)); margin:16px 0; }
 
-/* Links */
-.policy a { color: #9b7dff; text-decoration:underline; }
-.policy a:hover { color: #ffffff; }
+/* Accessibility helper: ensure focusable anchors show keyboard focus */
+a.card:focus{outline: none;}
 
-/* Responsive adjustments */
-@media (max-width:860px) {
-  .policy { padding: 0 6px; }
-  .container { padding-left:12px; padding-right:12px; }
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted, #94a3b8);
+  text-decoration: none;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: background .14s ease, color .14s ease;
+}
+
+.contact-item:hover,
+.contact-item:focus {
+  background: rgba(255,255,255,0.02);
+  color: #fff;
+  outline: none;
+}
+
+.contact-icon {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  object-fit: contain;
+  flex: 0 0 40px;
+}
+
+/* make sure address lines wrap nicely on narrow screens */
+@media (max-width:520px) {
+  .contact-list { gap: 6px; }
+  .contact-icon { width: 20px; height: 20px; }
+  .contact-item span { font-size: 0.92rem; }
 }
