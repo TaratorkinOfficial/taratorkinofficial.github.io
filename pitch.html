@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Taratorkin Official — Publisher Pitch. Mobile game studio specializing in rapid hyper-casual prototyping.">
+  <meta name="author" content="Taratorkin Official">
+  <meta name="theme-color" content="#6366f1">
+  <link rel="icon" href="assets/images/TaratorkinOfficial_cropped-logotarback.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <title>Taratorkin Official — Publisher Pitch</title>
+  <style>
+    .pitch-hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 140px 2rem 80px;
+      max-width: var(--container);
+      margin: 0 auto;
+    }
+    .pitch-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 6px 14px;
+      margin-bottom: 28px;
+      background: var(--bg-tertiary);
+      width: fit-content;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.1s forwards;
+    }
+    .pitch-eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--primary);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .pitch-hero h1 {
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.2s forwards;
+    }
+    .pitch-hero .lead {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.35s forwards;
+    }
+    .pitch-metrics {
+      display: flex;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--bg-tertiary);
+      width: fit-content;
+      max-width: 100%;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.5s forwards;
+      flex-wrap: wrap;
+    }
+    .pitch-metric {
+      padding: 20px 32px;
+      border-right: 1px solid var(--border);
+    }
+    .pitch-metric:last-child { border-right: none; }
+    .pitch-metric-val {
+      font-size: 28px; font-weight: 800;
+      color: var(--text-primary); line-height: 1; margin-bottom: 4px;
+    }
+    .pitch-metric-val.accent { color: var(--primary); }
+    .pitch-metric-lbl { font-size: 12px; color: var(--text-secondary); white-space: nowrap; }
+
+    .pitch-section {
+      padding: 100px 2rem;
+      max-width: var(--container);
+      margin: 0 auto;
+    }
+    .pitch-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--primary); margin-bottom: 16px;
+    }
+    .pitch-label::before {
+      content: ''; display: block;
+      width: 20px; height: 2px;
+      background: var(--primary); border-radius: 2px;
+    }
+    .pitch-section h2 {
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 800; line-height: 1.15;
+      letter-spacing: -0.02em; margin-bottom: 12px;
+    }
+    .pitch-sub {
+      font-size: 16px; color: var(--text-secondary);
+      max-width: 560px; line-height: 1.65; margin-bottom: 48px;
+    }
+    .pitch-callout {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--primary);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 24px 28px;
+      font-size: 16px; line-height: 1.75;
+      color: var(--text-secondary);
+      margin-bottom: 64px;
+    }
+    .pitch-callout strong { color: var(--text-primary); }
+
+    .sprint-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; margin-bottom: 64px;
+    }
+    .sprint-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      background: var(--bg-tertiary);
+      transition: var(--transition);
+      position: relative; overflow: hidden;
+    }
+    .sprint-card:hover { border-color: var(--primary); transform: translateY(-4px); }
+    .sprint-card.preferred {
+      background: linear-gradient(135deg, rgba(99,102,241,0.15) 0%, rgba(139,92,246,0.08) 100%);
+      border-color: var(--primary);
+    }
+    .sprint-badge {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 99px; margin-bottom: 20px;
+    }
+    .sprint-card.preferred .sprint-badge { background: var(--primary); color: #fff; }
+    .sprint-card:not(.preferred) .sprint-badge {
+      background: var(--bg-secondary); color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .sprint-duration {
+      font-size: 52px; font-weight: 800; line-height: 1;
+      letter-spacing: -0.03em; margin-bottom: 6px;
+    }
+    .sprint-card.preferred .sprint-duration { color: var(--primary); }
+    .sprint-card:not(.preferred) .sprint-duration { color: var(--text-primary); }
+    .sprint-type { font-size: 13px; color: var(--text-secondary); margin-bottom: 24px; font-weight: 500; }
+    .sprint-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .sprint-features li {
+      font-size: 14px; color: var(--text-secondary);
+      display: flex; align-items: flex-start; gap: 10px; line-height: 1.5;
+    }
+    .sprint-features li::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      flex-shrink: 0; margin-top: 6px;
+    }
+    .sprint-card.preferred .sprint-features li::before { background: var(--primary); }
+    .sprint-card:not(.preferred) .sprint-features li::before { background: var(--border); }
+
+    .deliver-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+    }
+    .deliver-card {
+      background: var(--bg-tertiary); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 24px 28px;
+      transition: var(--transition);
+    }
+    .deliver-card:hover { border-color: var(--primary); }
+    .deliver-icon {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; margin-bottom: 16px;
+    }
+    .deliver-card h3 { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+    .deliver-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+
+    .team-list { display: flex; flex-direction: column; gap: 12px; }
+    .person-card {
+      display: grid; grid-template-columns: 220px 1fr;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+      background: var(--bg-tertiary); transition: var(--transition);
+    }
+    .person-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+    .person-left {
+      background: var(--bg-secondary);
+      padding: 28px 24px;
+    }
+    .person-avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      overflow: hidden; margin-bottom: 16px;
+      border: 2px solid var(--border); flex-shrink: 0;
+    }
+    .person-avatar img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .person-name { font-size: 15px; font-weight: 700; color: var(--text-primary); line-height: 1.3; margin-bottom: 5px; }
+    .person-role { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+    .person-right { padding: 28px 32px; }
+    .person-bio { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 18px; }
+    .person-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .ptag {
+      font-size: 12px; padding: 3px 10px;
+      border: 1px solid var(--border); border-radius: 99px;
+      color: var(--text-secondary); background: var(--bg-secondary);
+    }
+    .person-link { font-size: 13px; color: var(--primary); text-decoration: none; font-weight: 500; }
+    .person-link:hover { text-decoration: underline; }
+
+    .games-pitch-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    }
+    .game-pitch-card {
+      border: 1px solid var(--border); border-radius: var(--radius-md);
+      padding: 22px; background: var(--bg-tertiary);
+      text-decoration: none; color: inherit; display: block;
+      transition: var(--transition);
+    }
+    .game-pitch-card:hover {
+      border-color: var(--primary);
+      background: rgba(99,102,241,0.06);
+      transform: translateY(-2px);
+    }
+    .game-pitch-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+    .game-pitch-title { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 5px; line-height: 1.3; }
+    .game-pitch-sub { font-size: 13px; color: var(--text-secondary); }
+    .game-pitch-arrow { float: right; color: var(--text-muted); font-size: 16px; }
+    .game-pitch-metric {
+      display: inline-flex; align-items: center; gap: 5px;
+      margin-top: 12px; font-size: 12px; font-weight: 600;
+      background: rgba(16,185,129,0.12); color: var(--success);
+      padding: 3px 10px; border-radius: 99px;
+    }
+
+    .strengths-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .strength-card {
+      border: 1px solid var(--border); border-radius: var(--radius-md);
+      padding: 24px; background: var(--bg-tertiary); transition: var(--transition);
+    }
+    .strength-card:hover { border-color: var(--primary); }
+    .strength-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 500; color: var(--primary); margin-bottom: 14px;
+    }
+    .strength-card h3 { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+    .strength-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+    .pitch-cta {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 72px 64px;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      gap: 48px; flex-wrap: wrap;
+      position: relative; overflow: hidden;
+    }
+    .pitch-cta::before {
+      content: ''; position: absolute;
+      top: -80px; right: -80px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .pitch-cta h2 { font-size: clamp(28px, 3vw, 40px); font-weight: 800; margin-bottom: 10px; }
+    .pitch-cta .cta-sub { font-size: 16px; color: var(--text-secondary); max-width: 420px; }
+    .cta-actions { display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
+
+    .section-sep { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    @media (max-width: 900px) {
+      .sprint-grid, .deliver-grid, .games-pitch-grid, .strengths-grid { grid-template-columns: 1fr; }
+      .person-card { grid-template-columns: 1fr; }
+      .pitch-cta { padding: 40px 28px; }
+      .pitch-metric { border-right: none; border-bottom: 1px solid var(--border); }
+      .pitch-metric:last-child { border-bottom: none; }
+    }
+    @media (max-width: 640px) {
+      .pitch-hero { padding: 120px 1rem 60px; }
+      .pitch-section { padding: 60px 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="loader" id="loader"><div class="loader-spinner"></div></div>
+
+  <header class="header" id="header">
+    <div class="container header-content">
+      <a href="index.html" class="logo">
+        <img src="assets/images/TaratorkinOfficial_logotarback.png" alt="Taratorkin Official">
+        <span>Taratorkin Official</span>
+      </a>
+      <nav class="nav" id="nav">
+        <a href="index.html#games" class="nav-link">Games</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="theme-icon">🌙</span>
+        </button>
+      </nav>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">☰</button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <div style="position:relative;overflow:hidden;">
+    <div class="hero-bg">
+      <div class="hero-gradient hero-gradient-1"></div>
+      <div class="hero-gradient hero-gradient-2"></div>
+      <div class="hero-gradient hero-gradient-3"></div>
+    </div>
+    <div class="pitch-hero">
+      <div class="pitch-eyebrow">Publisher pitch · April 2026</div>
+      <h1>Mobile games that <span class="gradient-text">ship fast.</span><br>And perform.</h1>
+      <p class="lead">Taratorkin Official is a lean, founder-led studio building hyper-casual prototypes for publishers. 4-week sprints. Full-stack team. Proven metrics.</p>
+      <div class="pitch-metrics">
+        <div class="pitch-metric">
+          <div class="pitch-metric-val accent">4 FTE</div>
+          <div class="pitch-metric-lbl">Team size</div>
+        </div>
+        <div class="pitch-metric">
+          <div class="pitch-metric-val">4 wk</div>
+          <div class="pitch-metric-lbl">Preferred sprint</div>
+        </div>
+        <div class="pitch-metric">
+          <div class="pitch-metric-val">~40%</div>
+          <div class="pitch-metric-lbl">D1 retention</div>
+        </div>
+        <div class="pitch-metric">
+          <div class="pitch-metric-val">$0.80</div>
+          <div class="pitch-metric-lbl">CPI</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-sep">
+
+  <!-- About -->
+  <div class="pitch-section" id="about">
+    <div class="pitch-label">About the studio</div>
+    <h2>Who we are.</h2>
+    <div class="pitch-callout">
+      We are a compact, founder-led mobile game studio specializing in rapid hyper-casual prototyping. Our preferred format is a <strong>4-week sprint</strong> — delivering a fully polished, pro-level prototype with deep mechanics, refined balance, and strong UA potential. We actively use AI tools for content creation, game balance, and optimization — always with human analysis and review. Our founder has first-hand <strong>CrazyLabs pipeline experience</strong>.
+    </div>
+
+    <h2>How we work.</h2>
+    <p class="pitch-sub">Focused sprints with a clear deliverable at the end. Every prototype ships complete — build, SDK, and creatives included.</p>
+    <div class="sprint-grid">
+      <div class="sprint-card preferred reveal">
+        <div class="sprint-badge">Preferred format</div>
+        <div class="sprint-duration">4 wk</div>
+        <div class="sprint-type">Pro-level prototype</div>
+        <ul class="sprint-features">
+          <li>Deep mechanics &amp; refined game design</li>
+          <li>Polished balance and progression</li>
+          <li>Strong UA creative potential</li>
+          <li>Full analytics &amp; ads SDK integration</li>
+          <li>5–6 high-quality UA creatives</li>
+          <li>Playable Android build, ready to test</li>
+        </ul>
+      </div>
+      <div class="sprint-card reveal">
+        <div class="sprint-badge">Also available</div>
+        <div class="sprint-duration">2 wk</div>
+        <div class="sprint-type">Simple concept prototype</div>
+        <ul class="sprint-features">
+          <li>Core mechanic validated fast</li>
+          <li>Basic analytics &amp; ads SDK</li>
+          <li>5–6 UA creatives</li>
+          <li>Playable Android build</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>What we deliver.</h2>
+    <p class="pitch-sub" style="margin-bottom:32px;">Every prototype includes a complete, publisher-ready package.</p>
+    <div class="deliver-grid">
+      <div class="deliver-card reveal">
+        <div class="deliver-icon">📱</div>
+        <h3>Playable Android build</h3>
+        <p>APK ready for UA testing — stable, optimized, publisher-ready.</p>
+      </div>
+      <div class="deliver-card reveal">
+        <div class="deliver-icon">📊</div>
+        <h3>Analytics &amp; ads SDK</h3>
+        <p>Firebase, GameAnalytics, and ad network integration out of the box.</p>
+      </div>
+      <div class="deliver-card reveal">
+        <div class="deliver-icon">🎬</div>
+        <h3>5–6 UA creatives</h3>
+        <p>Videos and statics made fully in-house by our dedicated artist.</p>
+      </div>
+      <div class="deliver-card reveal">
+        <div class="deliver-icon">✨</div>
+        <h3>AI-assisted optimization</h3>
+        <p>Balance, content, and QA accelerated by AI — reviewed and refined by the team.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-sep">
+
+  <!-- Team -->
+  <div class="pitch-section" id="team">
+    <div class="pitch-label">The team</div>
+    <h2>Four people.<br><span class="gradient-text">Full production stack.</span></h2>
+    <p class="pitch-sub">Development, art, level design, game design, and UA creatives — all under one roof.</p>
+    <div class="team-list">
+
+      <div class="person-card reveal">
+        <div class="person-left">
+          <div class="person-avatar"><img src="assets/images/alexander.jpg" alt="Alexander" onerror="this.parentElement.innerHTML='AT';this.parentElement.style.cssText='width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;margin-bottom:16px;background:rgba(99,102,241,0.2);color:#818cf8;font-family:JetBrains Mono,monospace'"></div>
+          <div class="person-name">Alexander Tarnahrodskyi</div>
+          <div class="person-role">Founder · Lead Developer · Game Designer</div>
+        </div>
+        <div class="person-right">
+          <p class="person-bio">Previously Unity developer at Creauctopus, shipping prototypes for CrazyLabs. Brings first-hand knowledge of publisher workflows, quality standards, and production expectations. Leads development strategy and personally verifies every team member's competencies.</p>
+          <div class="person-tags">
+            <span class="ptag">Unity</span><span class="ptag">Game design</span>
+            <span class="ptag">CrazyLabs pipeline</span><span class="ptag">SDK integration</span>
+            <span class="ptag">Business development</span>
+          </div>
+          <a href="https://taratorkinofficial.github.io" class="person-link" target="_blank" rel="noopener">taratorkinofficial.github.io ↗</a>
+        </div>
+      </div>
+
+      <div class="person-card reveal">
+        <div class="person-left">
+          <div class="person-avatar"><img src="assets/images/Illia.jpg" alt="Illia" onerror="this.parentElement.innerHTML='IO';this.parentElement.style.cssText='width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;margin-bottom:16px;background:rgba(16,185,129,0.2);color:#34d399;font-family:JetBrains Mono,monospace'"></div>
+          <div class="person-name">Illia Okolskyi</div>
+          <div class="person-role">Senior Unity Dev · Team Lead · Game Designer</div>
+        </div>
+        <div class="person-right">
+          <p class="person-bio">Senior developer specializing in Android mobile games, including tower defense genre. Acts as team lead — managing the development process, defining architecture decisions, and ensuring quality from prototype to release. Also covers game design, shaping mechanics and game feel. 5+ years of Unity experience across mobile, WebGL, AR, and VR. English C1 certified.</p>
+          <div class="person-tags">
+            <span class="ptag">Android games</span><span class="ptag">Tower defense</span>
+            <span class="ptag">Team lead</span><span class="ptag">Game design</span>
+            <span class="ptag">C# / SOLID</span><span class="ptag">Unity Editor tools</span>
+            <span class="ptag">WebGL · AR · VR</span>
+          </div>
+          <a href="https://www.linkedin.com/in/illia-okolskyi" class="person-link" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+
+      <div class="person-card reveal">
+        <div class="person-left">
+          <div class="person-avatar"><img src="assets/images/eduard.jpg" alt="Eduard" onerror="this.parentElement.innerHTML='ES';this.parentElement.style.cssText='width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;margin-bottom:16px;background:rgba(245,158,11,0.2);color:#fbbf24;font-family:JetBrains Mono,monospace'"></div>
+          <div class="person-name">Eduard Stepanysko</div>
+          <div class="person-role">Unity Developer · Live-ops specialist</div>
+        </div>
+        <div class="person-right">
+          <p class="person-bio">4 years of commercial mobile game development focused on post-release and live-update workflows. Shipped Word Maker on both Google Play and App Store. Strong in ad and analytics SDK integration, rapid iteration, and fast bug turnaround under tight deadlines.</p>
+          <div class="person-tags">
+            <span class="ptag">UnityAds</span><span class="ptag">AdMob</span>
+            <span class="ptag">IronSource</span><span class="ptag">Firebase</span>
+            <span class="ptag">Facebook SDK</span><span class="ptag">Live-ops</span>
+          </div>
+          <a href="https://www.upwork.com/freelancers/~01109d18c6fa5aff30" class="person-link" target="_blank" rel="noopener">Upwork profile ↗</a>
+        </div>
+      </div>
+
+      <div class="person-card reveal">
+        <div class="person-left">
+          <div class="person-avatar"><img src="assets/images/vitaliy.jpg" alt="Vitaliy" onerror="this.parentElement.innerHTML='VO';this.parentElement.style.cssText='width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;margin-bottom:16px;background:rgba(239,68,68,0.2);color:#f87171;font-family:JetBrains Mono,monospace'"></div>
+          <div class="person-name">Vitaliy Ovsyanikov</div>
+          <div class="person-role">3D Artist · Animator · Level Designer · Game Designer</div>
+        </div>
+        <div class="person-right">
+          <p class="person-bio">Multidisciplinary artist responsible for UA creatives, ad videos, level design, and environment storytelling. Builds immersive, well-paced game spaces from layout to final visual polish. Studio experience at LumenStory. Delivers 5–6 original UA creatives and ad videos per prototype. Also contributes to game design.</p>
+          <div class="person-tags">
+            <span class="ptag">Level design</span><span class="ptag">UA creatives</span>
+            <span class="ptag">Ad videos</span><span class="ptag">Blender</span>
+            <span class="ptag">Cinema4D</span><span class="ptag">After Effects</span>
+            <span class="ptag">Cinematics</span>
+          </div>
+          <a href="https://www.youtube.com/shorts/a3OqDD_F4fU" class="person-link" target="_blank" rel="noopener">Creative sample ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="section-sep">
+
+  <!-- Games -->
+  <div class="pitch-section" id="games">
+    <div class="pitch-label">Published games</div>
+    <h2>Live on Google Play<br><span class="gradient-text">and App Store.</span></h2>
+    <p class="pitch-sub">Titles we've shipped — as a studio and with publishing partners.</p>
+
+    <div class="section-divider" style="margin-bottom:24px;">
+      <span class="section-divider-title">Taratorkin Official</span>
+    </div>
+    <div class="games-pitch-grid" style="margin-bottom:32px;">
+      <a href="https://play.google.com/store/apps/details?id=com.taratorkinofficial.colonydefender" class="game-pitch-card reveal" target="_blank" rel="noopener">
+        <div class="game-pitch-label">Google Play</div><span class="game-pitch-arrow">↗</span>
+        <div class="game-pitch-title">Colony Defender</div>
+        <div class="game-pitch-sub">Tower defense · Android</div>
+      </a>
+      <a href="https://apps.apple.com/us/app/myrion-bastion/id6761761954" class="game-pitch-card reveal" target="_blank" rel="noopener">
+        <div class="game-pitch-label">App Store</div><span class="game-pitch-arrow">↗</span>
+        <div class="game-pitch-title">Myrion: Bastion</div>
+        <div class="game-pitch-sub">Colony Defender · iOS</div>
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.TaratorkinOfficial.BalloonTravel3D" class="game-pitch-card reveal" target="_blank" rel="noopener">
+        <div class="game-pitch-label">Google Play</div><span class="game-pitch-arrow">↗</span>
+        <div class="game-pitch-title">Balloon Travel 3D</div>
+        <div class="game-pitch-sub">Casual · Android</div>
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.TaratorkinOfficial.SpaceThrone3D" class="game-pitch-card reveal" target="_blank" rel="noopener">
+        <div class="game-pitch-label">Google Play</div><span class="game-pitch-arrow">↗</span>
+        <div class="game-pitch-title">Space Throne 3D</div>
+        <div class="game-pitch-sub">Casual · Android</div>
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.TaratorkinOfficial.VirusRunner" class="game-pitch-card reveal" target="_blank" rel="noopener">
+        <div class="game-pitch-label">Google Play</div><span class="game-pitch-arrow">↗</span>
+        <div class="game-pitch-title">Virus Runner</div>
+        <div class="game-pitch-sub">Hyper-casual · Android</div>
+      </a>
+      <div class="game-pitch-card reveal" style="opacity:0.45;cursor:default;">
+        <div class="game-pitch-label">Coming soon</div>
+        <div class="game-pitch-title">Harbour Keepers</div>
+        <div class="game-pitch-sub">Link coming soon</div>
+      </div>
+    </div>
+
+    <div class="section-divider" style="margin-bottom:24px;">
+      <span class="section-divider-title">CrazyLabs · via Creauctopus</span>
+    </div>
+    <div class="games-pitch-grid">
+      <a href="https://play.google.com/store/apps/details?id=com.Creauctopus.KingsLanding" class="game-pitch-card reveal" target="_blank" rel="noopener">
+        <div class="game-pitch-label">CrazyLabs</div><span class="game-pitch-arrow">↗</span>
+        <div class="game-pitch-title">King's Landing</div>
+        <div class="game-pitch-sub">Strategy · Google Play</div>
+        <div class="game-pitch-metric">D1 ~40% · CPI ~$0.80</div>
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.creauctopus.cinemaworld" class="game-pitch-card reveal" target="_blank" rel="noopener">
+        <div class="game-pitch-label">CrazyLabs · 5M+ downloads</div><span class="game-pitch-arrow">↗</span>
+        <div class="game-pitch-title">My Cinema World</div>
+        <div class="game-pitch-sub">Simulation · Google Play</div>
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.creauctopus.magicboxdefender" class="game-pitch-card reveal" target="_blank" rel="noopener">
+        <div class="game-pitch-label">Prototype · CrazyLabs</div><span class="game-pitch-arrow">↗</span>
+        <div class="game-pitch-title">Magic Box Defender</div>
+        <div class="game-pitch-sub">Google Play</div>
+      </a>
+    </div>
+  </div>
+
+  <hr class="section-sep">
+
+  <!-- Strengths -->
+  <div class="pitch-section">
+    <div class="pitch-label">Why work with us</div>
+    <h2>Key strengths.</h2>
+    <p class="pitch-sub" style="margin-bottom:40px;">What makes Taratorkin Official a reliable prototyping partner.</p>
+    <div class="strengths-grid">
+      <div class="strength-card reveal">
+        <div class="strength-num">01</div>
+        <h3>Speed &amp; depth</h3>
+        <p>4-week pro-level sprints as our preferred format. Tested pipeline, reliable delivery.</p>
+      </div>
+      <div class="strength-card reveal">
+        <div class="strength-num">02</div>
+        <h3>Publisher-ready</h3>
+        <p>Founder knows CrazyLabs standards and publisher expectations first-hand.</p>
+      </div>
+      <div class="strength-card reveal">
+        <div class="strength-num">03</div>
+        <h3>AI integration</h3>
+        <p>AI tools for content, balance, and optimization — always human-reviewed.</p>
+      </div>
+      <div class="strength-card reveal">
+        <div class="strength-num">04</div>
+        <h3>Full-stack team</h3>
+        <p>Dev + art + level design + game design + UA creatives under one roof.</p>
+      </div>
+      <div class="strength-card reveal">
+        <div class="strength-num">05</div>
+        <h3>Proven metrics</h3>
+        <p>D1 ~40%, CPI ~$0.80 on published CrazyLabs titles.</p>
+      </div>
+      <div class="strength-card reveal">
+        <div class="strength-num">06</div>
+        <h3>Both platforms</h3>
+        <p>Live titles on Google Play and App Store. Dual-platform delivery.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-sep">
+
+  <!-- Contact -->
+  <div class="pitch-section" id="contact" style="padding-bottom:120px;">
+    <div class="pitch-cta reveal">
+      <div>
+        <div class="pitch-label">Get in touch</div>
+        <h2>Let's build<br><span class="gradient-text">something together.</span></h2>
+        <p class="cta-sub">Ready to discuss prototyping terms, PPP structure, or start with a pilot project.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="mailto:taratorkin.official@gmail.com" class="btn btn-primary">✉️ taratorkin.official@gmail.com</a>
+        <a href="index.html" class="btn btn-secondary">← Back to main site</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="assets/images/TaratorkinOfficial_logotarback.png" alt="Taratorkin Official">
+            Taratorkin Official
+          </div>
+          <p class="footer-desc">Mobile game studio specializing in rapid hyper-casual prototyping for publishers.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#games">Games</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Team</h4>
+          <ul>
+            <li><a href="https://www.linkedin.com/in/illia-okolskyi" target="_blank" rel="noopener">Illia Okolskyi</a></li>
+            <li><a href="https://www.upwork.com/freelancers/~01109d18c6fa5aff30" target="_blank" rel="noopener">Eduard Stepanysko</a></li>
+            <li><a href="https://www.youtube.com/shorts/a3OqDD_F4fU" target="_blank" rel="noopener">Vitaliy Ovsyanikov</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 Taratorkin Official. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/afteri1mage/" class="social-link" target="_blank" rel="noopener" title="Artist portfolio">📸</a>
+          <a href="mailto:taratorkin.official@gmail.com" class="social-link" title="Email">✉️</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => document.getElementById('loader').classList.add('hidden'), 300);
+    });
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('.theme-icon');
+    const saved = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+    themeIcon.textContent = saved === 'dark' ? '🌙' : '☀️';
+    themeToggle.addEventListener('click', () => {
+      const cur = document.documentElement.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      themeIcon.textContent = next === 'dark' ? '🌙' : '☀️';
+    });
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const nav = document.getElementById('nav');
+    mobileBtn.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      mobileBtn.textContent = nav.classList.contains('active') ? '✕' : '☰';
+    });
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 50);
+    });
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('active'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '200px', threshold: 0.05 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
