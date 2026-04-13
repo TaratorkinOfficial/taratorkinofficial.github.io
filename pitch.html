@@ -287,7 +287,14 @@
     .pitch-cta .cta-sub { font-size: 16px; color: var(--text-secondary); max-width: 420px; }
     .cta-actions { display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
 
-    .section-sep { border: none; border-top: 1px solid var(--border); margin: 0; }
+    .pitch-band {
+      background: var(--bg-secondary);
+    }
+
+    .pitch-band .pitch-section {
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
 
     @media (max-width: 900px) {
       .sprint-grid, .deliver-grid, .games-pitch-grid, .strengths-grid { grid-template-columns: 1fr; }
@@ -354,45 +361,49 @@
     </div>
   </div>
 
-  <hr class="section-sep">
-
-  <!-- About -->
-  <div class="pitch-section" id="about">
-    <div class="pitch-label">About the studio</div>
-    <h2>Who we are.</h2>
-    <div class="pitch-callout">
-      We are a compact, founder-led mobile game studio specializing in rapid hyper-casual prototyping. Our preferred format is a <strong>4-week sprint</strong> — delivering a fully polished, pro-level prototype with deep mechanics, refined balance, and strong UA potential. We ship on both <strong>Android and iOS</strong>, and can publish on our own Google Play and App Store developer accounts. We actively use AI tools for content creation, game balance, and optimization — always with human analysis and review. Our founder has first-hand <strong>CrazyLabs pipeline experience</strong>.
-    </div>
-
-    <h2>How we work.</h2>
-    <p class="pitch-sub">Focused sprints with a clear deliverable at the end. Every prototype ships complete — build, SDK, and creatives included.</p>
-    <div class="sprint-grid">
-      <div class="sprint-card preferred reveal">
-        <div class="sprint-badge">Preferred format</div>
-        <div class="sprint-duration">4 wk</div>
-        <div class="sprint-type">Pro-level prototype</div>
-        <ul class="sprint-features">
-          <li>Deep mechanics &amp; refined game design</li>
-          <li>Polished balance and progression</li>
-          <li>Strong UA creative potential</li>
-          <li>Full analytics &amp; ads SDK integration</li>
-          <li>5–6 high-quality UA creatives</li>
-          <li>Playable Android &amp; iOS build, ready to test</li>
-        </ul>
+  <!-- About + How we work -->
+  <div class="pitch-band">
+    <div class="pitch-section" id="about">
+      <div class="pitch-label">About the studio</div>
+      <h2>Who we are.</h2>
+      <div class="pitch-callout">
+        We are a compact, founder-led mobile game studio specializing in rapid hyper-casual prototyping. Our preferred format is a <strong>4-week sprint</strong> — delivering a fully polished, pro-level prototype with deep mechanics, refined balance, and strong UA potential. We ship on both <strong>Android and iOS</strong>, and can publish on our own Google Play and App Store developer accounts. We actively use AI tools for content creation, game balance, and optimization — always with human analysis and review. Our founder has first-hand <strong>CrazyLabs pipeline experience</strong>.
       </div>
-      <div class="sprint-card reveal">
-        <div class="sprint-badge">Also available</div>
-        <div class="sprint-duration">2 wk</div>
-        <div class="sprint-type">Simple concept prototype</div>
-        <ul class="sprint-features">
-          <li>Core mechanic validated fast</li>
-          <li>Basic analytics &amp; ads SDK</li>
-          <li>5–6 UA creatives</li>
-          <li>Playable Android &amp; iOS build</li>
-        </ul>
+
+      <h2>How we work.</h2>
+      <p class="pitch-sub">Focused sprints with a clear deliverable at the end. Every prototype ships complete — build, SDK, and creatives included.</p>
+      <div class="sprint-grid">
+        <div class="sprint-card preferred reveal">
+          <div class="sprint-badge">Preferred format</div>
+          <div class="sprint-duration">4 wk</div>
+          <div class="sprint-type">Pro-level prototype</div>
+          <ul class="sprint-features">
+            <li>Deep mechanics &amp; refined game design</li>
+            <li>Polished balance and progression</li>
+            <li>Strong UA creative potential</li>
+            <li>Full analytics &amp; ads SDK integration</li>
+            <li>5–6 high-quality UA creatives</li>
+            <li>Playable Android &amp; iOS build, ready to test</li>
+          </ul>
+        </div>
+        <div class="sprint-card reveal">
+          <div class="sprint-badge">Also available</div>
+          <div class="sprint-duration">2 wk</div>
+          <div class="sprint-type">Simple concept prototype</div>
+          <ul class="sprint-features">
+            <li>Core mechanic validated fast</li>
+            <li>Basic analytics &amp; ads SDK</li>
+            <li>5–6 UA creatives</li>
+            <li>Playable Android &amp; iOS build</li>
+          </ul>
+        </div>
       </div>
     </div>
+  </div>
 
+  <!-- What we deliver -->
+  <div class="pitch-section">
+    <div class="pitch-label">Deliverables</div>
     <h2>What we deliver.</h2>
     <p class="pitch-sub" style="margin-bottom:32px;">Every prototype includes a complete, publisher-ready package.</p>
     <div class="deliver-grid">
@@ -429,10 +440,9 @@
     </div>
   </div>
 
-  <hr class="section-sep">
-
   <!-- Team -->
-  <div class="pitch-section" id="team">
+  <div class="pitch-band">
+    <div class="pitch-section" id="team">
     <div class="pitch-label">The team</div>
     <h2>Four people.<br><span class="gradient-text">Full production stack.</span></h2>
     <p class="pitch-sub">Development, art, level design, game design, and UA creatives — all under one roof.</p>
@@ -509,9 +519,8 @@
       </div>
 
     </div>
+    </div>
   </div>
-
-  <hr class="section-sep">
 
   <!-- Games -->
   <div class="pitch-section" id="games">
@@ -578,48 +587,46 @@
     </div>
   </div>
 
-  <hr class="section-sep">
-
   <!-- Strengths -->
-  <div class="pitch-section">
-    <div class="pitch-label">Why work with us</div>
-    <h2>Key strengths.</h2>
-    <p class="pitch-sub" style="margin-bottom:40px;">What makes Taratorkin Official a reliable prototyping partner.</p>
-    <div class="strengths-grid">
-      <div class="strength-card reveal">
-        <div class="strength-num">01</div>
-        <h3>Speed &amp; depth</h3>
-        <p>4-week pro-level sprints as our preferred format. Tested pipeline, reliable delivery.</p>
-      </div>
-      <div class="strength-card reveal">
-        <div class="strength-num">02</div>
-        <h3>Publisher-ready</h3>
-        <p>Founder knows CrazyLabs standards and publisher expectations first-hand.</p>
-      </div>
-      <div class="strength-card reveal">
-        <div class="strength-num">03</div>
-        <h3>AI integration</h3>
-        <p>AI tools for content, balance, and optimization — always human-reviewed.</p>
-      </div>
-      <div class="strength-card reveal">
-        <div class="strength-num">04</div>
-        <h3>Full-stack team</h3>
-        <p>Dev + art + level design + game design + UA creatives under one roof.</p>
-      </div>
-      <div class="strength-card reveal">
-        <div class="strength-num">05</div>
-        <h3>Proven metrics</h3>
-        <p>D1 ~40%, CPI ~$0.80 on published CrazyLabs titles.</p>
-      </div>
-      <div class="strength-card reveal">
-        <div class="strength-num">06</div>
-        <h3>Both platforms</h3>
-        <p>Live titles on Google Play and App Store. Dual-platform delivery.</p>
+  <div class="pitch-band">
+    <div class="pitch-section">
+      <div class="pitch-label">Why work with us</div>
+      <h2>Key strengths.</h2>
+      <p class="pitch-sub" style="margin-bottom:40px;">What makes Taratorkin Official a reliable prototyping partner.</p>
+      <div class="strengths-grid">
+        <div class="strength-card reveal">
+          <div class="strength-num">01</div>
+          <h3>Speed &amp; depth</h3>
+          <p>4-week pro-level sprints as our preferred format. Tested pipeline, reliable delivery.</p>
+        </div>
+        <div class="strength-card reveal">
+          <div class="strength-num">02</div>
+          <h3>Publisher-ready</h3>
+          <p>Founder knows CrazyLabs standards and publisher expectations first-hand.</p>
+        </div>
+        <div class="strength-card reveal">
+          <div class="strength-num">03</div>
+          <h3>AI integration</h3>
+          <p>AI tools for content, balance, and optimization — always human-reviewed.</p>
+        </div>
+        <div class="strength-card reveal">
+          <div class="strength-num">04</div>
+          <h3>Full-stack team</h3>
+          <p>Dev + art + level design + game design + UA creatives under one roof.</p>
+        </div>
+        <div class="strength-card reveal">
+          <div class="strength-num">05</div>
+          <h3>Proven metrics</h3>
+          <p>D1 ~40%, CPI ~$0.80 on published CrazyLabs titles.</p>
+        </div>
+        <div class="strength-card reveal">
+          <div class="strength-num">06</div>
+          <h3>Both platforms</h3>
+          <p>Live titles on Google Play and App Store. Dual-platform delivery.</p>
+        </div>
       </div>
     </div>
   </div>
-
-  <hr class="section-sep">
 
   <!-- Contact -->
   <div class="pitch-section" id="contact" style="padding-bottom:120px;">
