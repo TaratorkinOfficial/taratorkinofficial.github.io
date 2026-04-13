@@ -42,10 +42,14 @@
     --bg-tertiary: #f1f5f9;
     --text-primary: #0f172a;
     --text-secondary: #475569;
-    --text-muted: #94a3b8;
+    --text-muted: #64748b;
     --border: #e2e8f0;
     --shadow: rgba(0, 0, 0, 0.1);
     --glow: rgba(99, 102, 241, 0.2);
+    --bg: #ffffff;
+    --card: #f8fafc;
+    --muted: #64748b;
+    --glass: rgba(0,0,0,0.03);
 }
 
 /* ===== RESET & BASE ===== */
@@ -70,6 +74,10 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     transition: var(--transition);
+}
+
+[data-theme="light"] body {
+    background: linear-gradient(180deg, #f0f4ff 0%, var(--bg-secondary) 100%);
 }
 
 /* ===== SCROLLBAR ===== */
@@ -279,6 +287,56 @@ body {
 
 [data-theme="light"] .header.scrolled {
     background: rgba(255, 255, 255, 0.95);
+}
+
+/* ===== LIGHT THEME OVERRIDES ===== */
+[data-theme="light"] .hero-badge {
+    border-color: var(--border);
+    background: var(--bg-tertiary);
+}
+
+[data-theme="light"] .game-card,
+[data-theme="light"] .card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    background: #ffffff;
+}
+
+[data-theme="light"] .game-card:hover,
+[data-theme="light"] .game-card:focus,
+[data-theme="light"] .card:hover,
+[data-theme="light"] .card:focus {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .collapsible-header:hover {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="light"] .btn.ghost,
+[data-theme="light"] .btn.outline {
+    border-color: var(--border);
+}
+
+[data-theme="light"] .nav-links a:hover {
+    color: var(--text-primary);
+    background: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .visitor-counter {
+    background: rgba(99, 102, 241, 0.08);
+    border-color: rgba(99, 102, 241, 0.15);
+}
+
+[data-theme="light"] .hero-gradient {
+    opacity: 0.12;
+}
+
+[data-theme="light"] .social-link:hover {
+    color: white;
+}
+
+[data-theme="light"] .game-card-badge {
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .header-content {
@@ -853,6 +911,40 @@ body {
 
 .game-card-link:hover {
     gap: 8px;
+}
+
+.store-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.store-buttons a {
+    display: inline-flex;
+    transition: var(--transition);
+}
+
+.store-buttons a:hover {
+    transform: translateY(-2px);
+    opacity: 0.85;
+}
+
+.store-badge {
+    height: 40px;
+    display: block;
+}
+
+.store-badge.light {
+    display: none;
+}
+
+[data-theme="light"] .store-badge.dark {
+    display: none;
+}
+
+[data-theme="light"] .store-badge.light {
+    display: block;
 }
 
 .card-actions {
