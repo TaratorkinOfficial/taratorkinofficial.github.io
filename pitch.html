@@ -176,6 +176,66 @@
     .sprint-card.preferred .sprint-features li::before { background: var(--primary); }
     .sprint-card:not(.preferred) .sprint-features li::before { background: var(--border); }
 
+    .timeline-pitch {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 12px; margin-bottom: 20px;
+    }
+    .tl-week {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      background: var(--bg-tertiary);
+      border-top: 3px solid var(--tl-color);
+      transition: var(--transition);
+    }
+    .tl-week:hover { border-color: var(--tl-color); transform: translateY(-2px); }
+    .tl-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 500;
+      color: var(--tl-color);
+      letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .tl-week h4 {
+      font-size: 15px; font-weight: 700;
+      color: var(--text-primary); margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+    .tl-week ul {
+      list-style: none; display: flex;
+      flex-direction: column; gap: 9px;
+    }
+    .tl-week li {
+      font-size: 13px; color: var(--text-secondary);
+      line-height: 1.5; padding-left: 16px; position: relative;
+    }
+    .tl-week li::before {
+      content: ''; position: absolute;
+      left: 0; top: 7px; width: 6px; height: 6px;
+      border-radius: 50%; background: var(--tl-color); opacity: 0.45;
+    }
+    .tl-week li.milestone {
+      font-weight: 600; color: var(--text-primary);
+    }
+    .tl-week li.milestone::before {
+      opacity: 1;
+      box-shadow: 0 0 0 3px var(--bg-tertiary), 0 0 0 4px var(--tl-color);
+    }
+    .tl-week.tl-1 { --tl-color: #10b981; }
+    .tl-week.tl-2 { --tl-color: #3b82f6; }
+    .tl-week.tl-3 { --tl-color: #f59e0b; }
+    .tl-week.tl-4 { --tl-color: #a855f7; }
+    .tl-note {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; color: var(--text-secondary);
+      padding: 14px 20px; margin-bottom: 64px;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-md);
+      background: var(--bg-tertiary);
+      line-height: 1.55;
+    }
+    .tl-note strong { color: var(--text-primary); font-weight: 600; }
+
     .deliver-grid {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
     }
@@ -298,10 +358,14 @@
 
     @media (max-width: 900px) {
       .sprint-grid, .deliver-grid, .games-pitch-grid, .strengths-grid { grid-template-columns: 1fr; }
+      .timeline-pitch { grid-template-columns: 1fr 1fr; }
       .person-card { grid-template-columns: 1fr; }
       .pitch-cta { padding: 40px 28px; }
       .pitch-metric { border-right: none; border-bottom: 1px solid var(--border); }
       .pitch-metric:last-child { border-bottom: none; }
+    }
+    @media (max-width: 640px) {
+      .timeline-pitch { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
       .pitch-hero { padding: 120px 1rem 60px; }
@@ -350,12 +414,12 @@
           <div class="pitch-metric-lbl">Preferred sprint</div>
         </div>
         <div class="pitch-metric">
-          <div class="pitch-metric-val">~40%</div>
-          <div class="pitch-metric-lbl">D1 retention</div>
+          <div class="pitch-metric-val">5+</div>
+          <div class="pitch-metric-lbl">Titles live</div>
         </div>
         <div class="pitch-metric">
-          <div class="pitch-metric-val">$0.80</div>
-          <div class="pitch-metric-lbl">CPI</div>
+          <div class="pitch-metric-val">iOS + Android</div>
+          <div class="pitch-metric-lbl">Own dev accounts</div>
         </div>
       </div>
     </div>
@@ -367,7 +431,7 @@
       <div class="pitch-label">About the studio</div>
       <h2>Who we are.</h2>
       <div class="pitch-callout">
-        We are a compact, founder-led mobile game studio specializing in rapid hyper-casual prototyping. Our preferred format is a <strong>4-week sprint</strong> — delivering a fully polished, pro-level prototype with deep mechanics, refined balance, and strong UA potential. We ship on both <strong>Android and iOS</strong>, and can publish on our own Google Play and App Store developer accounts. We actively use AI tools for content creation, game balance, and optimization — always with human analysis and review. Our founder has first-hand <strong>CrazyLabs pipeline experience</strong>.
+        We are a compact mobile game studio specializing in rapid hyper-casual prototyping. Our preferred format is a <strong>4-week sprint</strong> — delivering a fully polished, pro-level prototype with deep mechanics, refined balance, and production-grade UA creatives. We ship on both <strong>Android and iOS</strong>, and can publish on our own Google Play and App Store developer accounts. We use AI to multiply creative and balance iterations — variants are generated fast, then benchmarked against human-made baselines before anything ships. Our founder has first-hand <strong>CrazyLabs pipeline experience</strong>.
       </div>
 
       <h2>How we work.</h2>
@@ -376,27 +440,76 @@
         <div class="sprint-card preferred reveal">
           <div class="sprint-badge">Preferred format</div>
           <div class="sprint-duration">4 wk</div>
-          <div class="sprint-type">Pro-level prototype</div>
+          <div class="sprint-type">Pro-level, ship-ready prototype</div>
           <ul class="sprint-features">
             <li>Deep mechanics &amp; refined game design</li>
-            <li>Polished balance and progression</li>
-            <li>Strong UA creative potential</li>
-            <li>Full analytics &amp; ads SDK integration</li>
-            <li>5–6 high-quality UA creatives</li>
-            <li>Playable Android &amp; iOS build, ready to test</li>
+            <li>Balance, progression &amp; juice pass</li>
+            <li>Full monetization: analytics + ads SDK</li>
+            <li>5–6 production-grade UA creatives</li>
+            <li>Dual-platform build: Android + iOS</li>
+            <li>Publishable on our own store accounts</li>
           </ul>
         </div>
         <div class="sprint-card reveal">
           <div class="sprint-badge">Also available</div>
           <div class="sprint-duration">2 wk</div>
-          <div class="sprint-type">Simple concept prototype</div>
+          <div class="sprint-type">Concept validation sprint</div>
           <ul class="sprint-features">
-            <li>Core mechanic validated fast</li>
-            <li>Basic analytics &amp; ads SDK</li>
-            <li>5–6 UA creatives</li>
-            <li>Playable Android &amp; iOS build</li>
+            <li>Core loop proof-of-concept</li>
+            <li>Android-first playable build</li>
+            <li>2–3 UA hook creatives (test batch)</li>
+            <li>Event-level analytics only</li>
+            <li>No full monetization or balance pass</li>
           </ul>
         </div>
+      </div>
+
+      <h2 style="margin-top:12px;">20 working days.</h2>
+      <p class="pitch-sub">How a 4-week sprint breaks down — enforced by hard freezes, so week 4 stays reserved for release, not finishing.</p>
+      <div class="timeline-pitch">
+        <div class="tl-week tl-1 reveal">
+          <div class="tl-num">Week 01 · Foundation</div>
+          <h4>Concept &amp; core loop</h4>
+          <ul>
+            <li>Brainstorm, dev-plan, task alignment</li>
+            <li>Core mechanic prototyped</li>
+            <li>Moodboard &amp; early assets</li>
+            <li class="milestone">Style freeze · day 5</li>
+          </ul>
+        </div>
+        <div class="tl-week tl-2 reveal">
+          <div class="tl-num">Week 02 · Build phase</div>
+          <h4>Content &amp; systems</h4>
+          <ul>
+            <li>Final assets integrated in waves</li>
+            <li>Features, progression, tutorial</li>
+            <li>Ads SDK &amp; analytics events wired</li>
+            <li class="milestone">Feature freeze · day 10</li>
+          </ul>
+        </div>
+        <div class="tl-week tl-3 reveal">
+          <div class="tl-num">Week 03 · Polish + UA</div>
+          <h4>Balance &amp; creatives</h4>
+          <ul>
+            <li>Juice, balance, bug pass</li>
+            <li>5–6 UA creatives rendered &amp; stitched</li>
+            <li>Store stills, gameplay capture</li>
+            <li class="milestone">QA builds · day 15</li>
+          </ul>
+        </div>
+        <div class="tl-week tl-4 reveal">
+          <div class="tl-num">Week 04 · Release</div>
+          <h4>Buffer &amp; publish</h4>
+          <ul>
+            <li>Test fixes (Mon–Wed)</li>
+            <li>Store listings &amp; copy</li>
+            <li class="milestone">Stores submit · day 18</li>
+            <li class="milestone">Release · day 20</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-note">
+        <span>🔒 <strong>Hard checkpoints.</strong> Style freeze (day 5) and feature freeze (day 10) lock scope early. Week 4 is release logistics — not finishing work.</span>
       </div>
     </div>
   </div>
@@ -424,8 +537,8 @@
       </div>
       <div class="deliver-card reveal">
         <div class="deliver-icon">✨</div>
-        <h3>AI-assisted optimization</h3>
-        <p>Balance, content, and QA accelerated by AI — reviewed and refined by the team.</p>
+        <h3>AI-accelerated iteration</h3>
+        <p>Creative variants and balance passes run through AI — final picks benchmarked against a human-made baseline.</p>
       </div>
       <div class="deliver-card reveal">
         <div class="deliver-icon">🚀</div>
@@ -572,7 +685,7 @@
         <div class="game-pitch-label">CrazyLabs</div><span class="game-pitch-arrow">↗</span>
         <div class="game-pitch-title">King's Landing</div>
         <div class="game-pitch-sub">Strategy · Google Play</div>
-        <div class="game-pitch-metric">D1 ~40% · CPI ~$0.80</div>
+        <div class="game-pitch-metric">D1 40% · CPI $0.80</div>
       </a>
       <a href="https://play.google.com/store/apps/details?id=com.creauctopus.cinemaworld" class="game-pitch-card reveal" target="_blank" rel="noopener">
         <div class="game-pitch-label">CrazyLabs · 5M+ downloads</div><span class="game-pitch-arrow">↗</span>
@@ -606,8 +719,8 @@
         </div>
         <div class="strength-card reveal">
           <div class="strength-num">03</div>
-          <h3>AI integration</h3>
-          <p>AI tools for content, balance, and optimization — always human-reviewed.</p>
+          <h3>AI-accelerated</h3>
+          <p>More creative and balance iterations per sprint. Every output benchmarked against a human baseline before shipping.</p>
         </div>
         <div class="strength-card reveal">
           <div class="strength-num">04</div>
@@ -617,12 +730,12 @@
         <div class="strength-card reveal">
           <div class="strength-num">05</div>
           <h3>Proven metrics</h3>
-          <p>D1 ~40%, CPI ~$0.80 on published CrazyLabs titles.</p>
+          <p>D1 40%, CPI $0.80 on King's Landing — shipped via the CrazyLabs pipeline.</p>
         </div>
         <div class="strength-card reveal">
           <div class="strength-num">06</div>
-          <h3>Both platforms</h3>
-          <p>Live titles on Google Play and App Store. Dual-platform delivery.</p>
+          <h3>Direct line</h3>
+          <p>Founder is your single point of contact. No PM layers, no team swaps mid-sprint. English-fluent, async-friendly.</p>
         </div>
       </div>
     </div>
@@ -634,7 +747,7 @@
       <div>
         <div class="pitch-label">Get in touch</div>
         <h2>Let's build<br><span class="gradient-text">something together.</span></h2>
-        <p class="cta-sub">Ready to discuss prototyping terms, PPP structure, or start with a pilot project.</p>
+        <p class="cta-sub">Flexible engagement — work-for-hire, rev-share, or PPP. <strong>PPP is our preferred structure</strong>, but we adapt to what fits your pipeline.</p>
       </div>
       <div class="cta-actions">
         <a href="mailto:taratorkin.official@gmail.com" class="btn btn-primary">✉️ taratorkin.official@gmail.com</a>
