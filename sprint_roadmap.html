@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>Роадмап · Taratorkin Official</title>
+<title>Дорожная карта · Taratorkin Official</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1049,10 +1049,10 @@ footer .sig {
 
 const STATIC = {
   ru: {
-    page_title: "Роадмап · Taratorkin Official",
-    hero_eyebrow: "Роадмап спринта · v2",
-    hero_title_1: "Роадмап",
-    hero_title_2: "спринта",
+    page_title: "Дорожная карта · Taratorkin Official",
+    hero_eyebrow: "Дорожная карта спринта · v2",
+    hero_title_1: "Дорожная",
+    hero_title_2: "карта",
     hero_lede: "4 недели, 20 рабочих дней, одна методика. От идеи до релиза в сторах с готовыми рекламными видео.",
     stat_days: "рабочих дней",
     stat_weeks: "недели",
@@ -1139,8 +1139,9 @@ const ROWS = [
     sub:  { ru: "разработчик",   en: "developer" },
     items: [
       { span: 1, type: "concept", title: { ru: "Мозговой", en: "Brain-" }, sub: { ru: "штурм", en: "storm" } },
+      { span: 1, type: "concept", title: { ru: "Разбор", en: "Task" }, sub: { ru: "задач", en: "alignment" } },
       { span: 1, type: "dev",     title: { ru: "Вспом.",   en: "Support" }, sub: { ru: "системы", en: "systems" } },
-      { span: 8, type: "dev",     title: { ru: "Основная разработка", en: "Core development" }, sub: { ru: "приём кора · внедрение ассетов · фичи", en: "taking over core · asset integration · features" } },
+      { span: 7, type: "dev",     title: { ru: "Основная разработка", en: "Core development" }, sub: { ru: "приём кора · внедрение ассетов · фичи", en: "taking over core · asset integration · features" } },
       { span: 3, type: "polish",  title: { ru: "Полировка · баги", en: "Polish · bugs" }, sub: { ru: "juice · оптимизация", en: "juice · optimization" } },
       { span: 1, type: "polish",  title: { ru: "Полировка", en: "Polish" }, sub: { ru: "финальная", en: "final" } },
       { span: 1, type: "polish", strong: true, title: { ru: "QA билды", en: "QA builds" }, sub: { ru: "TF+Android", en: "TF+Android" } },
@@ -1155,9 +1156,10 @@ const ROWS = [
     sub:  { ru: "разработчик",    en: "developer" },
     items: [
       { span: 1, type: "concept", title: { ru: "Мозговой", en: "Brain-" }, sub: { ru: "штурм", en: "storm" } },
-      { span: 1, type: "dev",     title: { ru: "SDK",     en: "SDK" },     sub: { ru: "аналитика", en: "analytics" } },
-      { span: 2, type: "dev",     title: { ru: "SDK · реклама", en: "SDK · ads" }, sub: { ru: "интеграции", en: "integrations" } },
-      { span: 6, type: "dev",     title: { ru: "Узкие задачи · фиксы", en: "Narrow tasks · fixes" }, sub: { ru: "тест Android · события аналитики", en: "Android tests · analytics events" } },
+      { span: 1, type: "concept", title: { ru: "Разбор", en: "Task" }, sub: { ru: "задач", en: "alignment" } },
+      { span: 1, type: "mkt",     title: { ru: "Поиск",    en: "Sound" },   sub: { ru: "звуков", en: "search" } },
+      { span: 4, type: "dev",     title: { ru: "Узкие задачи · фиксы", en: "Narrow tasks · fixes" }, sub: { ru: "тест Android · события аналитики", en: "Android tests · analytics events" } },
+      { span: 3, type: "dev",     title: { ru: "SDK · реклама", en: "SDK · ads" }, sub: { ru: "аналитика · интеграции", en: "analytics · integrations" } },
       { span: 2, type: "polish",  title: { ru: "Баги",    en: "Bugs" },    sub: { ru: "туториал", en: "tutorial" } },
       { span: 2, type: "mkt", strong: true, title: { ru: "Запись", en: "Gameplay" }, sub: { ru: "геймплея + скрины", en: "capture + screenshots" } },
       { span: 1, type: "polish",  title: { ru: "QA",      en: "QA" },      sub: { ru: "раздача", en: "distribution" } },
@@ -1174,10 +1176,10 @@ const ROWS = [
       { span: 1, type: "concept", strong: true, title: { ru: "Мудборд", en: "Mood" }, sub: { ru: "референсы", en: "references" } },
       { span: 3, type: "assets",  title: { ru: "Ассеты + иконки", en: "Assets + icons" }, sub: { ru: "черновые → финальные", en: "drafts → finals" } },
       { span: 1, type: "assets", strong: true, title: { ru: "Стиль", en: "Style" }, sub: { ru: "фриз", en: "freeze" } },
-      { span: 4, type: "assets",  title: { ru: "Финальные ассеты + UI", en: "Final assets + UI" }, sub: { ru: "волнами в репозиторий", en: "committed in waves" } },
-      { span: 2, type: "mkt",     title: { ru: "Скрины · статика", en: "Screens · stills" }, sub: { ru: "иконки + превью сторов", en: "store icons + previews" } },
-      { span: 2, type: "mkt",     title: { ru: "Динамика · хуки", en: "Motion · hooks" }, sub: { ru: "рендер видео", en: "video rendering" } },
-      { span: 1, type: "mkt",     title: { ru: "Звук",    en: "Sound" },   sub: { ru: "эмодзи", en: "emojis" } },
+      { span: 3, type: "assets",  title: { ru: "Финальные ассеты + UI", en: "Final assets + UI" }, sub: { ru: "волнами в репозиторий", en: "committed in waves" } },
+      { span: 1, type: "mkt",     title: { ru: "Звук · эмодзи",   en: "Sound · emojis" }, sub: { ru: "идеи для хуков", en: "hook ideas" } },
+      { span: 4, type: "mkt",     title: { ru: "Динамика · хуки", en: "Motion · hooks" }, sub: { ru: "рендер видео", en: "video rendering" } },
+      { span: 1, type: "mkt",     title: { ru: "Статика", en: "Stills" }, sub: { ru: "сторов", en: "stores" } },
       { span: 1, type: "mkt", strong: true, title: { ru: "Склейка", en: "Stitch" }, sub: { ru: "роликов", en: "final cuts" } },
       { span: 3, type: "polish", strong: true, title: { ru: "Тесты iOS", en: "iOS testing" }, sub: { ru: "QA на единственном iPhone", en: "QA on the only iPhone" } },
       { span: 1, type: "rel",     title: { ru: "Помощь",  en: "Build" },   sub: { ru: "со сборкой", en: "support" } },
