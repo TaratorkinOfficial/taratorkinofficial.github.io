@@ -114,6 +114,12 @@ body {
     background: var(--bg-secondary);
 }
 
+[data-theme="light"] #about,
+[data-theme="light"] .games,
+[data-theme="light"] .contact {
+    background: var(--bg-primary);
+}
+
 .about-cta {
     display: flex;
     justify-content: center;
