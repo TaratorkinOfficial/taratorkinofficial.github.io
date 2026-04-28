@@ -527,12 +527,8 @@
 						</div>
 					</div>
                     
-                    <a href="#contact" class="btn btn-primary" style="margin-top: 2rem;">
-                        Work With Us
-                        <span>→</span>
-                    </a>
                 </div>
-                
+
                 <div class="features-list reveal">
 					<div class="feature-item">
 						<div class="feature-icon">⚡</div>
@@ -585,7 +581,14 @@
 					</div>
 				</div>
             </div>
-            
+
+            <div class="about-cta reveal">
+                <a href="#contact" class="btn btn-primary">
+                    Work With Us
+                    <span>→</span>
+                </a>
+            </div>
+
             <!-- Team -->
             <div class="team-grid reveal">
                 <div class="team-card">
@@ -595,15 +598,15 @@
                     <div class="team-name">Alexander</div>
                     <div class="team-role">Founder</div>
                 </div>
-                
-				<div class="team-card">
+
+                <div class="team-card">
                     <div class="team-avatar">
                         <img src="assets/images/Illia.jpg" alt="Illia">
                     </div>
                     <div class="team-name">Illia</div>
                     <div class="team-role">Lead Developer</div>
                 </div>
-				
+
                 <div class="team-card">
                     <div class="team-avatar">
                         <img src="assets/images/eduard.jpg" alt="Eduard">
@@ -611,7 +614,7 @@
                     <div class="team-name">Eduard</div>
                     <div class="team-role">Developer</div>
                 </div>
-                
+
                 <div class="team-card">
                     <div class="team-avatar">
                         <img src="assets/images/vitaliy.jpg" alt="Vitaliy">
@@ -870,7 +873,7 @@
             });
         }, {
             rootMargin: '200px', // Trigger 200px before element is visible
-            threshold: 0.1
+            threshold: 0 // Fire as soon as any pixel intersects (within rootMargin)
         });
 
         revealElements.forEach(el => revealObserver.observe(el));
