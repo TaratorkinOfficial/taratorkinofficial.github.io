@@ -499,13 +499,14 @@ body::after {
 
 .cell {
   position: relative;
-  padding: 12px 10px;
+  padding: 10px 4px;
   border-radius: 10px;
   border: 1px solid;
   min-height: 78px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: stretch;
   text-align: center;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
@@ -522,6 +523,11 @@ body::after {
   letter-spacing: -0.01em;
   line-height: 1.22;
   color: var(--text);
+  text-align: center;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .cell .sub {
@@ -529,6 +535,11 @@ body::after {
   color: var(--text-dim);
   margin-top: 4px;
   line-height: 1.3;
+  text-align: center;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .cell.strong { border-width: 1.5px; }
@@ -1085,7 +1096,7 @@ const STATIC = {
     hero_eyebrow: "Дорожная карта спринта · v2",
     hero_title_1: "Дорожная",
     hero_title_2: "карта",
-    hero_lede: "4 недели, 20 рабочих дней, одна методика. От идеи до релиза в сторах с готовыми рекламными видео.",
+    hero_lede: "4 недели, 20 рабочих дней, одна методика. От идеи до релиза в магазинах с готовыми рекламными видео.",
     stat_days: "рабочих дней",
     stat_weeks: "недели",
     stat_checkpoints: "чекпоинтов",
@@ -1094,8 +1105,8 @@ const STATIC = {
     section_02_idx: "02 · Процесс",
     section_02_h2_a: "Флоу",
     section_02_h2_b: "художника",
-    ios_strong: "Только художник",
-    ios_text: " — единственный iPhone в команде. Тест в субботу-воскресенье после дня 15, без потери рабочих дней.",
+    ios_strong: "Художник",
+    ios_text: " — iPhone у него в команде. Тест в субботу-воскресенье после дня 15, без потери рабочих дней.",
     section_03_idx: "03 · Правила",
     section_03_h2_a: "Ключевые",
     section_03_h2_b: "правила",
@@ -1117,8 +1128,8 @@ const STATIC = {
     section_02_idx: "02 · Workflow",
     section_02_h2_a: "Artist",
     section_02_h2_b: "workflow",
-    ios_strong: "Artist only",
-    ios_text: " — the only iPhone on the team. Weekend testing (Sat–Sun) after day 15, no working days lost.",
+    ios_strong: "Artist",
+    ios_text: " — owns the iPhone on the team. Weekend testing (Sat–Sun) after day 15, no working days lost.",
     section_03_idx: "03 · Rules",
     section_03_h2_a: "Core",
     section_03_h2_b: "rules",
@@ -1156,12 +1167,12 @@ const ROWS = [
       { span: 1, type: "dev",     strong: true, title: { ru: "Кор",     en: "Core" },    sub: { ru: "+ Claude", en: "+ Claude" } },
       { span: 3, type: "dev",     title: { ru: "Ревью · архитектор", en: "Review · architect" }, sub: { ru: "помощь в сложных задачах", en: "helping on tough problems" } },
       { span: 5, type: "dev",     title: { ru: "Ревью PR · тюнинг",   en: "PR review · tuning" },  sub: { ru: "поддержка", en: "support" } },
-      { span: 3, type: "polish",  title: { ru: "Полировка",           en: "Polish" },              sub: { ru: "juice · баланс", en: "juice · balancing" } },
-      { span: 1, type: "mkt",     title: { ru: "Тексты",              en: "Store" },               sub: { ru: "сторов", en: "copy" } },
-      { span: 1, type: "rel", strong: true, title: { ru: "Билды", en: "Builds" }, sub: { ru: "раздача", en: "distribution" } },
-      { span: 2, type: "buf",     title: { ru: "Фиксы по тестам", en: "Test fixes" }, sub: { ru: "финальные правки", en: "final tweaks" } },
-      { span: 1, type: "rel", strong: true, title: { ru: "Apple", en: "Apple" }, sub: { ru: "публикация", en: "submit" } },
+      { span: 3, type: "polish",  title: { ru: "Полировка",           en: "Polish" },              sub: { ru: "ощущения · баланс", en: "juice · balancing" } },
+      { span: 1, type: "mkt",     title: { ru: "Тексты",              en: "Store" },               sub: { ru: "магазинов", en: "copy" } },
+      { span: 1, type: "rel", strong: true, title: { ru: "Сборки", en: "Builds" }, sub: { ru: "раздача", en: "distribution" } },
       { span: 1, type: "rel", strong: true, title: { ru: "Google", en: "Google" }, sub: { ru: "публикация", en: "submit" } },
+      { span: 1, type: "rel", strong: true, title: { ru: "Apple", en: "Apple" }, sub: { ru: "публикация", en: "submit" } },
+      { span: 2, type: "rel",     title: { ru: "Ожидание ревью", en: "Awaiting review" }, sub: { ru: "подготовка к релизу", en: "release prep" } },
       { span: 1, type: "rel", strong: true, title: { ru: "Релиз", en: "Release" }, sub: { ru: "передача", en: "handoff" } }
     ]
   },
@@ -1172,11 +1183,11 @@ const ROWS = [
     items: [
       { span: 1, type: "concept", title: { ru: "Мозговой", en: "Brain-" }, sub: { ru: "штурм", en: "storm" } },
       { span: 1, type: "concept", title: { ru: "Разбор", en: "Task" }, sub: { ru: "задач", en: "alignment" } },
-      { span: 1, type: "dev",     title: { ru: "Вспом.",   en: "Aux." }, sub: { ru: "системы", en: "systems" } },
+      { span: 1, type: "dev",     title: { ru: "Вспом.",   en: "Helper" }, sub: { ru: "системы", en: "systems" } },
       { span: 7, type: "dev",     title: { ru: "Основная разработка", en: "Core development" }, sub: { ru: "приём кора · внедрение ассетов · фичи", en: "taking over core · asset integration · features" } },
-      { span: 3, type: "polish",  title: { ru: "Полировка · баги", en: "Polish · bugs" }, sub: { ru: "juice · оптимизация", en: "juice · optimization" } },
+      { span: 3, type: "polish",  title: { ru: "Полировка · баги", en: "Polish · bugs" }, sub: { ru: "ощущения · оптимизация", en: "juice · optimization" } },
       { span: 1, type: "polish",  title: { ru: "Полировка", en: "Polish" }, sub: { ru: "финальная", en: "final" } },
-      { span: 1, type: "polish", strong: true, title: { ru: "QA билды", en: "QA builds" }, sub: { ru: "TF+Android", en: "TF+Android" } },
+      { span: 1, type: "polish", strong: true, title: { ru: "QA", en: "QA" }, sub: { ru: "Android", en: "Android" } },
       { span: 3, type: "buf",     title: { ru: "Фиксы по тестам", en: "Test fixes" }, sub: { ru: "финальные правки", en: "final tweaks" } },
       { span: 1, type: "rel",     title: { ru: "Помощь", en: "Build" }, sub: { ru: "со сборкой", en: "support" } },
       { span: 1, type: "rel",     title: { ru: "Релиз",  en: "Release" }, sub: { ru: "поддержка", en: "support" } }
@@ -1194,7 +1205,7 @@ const ROWS = [
       { span: 3, type: "dev",     title: { ru: "SDK · реклама", en: "SDK · ads" }, sub: { ru: "аналитика · интеграции", en: "analytics · integrations" } },
       { span: 2, type: "polish",  title: { ru: "Баги",    en: "Bugs" },    sub: { ru: "туториал", en: "tutorial" } },
       { span: 2, type: "mkt", strong: true, title: { ru: "Запись", en: "Gameplay" }, sub: { ru: "геймплея + скрины", en: "capture + screenshots" } },
-      { span: 1, type: "polish",  title: { ru: "QA",      en: "QA" },      sub: { ru: "раздача", en: "distribution" } },
+      { span: 1, type: "polish",  title: { ru: "QA", en: "QA" }, sub: { ru: "Android", en: "Android" } },
       { span: 3, type: "buf",     title: { ru: "Финальное QA", en: "Final QA" }, sub: { ru: "фиксы по тестам", en: "test fixes" } },
       { span: 1, type: "rel",     title: { ru: "Помощь",  en: "Build" },   sub: { ru: "со сборкой", en: "support" } },
       { span: 1, type: "rel",     title: { ru: "Релиз",   en: "Release" }, sub: { ru: "поддержка", en: "support" } }
@@ -1210,10 +1221,10 @@ const ROWS = [
       { span: 1, type: "assets", strong: true, title: { ru: "Стиль", en: "Style" }, sub: { ru: "фриз", en: "freeze" } },
       { span: 3, type: "assets",  title: { ru: "Финальные ассеты + UI", en: "Final assets + UI" }, sub: { ru: "волнами в репозиторий", en: "committed in waves" } },
       { span: 1, type: "mkt",     title: { ru: "Звук · эмодзи",   en: "Sound · emojis" }, sub: { ru: "идеи для хуков", en: "hook ideas" } },
+      { span: 1, type: "mkt",     title: { ru: "Статика", en: "Stills" }, sub: { ru: "игры", en: "game" } },
       { span: 4, type: "mkt",     title: { ru: "Динамика · хуки", en: "Motion · hooks" }, sub: { ru: "рендер видео", en: "video rendering" } },
-      { span: 1, type: "mkt",     title: { ru: "Статика", en: "Stills" }, sub: { ru: "сторов", en: "stores" } },
-      { span: 1, type: "mkt", strong: true, title: { ru: "Склейка", en: "Stitch" }, sub: { ru: "роликов", en: "final cuts" } },
-      { span: 3, type: "polish", strong: true, title: { ru: "Тесты iOS", en: "iOS testing" }, sub: { ru: "QA на единственном iPhone", en: "QA on the only iPhone" } },
+      { span: 1, type: "polish", strong: true, title: { ru: "QA", en: "QA" }, sub: { ru: "iOS", en: "iOS" } },
+      { span: 3, type: "mkt", strong: true, title: { ru: "Склейка", en: "Stitch" }, sub: { ru: "роликов", en: "final cuts" } },
       { span: 1, type: "rel",     title: { ru: "Помощь",  en: "Build" },   sub: { ru: "со сборкой", en: "support" } },
       { span: 1, type: "rel",     title: { ru: "Релиз",   en: "Release" }, sub: { ru: "поддержка", en: "support" } }
     ]
@@ -1221,20 +1232,20 @@ const ROWS = [
 ];
 
 const CHECKPOINTS = {
-  2:  { text: { ru: "Ревью кора",      en: "Core review" },      day: { ru: "день 2", en: "day 2" } },
+  2:  { text: { ru: "РЕВЬЮ КОРА",      en: "CORE REVIEW" },      day: { ru: "день 2", en: "day 2" } },
   5:  { text: { ru: "СТИЛЬ-ФРИЗ",      en: "STYLE FREEZE" },     day: { ru: "день 5", en: "day 5" } },
   10: { text: { ru: "ФИЧА-ФРИЗ",       en: "FEATURE FREEZE" },   day: { ru: "день 10", en: "day 10" } },
-  15: { text: { ru: "Раздача билдов",  en: "Ship builds" },      day: { ru: "д. 15 · iOS сб-вс", en: "d. 15 · iOS Sat–Sun" } },
-  18: { text: { ru: "STORES SUBMIT",   en: "STORES SUBMIT" },    day: { ru: "день 18", en: "day 18" } },
+  15: { text: { ru: "СБОРКИ",          en: "BUILDS" },            day: { ru: "день 15", en: "day 15" } },
+  18: { text: { ru: "ОЖИДАНИЕ",       en: "AWAITING" },           day: { ru: "день 18", en: "day 18" } },
   20: { text: { ru: "РЕЛИЗ",           en: "RELEASE" },          day: { ru: "день 20", en: "day 20" }, release: true }
 };
 
 const FLOW = [
   { lbl: { ru: "Ассеты + иконки",   en: "Assets + icons" },   desc: { ru: "черновые → финал, волнами в репо", en: "drafts → finals, committed in waves" } },
+  { lbl: { ru: "Звук · эмодзи",     en: "Sound · emojis" },   desc: { ru: "стикеры, подписи, нотификации", en: "stickers, captions, fake notifications" } },
   { lbl: { ru: "Статика скринов",   en: "Static shots" },     desc: { ru: "постановка кадров, концепты хуков", en: "store screenshots, hook concepts" } },
   { lbl: { ru: "Динамика · хуки",   en: "Motion · hooks" },   desc: { ru: "анимация зацепов для рекламы", en: "animating the ad grabbers" } },
   { lbl: { ru: "Рендер видео",      en: "Hook renders" },     desc: { ru: "хуки в форматах площадок", en: "ad-platform formats and ratios" } },
-  { lbl: { ru: "Звук · эмодзи",     en: "Sound · emojis" },   desc: { ru: "стикеры, подписи, нотификации", en: "stickers, captions, fake notifications" } },
   { lbl: { ru: "Склейка → финал",   en: "Stitch → final cuts" }, desc: { ru: "хук + геймплей = 5–6 роликов", en: "hook + gameplay = 5–6 ad videos" } }
 ];
 
@@ -1246,11 +1257,11 @@ const RULES = [
     p: { ru: "Пятница 2-й недели — фичи зафиксированы. Новое не добавляется, только фиксы и полировка.",
          en: "Friday of week 2 — feature set is locked. Nothing new added, only fixes and polish from here." } },
   { num: "03", h3: { ru: "iOS-QA на выходных", en: "Weekend iOS QA" },
-    p: { ru: "Единственный iPhone у художника. Тест на сб/вс после дня 15, без потери рабочих дней команды.",
-         en: "The artist owns the only iPhone. Sat–Sun testing after day 15, no working days burned." } },
-  { num: "04", h3: { ru: "Буфер 4-й недели",   en: "Week 4 is a buffer" },
-    p: { ru: "Пн-ср — фиксы найденного. Чт — stores submit. Пт — релиз. Неделя не для доделки, а для релизной логистики.",
-         en: "Mon–Wed: fix what the tests surfaced. Thu: stores submit. Fri: release. Not a week for finishing work." } },
+    p: { ru: "iPhone у художника. Тест на сб/вс после дня 15, без потери рабочих дней команды.",
+         en: "The artist owns the iPhone. Sat–Sun testing after day 15, no working days burned." } },
+  { num: "04", h3: { ru: "Релизная неделя",    en: "Release week" },
+    p: { ru: "Пн — отправка Google, вт — отправка Apple, ср-чт — ожидание ревью, пт — релиз. Неделя не для доделки, а для релизной логистики.",
+         en: "Mon — Google submit, Tue — Apple submit, Wed–Thu — review wait, Fri — release. Not a week for finishing work." } },
   { num: "05", h3: { ru: "Готовность 99%",     en: "99% ready by week 4" },
     p: { ru: "Входим в 4-ю неделю с почти готовым проектом. Если остались незавершённые фичи — методика сбоит.",
          en: "We enter week 4 with a near-complete build. Unfinished features at this point mean the methodology has slipped." } },
