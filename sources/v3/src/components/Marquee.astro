@@ -1,0 +1,120 @@
+---
+import { Image } from 'astro:assets';
+import { GAMES } from '../data/games';
+
+/**
+ * Two-row cover wall with depth: front row sharp, back row smaller,
+ * blurred and drifting the opposite way. Pure CSS animation,
+ * horizontal scroll under reduced motion.
+ */
+const covers = GAMES.filter((g) => g.group !== 'experience').map((g) => g.cover);
+const half = Math.ceil(covers.length / 2);
+const rowA = covers.slice(0, half);
+const rowB = covers.slice(half);
+---
+
+<div class="wall" aria-hidden="true">
+  <div class="wall__row wall__row--back">
+    <div class="wall__track wall__track--reverse">
+      {
+        [0, 1].map(() => (
+          <div class="wall__group">
+            {rowB.map((cover) => (
+              <Image src={cover} alt="" width={200} height={200} class="wall__img" loading="eager" />
+            ))}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <div class="wall__row wall__row--front">
+    <div class="wall__track">
+      {
+        [0, 1].map(() => (
+          <div class="wall__group">
+            {rowA.map((cover) => (
+              <Image src={cover} alt="" width={260} height={260} class="wall__img" loading="eager" />
+            ))}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .wall {
+    position: relative;
+    display: grid;
+    gap: 18px;
+    padding-block: 10px;
+    overflow: hidden;
+    /* fade the edges out */
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  }
+
+  .wall__row {
+    overflow: hidden;
+  }
+
+  .wall__track {
+    display: flex;
+    width: max-content;
+    animation: drift 52s linear infinite;
+  }
+
+  .wall__track--reverse {
+    animation-direction: reverse;
+    animation-duration: 74s;
+  }
+
+  .wall:hover .wall__track {
+    animation-play-state: paused;
+  }
+
+  .wall__group {
+    display: flex;
+    gap: 18px;
+    padding-right: 18px;
+  }
+
+  .wall :global(.wall__img) {
+    object-fit: cover;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    flex-shrink: 0;
+  }
+
+  .wall__row--front :global(.wall__img) {
+    width: clamp(120px, 15vw, 190px);
+    height: clamp(120px, 15vw, 190px);
+    box-shadow: 0 18px 40px -14px rgba(0, 0, 0, 0.55);
+  }
+
+  .wall__row--back :global(.wall__img) {
+    width: clamp(84px, 10vw, 130px);
+    height: clamp(84px, 10vw, 130px);
+    filter: blur(1.6px) brightness(0.75);
+  }
+
+  @keyframes drift {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wall__row {
+      overflow-x: auto;
+    }
+
+    .wall__track {
+      animation: none;
+    }
+
+    .wall__row--back {
+      display: none;
+    }
+  }
+</style>

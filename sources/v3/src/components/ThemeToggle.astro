@@ -1,0 +1,80 @@
+---
+/**
+ * Theme toggle — delegation-based so it survives View Transitions swaps.
+ * The actual theme boot script lives inline in Base.astro <head> to avoid FOUC.
+ */
+---
+
+<button type="button" class="theme-toggle" data-theme-toggle aria-live="polite">
+  <span class="theme-toggle__icon" aria-hidden="true"></span>
+  <span class="theme-toggle__label" data-theme-label>Light</span>
+</button>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--glass);
+    color: var(--text-2);
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--line-2);
+    color: var(--text);
+  }
+
+  .theme-toggle__icon::before {
+    content: '◐';
+    font-size: 14px;
+  }
+
+  @media (max-width: 480px) {
+    .theme-toggle {
+      padding: 8px 11px;
+    }
+
+    .theme-toggle__label {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const KEY = 'tt-theme';
+
+  function currentTheme(): string {
+    return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+  }
+
+  function syncLabels() {
+    const next = currentTheme() === 'dark' ? 'Light' : 'Dark';
+    document
+      .querySelectorAll<HTMLElement>('[data-theme-label]')
+      .forEach((el) => (el.textContent = next));
+    document
+      .querySelectorAll<HTMLButtonElement>('[data-theme-toggle]')
+      .forEach((btn) =>
+        btn.setAttribute('aria-label', `Switch to ${next.toLowerCase()} theme`),
+      );
+  }
+
+  document.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('[data-theme-toggle]');
+    if (!btn) return;
+    const next = currentTheme() === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem(KEY, next);
+    syncLabels();
+  });
+
+  document.addEventListener('astro:page-load', syncLabels);
+</script>

@@ -1,0 +1,70 @@
+---
+import { Image } from 'astro:assets';
+import { GAMES } from '../data/games';
+
+/** A strip of cover art — pure CSS animation, static under reduced motion. */
+const covers = GAMES.filter((g) => g.group !== 'experience').map((g) => ({
+  cover: g.cover,
+  title: g.title,
+}));
+---
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    {
+      [0, 1].map((copy) => (
+        <div class="marquee__group" aria-hidden={copy === 1 ? 'true' : undefined}>
+          {covers.map((c) => (
+            <Image src={c.cover} alt="" width={220} height={220} class="marquee__img" loading="eager" />
+          ))}
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .marquee {
+    overflow: hidden;
+    border-block: 1px solid var(--line-strong);
+    background: var(--surface);
+  }
+
+  .marquee__track {
+    display: flex;
+    width: max-content;
+    animation: scroll 48s linear infinite;
+  }
+
+  .marquee:hover .marquee__track {
+    animation-play-state: paused;
+  }
+
+  .marquee__group {
+    display: flex;
+  }
+
+  .marquee :global(.marquee__img) {
+    width: clamp(96px, 12vw, 150px);
+    height: clamp(96px, 12vw, 150px);
+    object-fit: cover;
+    border-right: 1px solid var(--line-strong);
+    flex-shrink: 0;
+  }
+
+  @keyframes scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee {
+      overflow-x: auto;
+    }
+
+    .marquee__track {
+      animation: none;
+    }
+  }
+</style>

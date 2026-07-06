@@ -1,1 +1,11 @@
+# local session config
 /.claude
+
+# build tooling inside the design sources
+sources/*/node_modules/
+sources/*/dist/
+sources/*/.astro/
+sources/*/npm-debug.log*
+
+# temp
+legacy-tmp.tar

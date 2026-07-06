@@ -1,0 +1,652 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../data/site';
+
+const TOC = [
+  { id: 'intro', label: 'Introduction' },
+  { id: 'children', label: 'A — Children' },
+  { id: 'general', label: 'B — General apps' },
+  { id: 'common', label: 'C — Common terms' },
+  { id: 'contact', label: 'Contact' },
+];
+---
+
+<Base
+  title="Privacy Policy — Taratorkin Official"
+  description="Privacy policy for Taratorkin Official mobile apps."
+  path="/privacy"
+>
+  <header class="phead">
+    <div class="container">
+      <p class="eyebrow eyebrow--accent">Legal</p>
+      <h1 class="phead__title display">Privacy Policy</h1>
+      <p class="phead__meta">Taratorkin Official · English · Last revised: 2026-05-08</p>
+    </div>
+  </header>
+
+  <div class="policy container">
+    <nav class="toc" aria-label="Policy sections">
+      <p class="eyebrow">Contents</p>
+      <ol>
+        {
+          TOC.map((item) => (
+            <li>
+              <a href={`#${item.id}`} data-toc-link>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+
+    <article class="policy__body">
+      <section id="intro">
+        <p>
+          <strong>Controller:</strong> Oleksandr Tarnahrodskyi, registered as an individual
+          entrepreneur (FOP) in Ukraine (Tax ID: [TAX_ID_PLACEHOLDER]), operating under the trade
+          name “Taratorkin Official” (the “Studio”, “we”, “us”, “our”). This Privacy Policy
+          describes what personal and non-personal information we collect in connection with the
+          mobile applications, games and digital services we provide (the “Apps” or “Services”),
+          why we collect it, how we use and share it, how long we retain it, and how to contact
+          us.
+        </p>
+        <p>
+          <strong>Governing law and jurisdiction:</strong> This policy is governed by the laws of
+          Ukraine. For users in the EEA, UK, and California — applicable local data protection
+          laws (GDPR, UK GDPR, CCPA) apply where they grant stronger protections.
+        </p>
+        <p>
+          <strong>Public policy URL:</strong>
+          <a href="https://taratorkinofficial.wordpress.com/policy" target="_blank" rel="noopener">
+            taratorkinofficial.wordpress.com/policy
+          </a>
+          <br />
+          <strong>Privacy contact email:</strong>
+          <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        </p>
+        <p>
+          <em>Important — Audience, structure and how to read this policy:</em> We publish Apps
+          for different audiences. Some Apps are intended for general audiences (adults/teens),
+          and some App versions or sections may be directed to or accessible by children. This
+          Policy is structured in three parts:
+        </p>
+        <ul>
+          <li>
+            <strong>Chapter A — Children:</strong> apps or sections intended for children
+            (stricter rules apply).
+          </li>
+          <li>
+            <strong>Chapter B — General Apps:</strong> apps for general audiences (standard
+            rules).
+          </li>
+          <li>
+            <strong>Chapter C — Common terms:</strong> applies to both A and B (cookies, third
+            parties, rights, retention, transfers, security, contact).
+          </li>
+        </ul>
+        <p>
+          If an App includes an age-gate, your selection determines whether Chapter A or Chapter
+          B applies to you.
+        </p>
+      </section>
+
+      <section id="children">
+        <h2>Chapter A — Children Privacy Policy</h2>
+
+        <h3>A.1 Overview and core rule</h3>
+        <p>
+          We do not knowingly collect personal information that directly identifies a child (such
+          as name, email, phone, or home address) from children under the applicable minimum age
+          except as permitted by law and platform rules. For children we limit collection to a
+          minimal set of data necessary for app functionality and safety.
+        </p>
+        <p>
+          All Apps directed to children are designed and distributed in compliance with the
+          <strong>Google Play Families Policy</strong> and the
+          <strong>Apple App Store Kids Category</strong> requirements, in addition to COPPA and
+          applicable EU/UK rules for children's data. Where platform requirements are stricter
+          than this Policy, the platform requirements apply.
+        </p>
+
+        <h3>A.2 Age-gate and designation</h3>
+        <p>
+          Some Apps include an age-gate. If a User selects an age below the configured threshold
+          (e.g., under 16), the App's children rules will apply to that session or section.
+        </p>
+
+        <h3>A.3 Data types we may collect from children (limited)</h3>
+        <ul>
+          <li>
+            Non-identifying device &amp; usage data: device model, OS version, app version,
+            session timestamps, levels reached, aggregated gameplay metrics, crash logs and
+            diagnostics.
+          </li>
+          <li>
+            Persistent device identifiers (limited): advertising identifier (GAID/IDFA) or
+            randomly generated user ID used only for internal operations — not linked to
+            identifying info for children.
+          </li>
+          <li>
+            Generalized location: country or city level derived from IP (no precise GPS for
+            children unless lawful and parental consent obtained).
+          </li>
+          <li>Local storage data required for offline functionality or to preserve game state.</li>
+        </ul>
+
+        <h3>A.4 Prohibited children data</h3>
+        <p>
+          We do not collect or permit third parties to collect children's direct identifiers
+          (name, email, home address, phone), financial data, contact lists, or sensitive
+          categories (race, health, religion) — except upon verifiable parental consent where
+          legally permitted.
+        </p>
+
+        <h3>A.5 Support requests by children</h3>
+        <p>
+          If a child provides contact info when contacting support, we use it only to respond and
+          then promptly delete it unless retention is authorized by a parent/guardian or required
+          by law.
+        </p>
+
+        <h3>A.6 Advertising and third-party partners for children</h3>
+        <p>
+          We do not permit behavioral interest-based advertising to children. Ads shown (if any)
+          are strictly contextual and served only via third parties certified or configured for
+          compliance with COPPA and the Google Play Families / Apple App Store Kids requirements
+          — for example, <strong>SuperAwesome</strong>, <strong>Kidoz</strong>, or AdMob operated
+          in its <strong>COPPA-safe / “tag for child-directed treatment”</strong> configuration.
+          <strong>
+            We do not run standard Google AdMob, Facebook Audience Network, IronSource / Unity
+            LevelPlay mediation, or other behavioral / cross-app-tracking ad networks in Apps
+            directed to children.
+          </strong>
+        </p>
+
+        <h3>A.7 Sharing children’s data</h3>
+        <p>
+          Children's persistent device identifiers may be shared only in very limited cases
+          (e.g., law enforcement, fraud prevention, or with parental consent). We do not share
+          identifying children’s personal data with advertisers or analytics providers.
+        </p>
+
+        <h3>A.8 Parental rights</h3>
+        <p>
+          Parents/legal guardians may contact us at
+          <a href={`mailto:${SITE.email}`}>{SITE.email}</a> to request access, correction or
+          deletion of their child’s data. We will verify identity where required by law and
+          comply with valid requests promptly.
+        </p>
+      </section>
+
+      <section id="general">
+        <h2>Chapter B — General Apps Privacy Policy</h2>
+
+        <h3>B.1 Overview</h3>
+        <p>
+          This chapter applies to Users of apps not designated as children-targeted and to Users
+          who indicate they are above the age gate. We may collect broader categories of data
+          here, but with reasonable limits and lawful bases.
+        </p>
+
+        <h3>B.2 Categories of information we collect</h3>
+        <ul>
+          <li>
+            <strong>Information you provide:</strong> contact/support info (email, nickname),
+            content you create or upload, transaction identifiers (order ID, receipt).
+          </li>
+          <li>
+            <strong>Device &amp; technical information:</strong> device model, OS version,
+            language, screen size, advertising identifiers (GAID/IDFA), Android ID, app-specific
+            user IDs, app version, SDKs, crash logs, IP address.
+          </li>
+          <li>
+            <strong>Usage &amp; analytics:</strong> gameplay data (levels reached, session
+            durations, in-app events), performance diagnostics.
+          </li>
+          <li>
+            <strong>Location:</strong> general location derived from IP; precise GPS only with
+            explicit permission and purpose.
+          </li>
+          <li>
+            <strong>Cookies &amp; local storage:</strong> data used to maintain preferences and
+            session state on the device.
+          </li>
+        </ul>
+
+        <h3>B.3 How we use the information (purposes &amp; legal bases)</h3>
+        <p>
+          We process data to: provide and operate the App; improve and develop the App; ensure
+          security and fraud prevention; process payments; serve ads and measure their
+          performance (consent where required); provide customer support; and comply with legal
+          obligations.
+        </p>
+
+        <h3>B.4 Advertising &amp; ad identifiers</h3>
+        <p>
+          We and our ad partners may use Advertising IDs (GAID/IDFA) to deliver, measure and
+          improve ad experiences. You can reset or limit ad personalization via device settings
+          (Android: Ads settings; iOS: Limit Ad Tracking / tracking settings).
+        </p>
+
+        <h3>B.5 Sharing — who we share with and why</h3>
+        <p>
+          We may share data with service providers (analytics, hosting, payments, support
+          platforms), advertising partners (for ad serving and measurement), affiliates and
+          partners (business transfers), and law enforcement when required. Third parties must
+          process data per our instructions and maintain safeguards.
+        </p>
+
+        <h3>B.6 User-generated content</h3>
+        <p>
+          Content you publish via the App may be visible to others per your sharing settings. You
+          are responsible for what you choose to publish.
+        </p>
+
+        <h3>B.7 Your choices and controls</h3>
+        <p>You have direct, device-level controls over how your data is used in our general-audience Apps:</p>
+        <ul>
+          <li>
+            <strong>Reset your advertising ID.</strong>
+            <ul>
+              <li>
+                <strong>Android:</strong> Settings → Privacy → Ads → <em>Reset advertising ID</em>
+                (or <em>Delete advertising ID</em> on Android 12+).
+              </li>
+              <li>
+                <strong>iOS:</strong> Settings → Privacy &amp; Security → Tracking → toggle off
+                <em>Allow Apps to Request to Track</em> (this prevents apps from accessing the
+                IDFA).
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Opt out of personalized ads.</strong>
+            <ul>
+              <li>
+                <strong>Android:</strong> Settings → Privacy → Ads → enable
+                <em>Opt out of Ads Personalization</em>.
+              </li>
+              <li>
+                <strong>iOS:</strong> Settings → Privacy &amp; Security → Apple Advertising →
+                toggle off <em>Personalized Ads</em>. For third-party networks, decline the App
+                Tracking Transparency (ATT) prompt or revoke it for the App in Settings → Privacy
+                &amp; Security → Tracking.
+              </li>
+              <li>
+                <strong>In-App:</strong> where a consent prompt is shown (EEA / UK / Switzerland),
+                you may withdraw or change ad-personalization consent at any time via the in-app
+                <em>Privacy Settings</em> / <em>Consent</em> option.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Request access, correction, or deletion of your data.</strong> Email
+            <a href={`mailto:${SITE.email}`}>{SITE.email}</a> with the subject line
+            <em>“Privacy request”</em> and include: (a) the App name / package, (b) your in-app
+            or device identifier if available, and (c) the action requested (access, correction,
+            deletion, export, or opt-out of sale/share). We may ask for reasonable verification
+            before acting. Verified requests are completed within 30 calendar days (see C.3).
+          </li>
+        </ul>
+      </section>
+
+      <section id="common">
+        <h2>Chapter C — Common terms</h2>
+
+        <h3>C.1 Third-party list and SDKs</h3>
+        <p>
+          We use third-party SDKs and vendors — ad networks, analytics providers, crash
+          reporters, and payment providers. We maintain a representative list of major third
+          parties at:
+          <a
+            href="https://taratorkinofficial.wordpress.com/policy#third-parties"
+            target="_blank"
+            rel="noopener"
+          >
+            policy#third-parties
+          </a>.
+        </p>
+        <p>
+          The principal SDKs currently integrated in our build pipeline, and the categories of
+          data each processes, are:
+        </p>
+        <ul>
+          <li>
+            <strong>Google Firebase — Crashlytics &amp; Analytics</strong> (Google LLC / Google
+            Ireland Ltd.) — crash stack traces, device model, OS version, app version,
+            non-precise locale, pseudonymous app instance ID, in-app event data.
+            <em>Used for diagnostics, crash reporting, and aggregated product analytics.</em>
+          </li>
+          <li>
+            <strong>GameAnalytics</strong> (GameAnalytics ApS, Denmark) — pseudonymous user ID,
+            device model, OS, country (from IP), gameplay events (levels, sessions, progression,
+            in-app purchases). <em>Used for gameplay event analytics.</em>
+          </li>
+          <li>
+            <strong>Google AdMob</strong> (Google LLC / Google Ireland Ltd.) — advertising
+            identifier (GAID/IDFA), device &amp; network information, IP address, ad interaction
+            events.
+            <em>
+              Used for in-app advertising in general-audience Apps only. Not used in
+              children-directed Apps (see A.6).
+            </em>
+          </li>
+          <li>
+            <strong>IronSource / Unity LevelPlay</strong> (Unity Technologies / ironSource Ltd.)
+            — advertising identifier (GAID/IDFA), device identifiers, IP address, ad impression /
+            click events.
+            <em>Used for ad mediation in general-audience Apps only. Not used in children-directed Apps.</em>
+          </li>
+          <li>
+            <strong>Facebook SDK / Meta Audience Network</strong> (Meta Platforms Ireland Ltd.) —
+            advertising identifier (GAID/IDFA), device identifiers, app event data, IP address.
+            <em>
+              Used for ad attribution and measurement in general-audience Apps only. Not used in
+              children-directed Apps.
+            </em>
+          </li>
+          <li>
+            <strong>Unity Engine</strong> (Unity Technologies) — device model, OS version,
+            graphics capabilities, crash and performance diagnostics.
+            <em>Used as the game runtime.</em>
+          </li>
+        </ul>
+        <p>
+          Each vendor processes data under its own privacy terms. The list above reflects current
+          integrations and may change; the canonical list is maintained at the third-parties URL
+          above.
+        </p>
+
+        <h3>C.2 Cookies, local storage &amp; offline data</h3>
+        <p>
+          Our Apps and third-party SDKs may use local storage to keep preferences, cap ad
+          frequency, and for analytics. Offline features may operate without Internet; until
+          connectivity is restored no data is transmitted.
+        </p>
+
+        <h3>C.3 Retention periods (typical)</h3>
+        <ul>
+          <li>Crash logs &amp; short-term diagnostics: <strong>up to 90 days</strong>;</li>
+          <li>
+            Usage analytics (aggregated/anonymized): <strong>up to 26 months</strong> (aligned
+            with the Google Analytics default retention);
+          </li>
+          <li>Transaction records (receipts): up to 7 years for tax/compliance;</li>
+          <li>
+            Account data: while account is active; after deletion we remove or anonymize data
+            within ~30–90 days unless legal obligations require longer retention;
+          </li>
+          <li>
+            <strong>
+              Verified user-deletion / access / correction requests: completed within 30 calendar
+              days of verification
+            </strong>
+            (extendable once by an additional period where permitted by law, with notice to the
+            requester).
+          </li>
+        </ul>
+
+        <h3>C.4 International transfers</h3>
+        <p>
+          Data may be processed or stored in countries outside your residence. We use appropriate
+          safeguards (standard contractual clauses or adequacy mechanisms) to protect transfers.
+        </p>
+
+        <h3>C.5 Security</h3>
+        <p>
+          We use industry-standard measures (encryption in transit, access controls, secure
+          hosting). No system is 100% secure; we cannot guarantee absolute security.
+        </p>
+
+        <h3>C.6 Your rights</h3>
+        <p>
+          To the extent applicable, you have rights to access, correct, delete, restrict
+          processing, portability, object to processing, and withdraw consent. To exercise rights
+          contact <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. We may ask for identity
+          verification as required.
+        </p>
+
+        <h3>C.7 California Privacy (CCPA / CPRA)</h3>
+        <p>
+          If you are a California resident, you may have rights to request categories of data
+          collected, purposes, categories of third parties, deletion, and opt out of sale. To
+          exercise these rights email <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+        </p>
+
+        <h3>C.8 Law enforcement &amp; legal requests</h3>
+        <p>
+          We will disclose personal data in response to valid legal process or to protect rights,
+          property, or safety.
+        </p>
+
+        <h3>C.9 Deletion &amp; portability</h3>
+        <p>
+          To request deletion, export, or correction of data send an email to
+          <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. Include app package name and device
+          identifiers if available. We may require verification.
+        </p>
+
+        <h3>C.10 Changes to the Privacy Policy</h3>
+        <p>
+          We may update this Policy. Material changes will be posted at the policy URL with an
+          updated “Last revised” date and, where required, notified in the App or via the store
+          listing.
+        </p>
+      </section>
+
+      <section id="contact">
+        <h2>Contact information</h2>
+        <p>
+          <strong>Data controller:</strong> Oleksandr Tarnahrodskyi, registered as an individual
+          entrepreneur (FOP) in Ukraine (Tax ID: [TAX_ID_PLACEHOLDER]), operating under the trade
+          name “Taratorkin Official”.<br />
+          <strong>Address:</strong> Ukraine.<br />
+          <strong>Governing law and jurisdiction:</strong> Laws of Ukraine; GDPR / UK GDPR / CCPA
+          apply for users in the EEA, UK, and California where they grant stronger protections.
+          <br />
+          <strong>Email:</strong> <a href={`mailto:${SITE.email}`}>{SITE.email}</a><br />
+          <strong>Policy page:</strong>
+          <a href="https://taratorkinofficial.wordpress.com/policy" target="_blank" rel="noopener">
+            taratorkinofficial.wordpress.com/policy
+          </a>
+        </p>
+      </section>
+    </article>
+  </div>
+</Base>
+
+<style>
+  .phead {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+    padding-block: clamp(48px, 7vw, 88px);
+  }
+
+  .phead::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(560px 280px at 22% -10%, var(--glow), transparent 70%);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .phead .container {
+    position: relative;
+  }
+
+  .phead__title {
+    font-size: clamp(32px, 5.4vw, 64px);
+    margin-top: 20px;
+  }
+
+  .phead__meta {
+    font-size: 13px;
+    color: var(--text-3);
+    margin-top: 16px;
+  }
+
+  .policy {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 80px);
+    align-items: start;
+    padding-block: clamp(48px, 6vw, 80px);
+  }
+
+  .toc {
+    position: sticky;
+    top: calc(var(--header-h) + 24px);
+    padding: 22px;
+    background: var(--glass);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+  }
+
+  .toc ol {
+    list-style: none;
+    margin-top: 12px;
+  }
+
+  .toc a {
+    display: block;
+    padding: 8px 2px;
+    font-size: 14px;
+    text-decoration: none;
+    color: var(--text-2);
+    transition: color 0.15s var(--ease);
+  }
+
+  .toc li + li a {
+    border-top: 1px solid var(--line);
+  }
+
+  .toc a:hover {
+    color: var(--text);
+  }
+
+  .toc a.is-active {
+    color: var(--accent-ink);
+    font-weight: 650;
+  }
+
+  @media (max-width: 860px) {
+    .policy {
+      grid-template-columns: 1fr;
+    }
+
+    .toc {
+      position: static;
+    }
+  }
+
+  /* legal typography */
+  .policy__body {
+    max-width: 76ch;
+  }
+
+  .policy__body section {
+    scroll-margin-top: calc(var(--header-h) + 24px);
+  }
+
+  .policy__body section + section {
+    margin-top: clamp(40px, 5vw, 64px);
+    padding-top: clamp(28px, 4vw, 44px);
+    border-top: 1px solid var(--line);
+  }
+
+  .policy__body h2 {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2.6vw, 28px);
+    font-weight: 650;
+  }
+
+  .policy__body h3 {
+    font-size: 16.5px;
+    font-weight: 650;
+    color: var(--text);
+    margin-top: 28px;
+  }
+
+  .policy__body p {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--text-2);
+    margin-top: 12px;
+  }
+
+  .policy__body strong {
+    color: var(--text);
+  }
+
+  .policy__body ul {
+    margin-top: 12px;
+    padding-left: 22px;
+    display: grid;
+    gap: 8px;
+  }
+
+  .policy__body li {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-2);
+  }
+
+  .policy__body li::marker {
+    color: var(--accent);
+  }
+
+  .policy__body ul ul {
+    margin-top: 8px;
+  }
+
+  .policy__body a {
+    color: var(--accent-ink);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--accent-ink) 40%, transparent);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.15s var(--ease);
+  }
+
+  .policy__body a:hover {
+    text-decoration-color: currentColor;
+  }
+</style>
+
+<script>
+  // TOC scrollspy.
+  function initToc() {
+    const toc = document.querySelector<HTMLElement>('.toc');
+    if (!toc || toc.hasAttribute('data-spy-ready')) return;
+    toc.setAttribute('data-spy-ready', '');
+    const links = document.querySelectorAll<HTMLAnchorElement>('[data-toc-link]');
+    if (!links.length) return;
+    const map = new Map<Element, HTMLAnchorElement>();
+    for (const link of links) {
+      const id = link.getAttribute('href')?.slice(1);
+      const sec = id ? document.getElementById(id) : null;
+      if (sec) map.set(sec, link);
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const link = map.get(entry.target);
+          if (link && entry.isIntersecting) {
+            links.forEach((l) => l.classList.remove('is-active'));
+            link.classList.add('is-active');
+          }
+        }
+      },
+      { rootMargin: '-15% 0px -75% 0px' },
+    );
+    map.forEach((_, sec) => io.observe(sec));
+  }
+
+  // Run immediately too: on a first client-side (View Transitions) visit this
+  // module can finish loading AFTER astro:page-load has already fired.
+  initToc();
+  document.addEventListener('astro:page-load', initToc);
+</script>

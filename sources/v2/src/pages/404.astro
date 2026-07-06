@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+---
+
+<Base
+  title="404 — Taratorkin Official"
+  description="Page not found."
+  path="/404"
+  noindex
+>
+  <section class="nf container">
+    <p class="nf__code display" aria-hidden="true">404</p>
+    <h1 class="nf__title">Level not found.</h1>
+    <p class="nf__text">This screen doesn't exist — but our games do.</p>
+    <div class="nf__actions">
+      <a href={base} class="btn btn--accent">← Back to home</a>
+      <a href={base + '#work'} class="btn">See the games</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-block: clamp(64px, 10vw, 140px);
+  }
+
+  .nf__code {
+    font-size: clamp(80px, 18vw, 220px);
+    line-height: 1;
+    color: var(--accent);
+    letter-spacing: -0.04em;
+  }
+
+  .nf__title {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 3.4vw, 36px);
+    margin-top: 20px;
+  }
+
+  .nf__text {
+    color: var(--ink-2);
+    margin-top: 10px;
+  }
+
+  .nf__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+</style>

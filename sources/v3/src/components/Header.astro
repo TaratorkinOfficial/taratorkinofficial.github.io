@@ -1,0 +1,181 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/logo.webp';
+import ThemeToggle from './ThemeToggle.astro';
+import { SITE } from '../data/site';
+
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+
+/** Anchors resolve against the home page so they work from any route. */
+const nav = [
+  { label: 'Work', href: base + '#work' },
+  { label: 'Studio', href: base + '#studio' },
+  { label: 'Team', href: base + '#team' },
+  { label: 'Contact', href: base + '#contact' },
+];
+
+/* On the pitch page itself, "For publishers" would link to the page the
+   reader is already on — swap the CTA for a direct contact instead. */
+const onPitch = Astro.url.pathname
+  .replace(/\.html$/, '')
+  .replace(/\/$/, '')
+  .endsWith('/pitch');
+---
+
+<header class="header">
+  <div class="header__pill glass">
+    <a href={base} class="wordmark" aria-label="Taratorkin Official — home">
+      <Image src={logo} alt="" width={64} densities={[1, 2]} class="wordmark__logo" />
+      <span class="wordmark__text">Taratorkin&nbsp;Official</span>
+    </a>
+
+    <nav class="nav" aria-label="Main">
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+
+    <div class="header__actions">
+      {
+        onPitch ? (
+          <a href={`mailto:${SITE.email}`} class="nav__pitch">Email us</a>
+        ) : (
+          <a href={base + 'pitch'} class="nav__pitch">For publishers</a>
+        )
+      }
+      <ThemeToggle />
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 12px;
+    z-index: 50;
+    display: flex;
+    justify-content: center;
+    padding-inline: 16px;
+    height: 0; /* pill floats without reserving layout height beyond itself */
+  }
+
+  /* progressive-blur scrim: scrolled content dissolves toward the viewport
+     edge instead of showing as a raw strip above the floating pill */
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 0;
+    right: 0;
+    height: 108px;
+    background: linear-gradient(
+      to bottom,
+      var(--bg) 0%,
+      color-mix(in srgb, var(--bg) 82%, transparent) 40%,
+      transparent 100%
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    mask-image: linear-gradient(to bottom, #000 35%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent 100%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .header__pill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(14px, 2.5vw, 36px);
+    width: min(var(--container), 100%);
+    padding: 10px 12px 10px 16px;
+    border-radius: 999px;
+    /* the one place real backdrop blur earns its keep: content scrolls
+       beneath the floating pill */
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transform: translateZ(0);
+  }
+
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .wordmark :global(.wordmark__logo) {
+    width: 32px;
+    height: auto;
+    border-radius: 9px;
+  }
+
+  .wordmark__text {
+    font-family: var(--font-display);
+    font-size: 14.5px;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(10px, 2vw, 26px);
+  }
+
+  .nav a {
+    font-size: 14px;
+    font-weight: 550;
+    text-decoration: none;
+    color: var(--text-2);
+    padding: 6px 4px;
+    transition: color 0.15s ease;
+  }
+
+  .nav a:hover {
+    color: var(--text);
+  }
+
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav__pitch {
+    font-size: 13.5px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    color: var(--accent-contrast);
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 130%);
+    padding: 9px 18px;
+    border-radius: 999px;
+    box-shadow: 0 8px 22px -8px var(--glow);
+    transition:
+      transform 0.2s var(--spring),
+      box-shadow 0.2s ease;
+  }
+
+  .nav__pitch:hover {
+    transform: translateY(-1px) scale(1.03);
+    box-shadow: 0 12px 30px -8px var(--glow);
+  }
+
+  @media (max-width: 860px) {
+    .nav {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .wordmark__text {
+      display: none;
+    }
+
+    .nav__pitch {
+      font-size: 12.5px;
+      padding: 8px 14px;
+    }
+  }
+</style>

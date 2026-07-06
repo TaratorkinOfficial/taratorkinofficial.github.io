@@ -1,0 +1,28 @@
+{
+  "name": "taratorkin-studio-v2",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Taratorkin Official — mobile games studio site. Astro 5 static site deployed to GitHub Pages.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "@fontsource-variable/manrope": "^5.1.0",
+    "@fontsource-variable/unbounded": "^5.1.0",
+    "@fontsource/space-mono": "^5.1.0",
+    "astro": "^5.1.0",
+    "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "prettier": "^3.4.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript": "^5.7.2"
+  }
+}

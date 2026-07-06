@@ -1,8 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /v1/
-Disallow: /v2/
-Disallow: /v3/
-Disallow: /sprint_roadmap.html
-
-Sitemap: https://taratorkinofficial.github.io/sitemap.xml

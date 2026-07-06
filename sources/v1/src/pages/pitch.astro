@@ -1,0 +1,801 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import GameCard from '../components/GameCard.astro';
+import { GAMES, GROUPS } from '../data/games';
+import { TEAM } from '../data/team';
+import { SITE } from '../data/site';
+import {
+  PITCH_METRICS,
+  PITCH_CALLOUT,
+  ENGAGEMENT,
+  SPRINT_FORMATS,
+  TIMELINE,
+  TIMELINE_NOTE,
+  DELIVERABLES,
+  STRENGTHS,
+} from '../data/pitch';
+
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+
+const AGENDA = [
+  { id: 'about', num: '01', label: 'Who we are' },
+  { id: 'format', num: '02', label: 'How we work' },
+  { id: 'timeline', num: '03', label: '20 working days' },
+  { id: 'deliverables', num: '04', label: 'Deliverables' },
+  { id: 'team', num: '05', label: 'The team' },
+  { id: 'track', num: '06', label: 'Track record' },
+  { id: 'strengths', num: '07', label: 'Why us' },
+];
+
+const collabGames = GAMES.filter((g) => g.group === 'collab');
+const studioGames = GAMES.filter((g) => g.group === 'studio');
+---
+
+<Base
+  title="Publisher pitch — Taratorkin Official"
+  description="4-week sprints across hyper, hybrid, and casual. Full-stack team of 4, AI-accelerated iteration, dual-platform builds, founder with first-hand CrazyLabs pipeline experience."
+  path="/pitch"
+>
+  <!-- ===== PITCH HERO ===== -->
+  <section class="phero">
+    <div class="container">
+      <p class="eyebrow eyebrow--accent">Publisher pitch</p>
+      <h1 class="phero__title display">
+        Mobile games that ship <em>fast</em>. And perform.
+      </h1>
+      <p class="phero__lede">
+        Taratorkin Official is a lean, founder-led studio building polished prototypes across
+        <strong>hyper, hybrid, and casual</strong> for publishers. 4-week sprints. Full-stack
+        team. Proven metrics.
+      </p>
+      <dl class="phero__metrics">
+        {
+          PITCH_METRICS.map((m) => (
+            <div class="phero__metric">
+              <dt>{m.label}</dt>
+              <dd class="mono">{m.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <div class="pitch container">
+    <!-- sticky agenda -->
+    <nav class="agenda" aria-label="Pitch sections">
+      <p class="eyebrow">Agenda</p>
+      <ol>
+        {
+          AGENDA.map((a) => (
+            <li>
+              <a href={`#${a.id}`} data-agenda-link>
+                <span class="mono">{a.num}</span> {a.label}
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+      <a href={`mailto:${SITE.email}`} class="btn btn--accent agenda__cta">Email us</a>
+    </nav>
+
+    <div class="pitch__content">
+      <!-- 01 who we are -->
+      <section class="psec" id="about">
+        <h2 class="psec__title"><span class="mono">01</span> Who we are</h2>
+        <p class="callout">{PITCH_CALLOUT}</p>
+      </section>
+
+      <!-- 02 how we work -->
+      <section class="psec" id="format">
+        <h2 class="psec__title"><span class="mono">02</span> How we work</h2>
+        <p class="psec__lede">{ENGAGEMENT}</p>
+
+        <div class="sprints">
+          {
+            SPRINT_FORMATS.map((f) => (
+              <article class:list={['sprint', { 'sprint--preferred': f.preferred }]}>
+                <p class="sprint__badge mono">{f.badge}</p>
+                <p class="sprint__duration display">{f.duration}</p>
+                <p class="sprint__type">{f.type}</p>
+                <ul>
+                  {f.features.map((feat) => (
+                    <li>{feat}</li>
+                  ))}
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- 03 timeline -->
+      <section class="psec" id="timeline">
+        <h2 class="psec__title"><span class="mono">03</span> 20 working days</h2>
+        <p class="psec__lede">
+          How a 4-week sprint breaks down — enforced by hard freezes, so week 4 stays reserved
+          for release, not finishing.
+        </p>
+
+        <div class="weeks">
+          {
+            TIMELINE.map((w) => (
+              <article class="week" style={`--wc: var(${w.colorVar})`}>
+                <p class="week__num mono">{w.num} · {w.phase}</p>
+                <h3 class="week__title">{w.title}</h3>
+                <ul>
+                  {w.items.map((item) => (
+                    <li class:list={[{ milestone: item.milestone }]}>{item.text}</li>
+                  ))}
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+        <p class="note">🔒 {TIMELINE_NOTE}</p>
+      </section>
+
+      <!-- 04 deliverables -->
+      <section class="psec" id="deliverables">
+        <h2 class="psec__title"><span class="mono">04</span> Deliverables</h2>
+        <p class="psec__lede">Every prototype includes a complete, publisher-ready package.</p>
+        <ul class="deliver">
+          {
+            DELIVERABLES.map((d, i) => (
+              <li class="deliver__item">
+                <span class="mono deliver__num">{String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  <h3>{d.title}</h3>
+                  <p>{d.text}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <!-- 05 team -->
+      <section class="psec" id="team">
+        <h2 class="psec__title"><span class="mono">05</span> The team</h2>
+        <p class="psec__lede">
+          Development, art, level design, game design, and UA creatives — all under one roof.
+        </p>
+        <div class="pteam">
+          {
+            TEAM.map((m) => (
+              <article class="pmember">
+                <Image
+                  src={m.photo}
+                  alt={`Portrait of ${m.name}`}
+                  width={240}
+                  widths={[120, 240]}
+                  sizes="120px"
+                  class="pmember__photo"
+                  loading="lazy"
+                />
+                <div>
+                  <h3>{m.name}</h3>
+                  <p class="pmember__role mono">{m.role}</p>
+                  <p class="pmember__bio">{m.bio}</p>
+                  <p class="pmember__links">
+                    {m.links.map((l) => (
+                      <a href={l.url} target="_blank" rel="noopener" class="link">
+                        {l.label} ↗
+                      </a>
+                    ))}
+                  </p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- 06 track record -->
+      <section class="psec" id="track">
+        <h2 class="psec__title"><span class="mono">06</span> Track record</h2>
+        <p class="psec__lede">
+          Live on Google Play and the App Store — partner collaborations and our own releases.
+        </p>
+
+        <h3 class="track-sub mono">{GROUPS.collab.label} · {GROUPS.collab.note}</h3>
+        <div class="track-grid">
+          {collabGames.map((game) => <GameCard game={game} />)}
+        </div>
+
+        <h3 class="track-sub mono">{GROUPS.studio.label} · {GROUPS.studio.note}</h3>
+        <div class="track-grid">
+          {studioGames.map((game) => <GameCard game={game} />)}
+        </div>
+      </section>
+
+      <!-- 07 strengths -->
+      <section class="psec" id="strengths">
+        <h2 class="psec__title"><span class="mono">07</span> Why us</h2>
+        <div class="strengths">
+          {
+            STRENGTHS.map((s, i) => (
+              <article class="strength">
+                <p class="mono strength__num">{String(i + 1).padStart(2, '0')}</p>
+                <h3>{s.title}</h3>
+                <p>{s.text}</p>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="psec pcta">
+        <h2 class="display">Let's build something together.</h2>
+        <p>
+          Engagement models, sprint formats, and timeline are detailed above. Drop us an email
+          — let's talk specifics.
+        </p>
+        <div class="pcta__actions">
+          <a href={`mailto:${SITE.email}`} class="btn btn--accent">{SITE.email}</a>
+          <a href={base} class="btn">← Back to site</a>
+        </div>
+      </section>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .phero {
+    border-bottom: 1px solid var(--line-strong);
+    padding-block: clamp(64px, 9vw, 120px);
+  }
+
+  .phero__title {
+    font-size: clamp(32px, 5.6vw, 72px);
+    max-width: 20ch;
+    margin-top: 24px;
+  }
+
+  .phero__title em {
+    font-style: normal;
+    color: var(--accent-ink);
+  }
+
+  .phero__lede {
+    max-width: 58ch;
+    font-size: clamp(16px, 1.5vw, 19px);
+    color: var(--ink-2);
+    margin-top: 24px;
+  }
+
+  .phero__metrics {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    margin-top: 44px;
+    max-width: 760px;
+  }
+
+  .phero__metric {
+    padding: 20px;
+    border-left: 1px solid var(--line);
+  }
+
+  .phero__metric:first-child {
+    border-left: none;
+  }
+
+  .phero__metric dt {
+    font-size: 12px;
+    color: var(--ink-3);
+    order: 2;
+  }
+
+  .phero__metric dd {
+    font-size: clamp(20px, 2.4vw, 30px);
+    font-weight: 700;
+    color: var(--accent-ink);
+  }
+
+  @media (max-width: 720px) {
+    .phero__metrics {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .phero__metric:nth-child(3) {
+      border-left: none;
+    }
+
+    .phero__metric:nth-child(n + 3) {
+      border-top: 1px solid var(--line);
+    }
+  }
+
+  /* ===== two-column pitch layout ===== */
+  .pitch {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 80px);
+    align-items: start;
+    padding-block: clamp(48px, 6vw, 88px);
+  }
+
+  .agenda {
+    position: sticky;
+    top: calc(var(--header-h) + 24px);
+  }
+
+  .agenda ol {
+    list-style: none;
+    margin-top: 16px;
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .agenda a {
+    display: flex;
+    gap: 10px;
+    padding: 10px 2px;
+    font-size: 13.5px;
+    text-decoration: none;
+    color: var(--ink-2);
+    border-bottom: 1px solid var(--line);
+    transition: color 0.15s ease;
+  }
+
+  .agenda a:hover {
+    color: var(--ink);
+  }
+
+  .agenda a.is-active {
+    color: var(--accent-ink);
+    font-weight: 700;
+  }
+
+  .agenda a .mono {
+    font-size: 11px;
+    padding-top: 2px;
+    color: var(--ink-3);
+  }
+
+  .agenda__cta {
+    margin-top: 24px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  @media (max-width: 900px) {
+    .pitch {
+      grid-template-columns: 1fr;
+    }
+
+    .agenda {
+      position: static;
+    }
+
+    .agenda ol {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      border: none;
+      gap: 4px;
+    }
+
+    .agenda__cta {
+      width: auto;
+    }
+  }
+
+  /* ===== sections ===== */
+  .psec {
+    padding-block: clamp(36px, 4.5vw, 64px);
+    border-top: 1px solid var(--line);
+  }
+
+  .psec:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .psec__title {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 3vw, 34px);
+    font-weight: 600;
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+    scroll-margin-top: calc(var(--header-h) + 24px);
+  }
+
+  .psec__title .mono {
+    font-size: 13px;
+    color: var(--accent-ink);
+  }
+
+  .psec__lede {
+    max-width: 64ch;
+    color: var(--ink-2);
+    margin-top: 14px;
+  }
+
+  .callout {
+    border-left: 3px solid var(--accent);
+    background: var(--surface);
+    border-block: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    padding: 24px 28px;
+    line-height: 1.8;
+    color: var(--ink-2);
+    margin-top: 22px;
+  }
+
+  /* sprints */
+  .sprints {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 30px;
+  }
+
+  .sprint {
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    padding: 26px;
+  }
+
+  .sprint--preferred {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .sprint__badge {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--accent-ink);
+  }
+
+  .sprint--preferred .sprint__badge {
+    color: var(--accent);
+  }
+
+  .sprint__duration {
+    font-size: clamp(38px, 5vw, 58px);
+    margin-top: 10px;
+    line-height: 1;
+  }
+
+  .sprint__type {
+    font-size: 14px;
+    opacity: 0.75;
+    margin-top: 6px;
+  }
+
+  .sprint ul {
+    list-style: none;
+    margin-top: 20px;
+    display: grid;
+    gap: 9px;
+  }
+
+  .sprint li {
+    font-size: 14.5px;
+    padding-left: 18px;
+    position: relative;
+    opacity: 0.9;
+  }
+
+  .sprint li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+  }
+
+  @media (max-width: 720px) {
+    .sprints {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* timeline weeks */
+  .weeks {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 30px;
+  }
+
+  .week {
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--wc);
+    background: var(--surface);
+    padding: 20px;
+  }
+
+  .week__num {
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--wc);
+  }
+
+  .week__title {
+    font-size: 16px;
+    margin-top: 8px;
+  }
+
+  .week ul {
+    list-style: none;
+    margin-top: 14px;
+    display: grid;
+    gap: 8px;
+  }
+
+  .week li {
+    font-size: 13.5px;
+    color: var(--ink-2);
+    padding-left: 15px;
+    position: relative;
+  }
+
+  .week li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 5px;
+    height: 5px;
+    background: var(--wc);
+    opacity: 0.5;
+  }
+
+  .week li.milestone {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .week li.milestone::before {
+    opacity: 1;
+  }
+
+  .note {
+    margin-top: 18px;
+    border: 1px dashed var(--line-strong);
+    padding: 14px 18px;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+
+  @media (max-width: 900px) {
+    .weeks {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .weeks {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* deliverables */
+  .deliver {
+    list-style: none;
+    margin-top: 26px;
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .deliver__item {
+    display: flex;
+    gap: 22px;
+    padding: 20px 4px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .deliver__num {
+    color: var(--accent-ink);
+    font-size: 12px;
+    padding-top: 4px;
+  }
+
+  .deliver__item h3 {
+    font-size: 16px;
+  }
+
+  .deliver__item p {
+    font-size: 14.5px;
+    color: var(--ink-2);
+    margin-top: 4px;
+    max-width: 70ch;
+  }
+
+  /* team */
+  .pteam {
+    display: grid;
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  .pmember {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr);
+    gap: 22px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 20px;
+  }
+
+  .pmember :global(.pmember__photo) {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 1px solid var(--line-strong);
+  }
+
+  .pmember h3 {
+    font-size: 17px;
+  }
+
+  .pmember__role {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent-ink);
+    margin-top: 4px;
+  }
+
+  .pmember__bio {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin-top: 10px;
+  }
+
+  .pmember__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 12px;
+  }
+
+  @media (max-width: 560px) {
+    .pmember {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* track record */
+  .track-sub {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ink-3);
+    margin: 36px 0 16px;
+  }
+
+  .track-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  /* strengths */
+  .strengths {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 26px;
+  }
+
+  .strength {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 22px;
+  }
+
+  .strength__num {
+    font-size: 11px;
+    color: var(--accent-ink);
+  }
+
+  .strength h3 {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  .strength p {
+    font-size: 14px;
+    color: var(--ink-2);
+    margin-top: 8px;
+    line-height: 1.65;
+  }
+
+  @media (max-width: 720px) {
+    .strengths {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* cta */
+  .pcta {
+    text-align: left;
+  }
+
+  .pcta h2 {
+    font-size: clamp(26px, 4vw, 44px);
+  }
+
+  .pcta p {
+    color: var(--ink-2);
+    margin-top: 14px;
+    max-width: 50ch;
+  }
+
+  .pcta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .pcta .btn--accent {
+    text-transform: none;
+    letter-spacing: 0.04em;
+  }
+
+  /* ===== print — publishers save this as PDF ===== */
+  @media print {
+    .agenda,
+    :global(header),
+    :global(footer) {
+      display: none !important;
+    }
+
+    .pitch {
+      display: block;
+    }
+
+    .psec {
+      break-inside: avoid-page;
+    }
+
+    .sprint--preferred {
+      background: #fff;
+      color: #000;
+      outline: 3px solid #000;
+    }
+  }
+</style>
+
+<script>
+  // Scrollspy for the agenda nav.
+  function initScrollspy() {
+    const links = document.querySelectorAll<HTMLAnchorElement>('[data-agenda-link]');
+    if (!links.length) return;
+    const map = new Map<Element, HTMLAnchorElement>();
+    for (const link of links) {
+      const id = link.getAttribute('href')?.slice(1);
+      const sec = id ? document.getElementById(id) : null;
+      if (sec) map.set(sec, link);
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const link = map.get(entry.target);
+          if (!link) continue;
+          if (entry.isIntersecting) {
+            links.forEach((l) => l.classList.remove('is-active'));
+            link.classList.add('is-active');
+          }
+        }
+      },
+      { rootMargin: '-20% 0px -70% 0px' },
+    );
+    map.forEach((_, sec) => io.observe(sec));
+  }
+
+  document.addEventListener('astro:page-load', initScrollspy);
+</script>

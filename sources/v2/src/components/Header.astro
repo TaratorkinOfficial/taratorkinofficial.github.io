@@ -1,0 +1,132 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/logo.webp';
+import ThemeToggle from './ThemeToggle.astro';
+
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+
+/** Anchors resolve against the home page so they work from any route. */
+const nav = [
+  { label: 'Work', href: base + '#work' },
+  { label: 'Studio', href: base + '#studio' },
+  { label: 'Team', href: base + '#team' },
+  { label: 'Contact', href: base + '#contact' },
+];
+---
+
+<header class="header">
+  <div class="header__inner container">
+    <a href={base} class="wordmark" aria-label="Taratorkin Official — home">
+      <Image src={logo} alt="" width={56} densities={[1, 2]} class="wordmark__logo" />
+      <span class="wordmark__text">Taratorkin<br />Official</span>
+    </a>
+
+    <nav class="nav" aria-label="Main">
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      <a href={base + 'pitch'} class="nav__pitch">For publishers ↗</a>
+    </nav>
+
+    <ThemeToggle />
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    height: var(--header-h);
+  }
+
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .wordmark :global(.wordmark__logo) {
+    width: 34px;
+    height: auto;
+    border: 1px solid var(--line-strong);
+  }
+
+  .wordmark__text {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.25;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 2.4vw, 32px);
+  }
+
+  .nav a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    text-decoration: none;
+    color: var(--ink-2);
+    transition: color 0.15s ease;
+  }
+
+  .nav a:hover {
+    color: var(--ink);
+  }
+
+  .nav__pitch {
+    color: var(--accent-ink) !important;
+    border: 1px solid var(--accent-ink);
+    padding: 7px 12px;
+    white-space: nowrap;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease !important;
+  }
+
+  .nav__pitch:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-contrast) !important;
+  }
+
+  @media (max-width: 860px) {
+    .nav a:not(.nav__pitch) {
+      display: none;
+    }
+  }
+
+  /* Narrow screens: logo mark only — the link keeps its aria-label. */
+  @media (max-width: 560px) {
+    .wordmark__text {
+      display: none;
+    }
+
+    .header__inner {
+      gap: 12px;
+    }
+
+    .nav__pitch {
+      font-size: 10.5px;
+      padding: 7px 10px;
+      letter-spacing: 0.08em;
+    }
+  }
+</style>
