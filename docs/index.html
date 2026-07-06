@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Taratorkin Official — Independent mobile games studio crafting polished, retention-driven experiences">
+    <meta name="keywords" content="mobile games, game studio, hyper casual, hybrid casual, Unity, game development">
+    <meta name="author" content="Taratorkin Official">
+    <meta name="theme-color" content="#6366f1">
+	<link rel="stylesheet" href="assets/css/styles.css">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Taratorkin Official — Games">
+    <meta property="og:description" content="Play short, polished mobile games with character">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://taratorkinofficial.github.io">
+    <meta property="og:image" content="https://taratorkinofficial.github.io/assets/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <link rel="canonical" href="https://taratorkinofficial.github.io/">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Taratorkin Official — Games">
+    <meta name="twitter:description" content="Crafting colorful, bite-sized mobile experiences">
+    <meta name="twitter:image" content="https://taratorkinofficial.github.io/assets/images/og-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="assets/icons/favicon-16.png" sizes="16x16" type="image/png">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" sizes="180x180">
+    <link rel="manifest" href="assets/icons/site.webmanifest">
+    
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <title>Taratorkin Official — Games</title>
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Taratorkin Official",
+        "url": "https://taratorkinofficial.github.io/",
+        "logo": "https://taratorkinofficial.github.io/assets/images/TaratorkinOfficial_logotarback.webp",
+        "description": "Independent mobile games studio crafting polished, retention-driven experiences since 2020.",
+        "foundingDate": "2020",
+        "sameAs": [
+            "https://www.linkedin.com/in/taratorkinofficial"
+        ]
+    }
+    </script>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4f0e8def1e514737a965ca85fcda51ab"}'></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✅</span>
+        <span class="toast-message">Email copied to clipboard!</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <img src="assets/images/TaratorkinOfficial_logotarback.webp" alt="Taratorkin Official">
+                <span>Taratorkin Official</span>
+            </a>
+            
+            <nav class="nav" id="nav">
+                <a href="#games" class="nav-link">Games</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+				<a href="pitch.html" class="nav-link nav-link-accent">For Publishers</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </nav>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                ☰
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <div class="hero-gradient hero-gradient-1"></div>
+            <div class="hero-gradient hero-gradient-2"></div>
+            <div class="hero-gradient hero-gradient-3"></div>
+        </div>
+        
+        <div class="hero-content">
+            <!-- Visitor Counter -->
+			<div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                <span>Available on iOS & Android</span>
+            </div>
+
+            <h1 class="hero-title">
+                Play short, polished<br>
+                <span class="gradient-text">mobile games</span> with character
+            </h1>
+            
+            <p class="hero-subtitle">
+                We craft colorful, bite-sized mobile experiences — easy to learn, 
+                hard to put down. Perfect for quick sessions on the go.
+            </p>
+            
+            <div class="hero-buttons">
+                <a href="#games" class="btn btn-primary">
+                    🎯 Our Games
+                    <span>→</span>
+                </a>
+                <a href="#about" class="btn btn-secondary">
+                    About Us
+                </a>
+				<a href="pitch.html" class="btn btn-outline">
+                    📋 Publisher Pitch
+                </a>
+            </div>
+            
+            <div class="hero-stats">
+				<div class="stat-item">
+					<div class="stat-value" data-count="19" data-suffix="">0</div>
+					<div class="stat-label">Games Published</div>
+				</div>
+				<div class="stat-item">
+					<!-- Добавили data-suffix="M+" и убрали M+ из label -->
+					<div class="stat-value" data-count="10" data-suffix="M+">0</div>
+					<div class="stat-label">Downloads</div>
+				</div>
+				<div class="stat-item">
+					<div class="stat-value" data-count="2020" data-suffix="" data-plain="true">0</div>
+					<div class="stat-label">Since</div>
+				</div>
+			</div>
+        </div>
+    </section>
+
+    <!-- Games Section -->
+    <section class="section games" id="games">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Portfolio</span>
+                <h2 class="section-title">Our <span class="gradient-text">Games</span></h2>
+                <p class="section-subtitle">
+                    Explore our collection of hyper, hybrid, and casual titles
+                </p>
+            </div>
+
+            <!-- Collaboration Games -->
+            <div class="section-divider">
+                <span class="section-divider-title">Collaboration Games</span>
+            </div>
+            
+            <div class="games-grid" id="gamesGrid">
+                <div class="game-card reveal">
+                    <div class="game-card-image">
+                        <img loading="lazy" decoding="async" src="assets/images/cinemaworld.webp" alt="My Cinema World">
+                        <span class="game-card-badge">5M+ Downloads</span>
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">My Cinema World</h3>
+                        <p class="game-card-desc">Simulation/management for cinema fans. Build and manage your dream cinema empire.</p>
+                        <div class="game-card-meta">
+                            <div class="store-buttons">
+                                <a href="https://play.google.com/store/apps/details?id=com.creauctopus.cinemaworld" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_playstore.svg" alt="Google Play" class="store-icon"></a>
+                                <a href="https://apps.apple.com/us/app/my-cinema-world/id6479268268" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_appstore.svg" alt="App Store" class="store-icon"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-card reveal">
+                    <div class="game-card-image">
+                        <img loading="lazy" decoding="async" src="assets/images/wordmaker.webp" alt="Word Maker">
+                        <span class="game-card-badge">5M+ Downloads</span>
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Word Maker: Words Games Puzzle</h3>
+                        <p class="game-card-desc">Word Maker - a word game app. Challenge your vocabulary with fun puzzles.</p>
+                        <div class="game-card-meta">
+                            <div class="store-buttons">
+                                <a href="https://play.google.com/store/apps/details?id=com.aaaudi.wordmaker" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_playstore.svg" alt="Google Play" class="store-icon"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-card reveal">
+                    <div class="game-card-image">
+                        <img loading="lazy" decoding="async" src="assets/images/kingslanding.webp" alt="Kings Landing">
+						<span class="game-card-badge">100K+ Downloads</span>
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Kings Landing</h3>
+                        <p class="game-card-desc">A strategy/management title. Rule your kingdom and expand your territory.</p>
+                        <div class="game-card-meta">
+                            <div class="store-buttons">
+                                <a href="https://play.google.com/store/apps/details?id=com.Creauctopus.KingsLanding&hl=ru" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_playstore.svg" alt="Google Play" class="store-icon"></a>
+                                <a href="https://apps.apple.com/us/app/kings-landing-idle-arcade/id6478125091" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_appstore.svg" alt="App Store" class="store-icon"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-card reveal">
+                    <div class="game-card-image">
+                        <img loading="lazy" decoding="async" src="assets/images/foodbattles.webp" alt="Food Battles">
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Food Battles</h3>
+                        <p class="game-card-desc">Competitive cooking arcade. Battle chefs in fast-paced culinary challenges.</p>
+                        <div class="game-card-meta">
+                            <div class="store-buttons">
+                                <a href="https://play.google.com/store/apps/details?id=com.creauctopus.foodbattles" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_playstore.svg" alt="Google Play" class="store-icon"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-card reveal">
+                    <div class="game-card-image">
+                        <img loading="lazy" decoding="async" src="assets/images/magicboxdefender.webp" alt="Magic Box Defender">
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Magic Box Defender</h3>
+                        <p class="game-card-desc">Tower defense style action. Defend your realm with magical powers.</p>
+                        <div class="game-card-meta">
+                            <div class="store-buttons">
+                                <a href="https://play.google.com/store/apps/details?id=com.creauctopus.magicboxdefender" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_playstore.svg" alt="Google Play" class="store-icon"></a>
+                                <a href="https://apps.apple.com/us/app/magic-box-defender/id6753757246" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_appstore.svg" alt="App Store" class="store-icon"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-card reveal">
+                    <div class="game-card-image">
+                        <img loading="lazy" decoding="async" src="assets/images/battlegangs.webp" alt="Battle Gangs">
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Battle Gangs</h3>
+                        <p class="game-card-desc">Action / strategy hybrid. Lead your gang to victory in street battles.</p>
+                        <div class="game-card-meta">
+                            <div class="store-buttons">
+                                <a href="https://play.google.com/store/apps/details?id=com.creauctopus.battlesimulator" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_playstore.svg" alt="Google Play" class="store-icon"></a>
+                                <a href="https://apps.apple.com/us/app/battle-gangs/id6752643126" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_appstore.svg" alt="App Store" class="store-icon"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-divider">
+                <span class="section-divider-title">Studio Games</span>
+            </div>
+
+            <!-- Studio Games (own studio releases) -->
+            <div class="games-grid">
+				<div class="game-card reveal">
+                    <div class="game-card-image">
+                        <img loading="lazy" decoding="async" src="assets/images/colonydefender.webp" alt="Colony Defender">
+                        <span class="game-card-badge new">NEW</span>
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Colony Defender</h3>
+                        <p class="game-card-desc">A light strategy. Manage a growing settlement, build units from cards, and survive monster waves.</p>
+                        <div class="game-card-meta">
+                            <div class="store-buttons">
+                                <a href="https://play.google.com/store/apps/details?id=com.taratorkinofficial.colonydefender" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_playstore.svg" alt="Google Play" class="store-icon"></a>
+                                <a href="https://apps.apple.com/us/app/myrion-bastion/id6761761954" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_appstore.svg" alt="App Store" class="store-icon"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-card reveal">
+                    <div class="game-card-image">
+                        <img loading="lazy" decoding="async" src="assets/images/timetochill.webp" alt="Time To Chill">
+                        <span class="game-card-badge new">NEW</span>
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Time To Chill</h3>
+                        <p class="game-card-desc">Merge cocktails and unlock stylish tropical destinations.</p>
+                        <div class="game-card-meta">
+                            <div class="store-buttons">
+                                <a href="https://play.google.com/store/apps/details?id=com.taratorkinofficial.timetochill" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_playstore.svg" alt="Google Play" class="store-icon"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-card reveal">
+                    <div class="game-card-image">
+                        <img loading="lazy" decoding="async" src="assets/images/harborkeepers.webp" alt="Harbor Keepers">
+                        <span class="game-card-badge new">NEW</span>
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Harbor Keepers</h3>
+                        <p class="game-card-desc">Tower defense — protect your island from pirate invasions.</p>
+                        <div class="game-card-meta">
+                            <div class="store-buttons">
+                                <a href="https://play.google.com/store/apps/details?id=com.taratorkinofficial.harborkeepers" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_playstore.svg" alt="Google Play" class="store-icon"></a>
+                                <a href="https://apps.apple.com/us/app/harbor-keepers/id6762597951" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_appstore.svg" alt="App Store" class="store-icon"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-card reveal">
+                    <div class="game-card-image">
+                        <img loading="lazy" decoding="async" src="assets/images/balloontravel.webp" alt="Balloon Travel 3D">
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Balloon Travel 3D</h3>
+                        <p class="game-card-desc">A relaxing balloon arcade. Float through beautiful landscapes.</p>
+                        <div class="game-card-meta">
+                            <div class="store-buttons">
+                                <a href="https://play.google.com/store/apps/details?id=com.TaratorkinOfficial.BalloonTravel3D" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_playstore.svg" alt="Google Play" class="store-icon"></a>
+                                <a href="https://apps.apple.com/us/app/balloon-travel-3d/id6763124242" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_appstore.svg" alt="App Store" class="store-icon"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-card reveal">
+                    <div class="game-card-image">
+                        <img loading="lazy" decoding="async" src="assets/images/spacetrouble.webp" alt="Space Trouble 3D">
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Space Trouble 3D</h3>
+                        <p class="game-card-desc">Fast-paced space runner with explosive obstacles.</p>
+                        <div class="game-card-meta">
+                            <div class="store-buttons">
+                                <a href="https://play.google.com/store/apps/details?id=com.TaratorkinOfficial.SpaceThrone3D" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_playstore.svg" alt="Google Play" class="store-icon"></a>
+                                <a href="https://apps.apple.com/us/app/space-trouble-3d/id6762308603" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_appstore.svg" alt="App Store" class="store-icon"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-card reveal">
+                    <div class="game-card-image">
+                        <img loading="lazy" decoding="async" src="assets/images/virusrunner.webp" alt="Virus Runner">
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Virus Runner</h3>
+                        <p class="game-card-desc">Dynamic runner with progression. Evolve and survive.</p>
+                        <div class="game-card-meta">
+                            <div class="store-buttons">
+                                <a href="https://play.google.com/store/apps/details?id=com.TaratorkinOfficial.VirusRunner" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_playstore.svg" alt="Google Play" class="store-icon"></a>
+                                <a href="https://apps.apple.com/us/app/neurophage-runner/id6763154550" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_appstore.svg" alt="App Store" class="store-icon"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider">
+                <span class="section-divider-title">Team members experience</span>
+            </div>
+
+            <!-- Personal Games (founder's portfolio + team experience) -->
+            <div class="games-grid">
+                <div class="game-card reveal">
+                    <div class="game-card-image">
+                        <img loading="lazy" decoding="async" src="assets/images/rageofgiants.webp" alt="Rage Of Giants">
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Rage Of Giants</h3>
+                        <p class="game-card-desc">Island wars and giant battles. Unleash epic destruction.</p>
+                        <div class="game-card-meta">
+                            <div class="store-buttons">
+                                <a href="https://play.google.com/store/apps/details?id=com.DVGGames.RageOfGiantsIslandsWars&hl=en_US" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_playstore.svg" alt="Google Play" class="store-icon"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-card reveal">
+                    <div class="game-card-image">
+                        <img loading="lazy" decoding="async" src="assets/images/frontline.webp" alt="Frontline: Steel and Blood">
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Frontline: Steel and Blood</h3>
+                        <p class="game-card-desc">Strategy title — external listing (Bluestacks). Command your army.</p>
+                        <div class="game-card-meta">
+                            <div class="store-buttons">
+                                <a href="https://www.bluestacks.com/apps/strategy/frontline-steel-and-blood-on-pc.html" target="_blank" rel="noopener" class="game-card-link">Listing →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-card reveal">
+                    <div class="game-card-image">
+                        <img loading="lazy" decoding="async" src="assets/images/prismatrix.webp" alt="Prismatrix">
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Prismatrix</h3>
+                        <p class="game-card-desc">Puzzle / arcade experiment. Solve colorful challenges.</p>
+                        <div class="game-card-meta">
+                            <div class="store-buttons">
+                                <a href="https://play.google.com/store/apps/details?id=com.GaForCompany.Prismatrix" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_playstore.svg" alt="Google Play" class="store-icon"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-card reveal">
+                    <div class="game-card-image">
+                        <img loading="lazy" decoding="async" src="assets/images/nilevalley.webp" alt="Nile Valley: Farm Adventure">
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Nile Valley: Farm Adventure</h3>
+                        <p class="game-card-desc">City builder with idle farming, set in ancient Egypt.</p>
+                        <div class="game-card-meta">
+                            <div class="store-buttons">
+                                <a href="https://play.google.com/store/apps/details?id=com.eightkgames.nilevalley" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_playstore.svg" alt="Google Play" class="store-icon"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-card reveal">
+                    <div class="game-card-image">
+                        <img loading="lazy" decoding="async" src="assets/images/matchland.webp" alt="Matchland: Build a Theme Park">
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Matchland: Build a Theme Park</h3>
+                        <p class="game-card-desc">Match-3 game with theme park build meta-game.</p>
+                        <div class="game-card-meta">
+                            <div class="store-buttons">
+                                <a href="https://web.archive.org/web/20240518013613/https://apps.apple.com/us/app/matchland-build-a-theme-park/id1445039832" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_appstore.svg" alt="App Store" class="store-icon"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-card reveal">
+                    <div class="game-card-image">
+                        <img loading="lazy" decoding="async" src="assets/images/crossstitchcoloringbook.webp" alt="Cross-Stitch: Coloring Book">
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Cross-Stitch: Coloring Book</h3>
+                        <p class="game-card-desc">Relaxing pixel-art cross-stitch coloring book.</p>
+                        <div class="game-card-meta">
+                            <div class="store-buttons">
+                                <a href="https://play.google.com/store/apps/details?id=com.playcus.crossstitchcoloringbook" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_playstore.svg" alt="Google Play" class="store-icon"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-card reveal">
+                    <div class="game-card-image">
+                        <img loading="lazy" decoding="async" src="assets/images/crossstitchcoloringart.webp" alt="Cross Stitch Coloring Art">
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Cross Stitch Coloring Art</h3>
+                        <p class="game-card-desc">Cross-stitch coloring art for casual creativity.</p>
+                        <div class="game-card-meta">
+                            <div class="store-buttons">
+                                <a href="https://play.google.com/store/apps/details?id=com.playcus.crosstitchcoloringart" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_playstore.svg" alt="Google Play" class="store-icon"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-card reveal">
+                    <div class="game-card-image">
+                        <img loading="lazy" decoding="async" src="assets/images/crossstitchmandala.webp" alt="Cross Stitch Coloring Mandala">
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Cross Stitch Coloring Mandala</h3>
+                        <p class="game-card-desc">Mandala cross-stitch coloring with calming progression.</p>
+                        <div class="game-card-meta">
+                            <div class="store-buttons">
+                                <a href="https://play.google.com/store/apps/details?id=com.playcus.crossstitch.coloring.mandala" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/images/games_playstore.svg" alt="Google Play" class="store-icon"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Studio</span>
+                <h2 class="section-title">About <span class="gradient-text">Us</span></h2>
+                <p class="section-subtitle">
+                    Independent mobile games studio focused on polished, retention-driven experiences
+                </p>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-content reveal">
+                    <h3>Our Mission</h3>
+                    <p>
+                        <strong>Taratorkin Official</strong> is an independent mobile games studio with a clear focus: 
+                        build polished, retention-driven experiences that players return to. Since 2020 
+                        our core team has been designing, prototyping and shipping titles across the 
+                        hyper, hybrid, and casual space.
+                    </p>
+                    <p>
+                        We combine fast iteration with production discipline to deliver both hits and
+                        steady-grossing live games. Our approach blends creative design, lean engineering
+                        and data-informed live-ops.
+                    </p>
+                    <p>
+                        <strong>AI is part of our pipeline.</strong> We use it to multiply creative variants,
+                        accelerate balance passes, and rapidly iterate on UA hooks — but every AI-generated
+                        output is benchmarked against a human-made baseline before shipping. Speed never
+                        comes at the cost of quality, and a compact team operates at the throughput of a
+                        much larger studio.
+                    </p>
+                    <p>
+                        From rapid prototyping to full production and long-term live-ops, we cover the
+                        entire lifecycle of a mobile game. Our toolbox spans A/B testing, event-driven
+                        content, retention &amp; LTV optimization, IAP economy design, and rewarded-ad
+                        mediation — across hyper, hybrid, and casual genres, all under one roof.
+                    </p>
+                </div>
+
+                <div class="features-list reveal">
+					<div class="feature-item">
+						<div class="feature-icon">⚡</div>
+						<div class="feature-text">
+							<h4>Rapid Prototyping</h4>
+							<p>Quick, playable prototypes that validate core loops</p>
+						</div>
+					</div>
+					
+					<div class="feature-item">
+						<div class="feature-icon">🎨</div>
+						<div class="feature-text">
+							<h4>Production & Polish</h4>
+							<p>Robust Unity pipelines with great art direction</p>
+						</div>
+					</div>
+					
+					<div class="feature-item">
+						<div class="feature-icon">📊</div>
+						<div class="feature-text">
+							<h4>Live-Ops & Support</h4>
+							<p>A/B testing, events, retention optimization</p>
+						</div>
+					</div>
+					
+					<div class="feature-item">
+						<div class="feature-icon">💰</div>
+						<div class="feature-text">
+							<h4>Monetization</h4>
+							<p>IAP economy, rewarded ads, fair player experience</p>
+						</div>
+					</div>
+					
+					<!-- NEW: Data-Driven Development -->
+					<div class="feature-item">
+						<div class="feature-icon">📈</div>
+						<div class="feature-text">
+							<h4>Data-Driven Development</h4>
+							<p>Analytics-informed decisions for retention & growth</p>
+						</div>
+					</div>
+					
+					<!-- NEW: Full-Cycle Development -->
+					<div class="feature-item">
+						<div class="feature-icon">🔄</div>
+						<div class="feature-text">
+							<h4>Full-Cycle Development</h4>
+							<p>From concept to launch with live-ops support</p>
+						</div>
+					</div>
+				</div>
+            </div>
+
+            <div class="about-cta reveal">
+                <a href="#contact" class="btn btn-primary">
+                    Work With Us
+                    <span>→</span>
+                </a>
+            </div>
+
+            <!-- Team -->
+            <div class="team-grid reveal">
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <img loading="lazy" decoding="async" src="assets/images/alexander.webp" alt="Alexander">
+                    </div>
+                    <div class="team-name">Alexander</div>
+                    <div class="team-role">Founder</div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <img loading="lazy" decoding="async" src="assets/images/Illia.webp" alt="Illia">
+                    </div>
+                    <div class="team-name">Illia</div>
+                    <div class="team-role">Lead Developer</div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <img loading="lazy" decoding="async" src="assets/images/eduard.webp" alt="Eduard">
+                    </div>
+                    <div class="team-name">Eduard</div>
+                    <div class="team-role">Developer</div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <img loading="lazy" decoding="async" src="assets/images/vitaliy.webp" alt="Vitaliy">
+                    </div>
+                    <div class="team-name">Vitaliy</div>
+                    <div class="team-role">Artist</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Get In Touch</span>
+                <h2 class="section-title">Contact <span class="gradient-text">Us</span></h2>
+                <p class="section-subtitle">
+                    Interested in partnerships or listing your game? Let's talk!
+                </p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <a href="mailto:taratorkin.official@gmail.com" class="contact-item" onclick="copyEmail(event)">
+                        <div class="contact-icon">
+                            <img loading="lazy" decoding="async" src="assets/images/gmail.webp" alt="Gmail">
+                        </div>
+                        <div>
+                            <strong>Email</strong>
+                            <p class="contact-item-detail">taratorkin.official@gmail.com</p>
+                        </div>
+                    </a>
+                    
+                    <a href="https://www.linkedin.com/in/taratorkinofficial" target="_blank" rel="noopener" class="contact-item">
+                        <div class="contact-icon">
+                            <img loading="lazy" decoding="async" src="assets/images/linkedin.webp" alt="LinkedIn">
+                        </div>
+                        <div>
+                            <strong>LinkedIn</strong>
+                            <p class="contact-item-detail">linkedin.com/in/taratorkinofficial</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <form class="contact-form reveal" id="contactForm">
+                    <div class="form-group">
+                        <label class="form-label" for="name">Name</label>
+                        <input type="text" id="name" class="form-input" placeholder="Your name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email</label>
+                        <input type="email" id="email" class="form-input" placeholder="your@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="message">Message</label>
+                        <textarea id="message" class="form-textarea" placeholder="Tell us about your project..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">
+                        Send Message
+                        <span>→</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img loading="lazy" decoding="async" src="assets/images/TaratorkinOfficial_cropped-logotarback.webp" alt="Taratorkin Official">
+                        <span>Taratorkin Official</span>
+                    </div>
+                    <p class="footer-desc">
+                        Independent mobile games studio crafting polished, 
+                        retention-driven experiences since 2020.
+                    </p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#games">Games</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="footer-copyright" id="footerCopyright">
+                    © 2026 Taratorkin Official — All rights reserved
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+    <script>
+        // ===== COUNTER ANIMATION =====
+        const counters = document.querySelectorAll('.stat-value');
+        const heroSection = document.querySelector('.hero');
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let counterAnimated = false;
+
+        const animateCounters = () => {
+            if (counterAnimated || !heroSection || !counters.length) return;
+
+            const heroTop = heroSection.offsetTop;
+            const heroBottom = heroTop + heroSection.offsetHeight;
+
+            if (window.scrollY + window.innerHeight >= heroTop &&
+                window.scrollY <= heroBottom) {
+                counterAnimated = true;
+
+                counters.forEach(counter => {
+                    const target = parseInt(counter.dataset.count, 10);
+                    const suffix = counter.dataset.suffix || '';
+                    const isPlain = counter.dataset.plain === 'true';
+                    const format = (n) => isPlain ? String(n) : n.toLocaleString();
+
+                    if (reduceMotion) {
+                        counter.textContent = format(target) + suffix;
+                        return;
+                    }
+
+                    let count = 0;
+                    const increment = target / 50;
+
+                    const updateCount = () => {
+                        if (count < target) {
+                            count += increment;
+                            counter.textContent = format(Math.ceil(count));
+                            setTimeout(updateCount, 30);
+                        } else {
+                            counter.textContent = format(target) + suffix;
+                        }
+                    };
+
+                    updateCount();
+                });
+            }
+        };
+
+        window.addEventListener('scroll', animateCounters, { passive: true });
+        animateCounters(); // Check on load
+
+        // ===== TOAST NOTIFICATION =====
+        const toast = document.getElementById('toast');
+
+        function showToast(message, type = 'success') {
+            toast.querySelector('.toast-message').textContent = message;
+            toast.className = `toast ${type}`;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        // ===== COPY EMAIL =====
+        function copyEmail(event) {
+            event.preventDefault();
+            navigator.clipboard.writeText('taratorkin.official@gmail.com');
+            showToast('Email copied to clipboard!');
+        }
+
+        // ===== CONTACT FORM =====
+        // Static site, no backend: we hand off to the visitor's mail client via
+        // mailto:, and copy the same text to the clipboard as a fallback for
+        // visitors without a configured desktop mail client (mobile/webmail).
+        const contactForm = document.getElementById('contactForm');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            const subject = encodeURIComponent(`Contact from ${name}`);
+            const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+            const mailtoLink = `mailto:taratorkin.official@gmail.com?subject=${subject}&body=${encodeURIComponent(body)}`;
+
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(`To: taratorkin.official@gmail.com\nSubject: Contact from ${name}\n\n${body}`).catch(() => {});
+            }
+
+            window.location.href = mailtoLink;
+            showToast("Opening your email app — if nothing happens, we've copied the message so you can paste it into an email.");
+            contactForm.reset();
+        });
+    </script>
+</body>
+</html>

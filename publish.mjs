@@ -60,10 +60,10 @@ fs.mkdirSync(DOCS, { recursive: true });
 // 3) root content
 if (rootDesign === 'legacy') {
   console.log(`> extracting legacy site (${LEGACY_TAG}) → docs/`);
-  const tarPath = path.join(ROOT, 'legacy-tmp.tar');
-  run(`git archive --format=tar -o "${tarPath}" ${LEGACY_TAG}`, ROOT);
-  run(`tar -xf "${tarPath}" -C "${DOCS}"`, ROOT);
-  fs.rmSync(tarPath, { force: true });
+  // relative paths on purpose: GNU tar treats "C:\..." as a remote host
+  run(`git archive --format=tar -o legacy-tmp.tar ${LEGACY_TAG}`, ROOT);
+  run('tar -xf legacy-tmp.tar -C docs', ROOT);
+  fs.rmSync(path.join(ROOT, 'legacy-tmp.tar'), { force: true });
 
   // the legacy HTML predates the analytics beacon — inject it
   const BEACON =
