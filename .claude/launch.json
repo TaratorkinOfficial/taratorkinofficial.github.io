@@ -1,0 +1,53 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "static-site",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "http-server", "-p", "5173", "-c-1"],
+      "port": 5173
+    },
+    {
+      "name": "new-studio-preview",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "C:/Users/Alexander/Documents/Work/Site/taratorkin-studio",
+        "run",
+        "preview",
+        "--",
+        "--port",
+        "4321"
+      ],
+      "port": 4321
+    },
+    {
+      "name": "studio-v2-preview",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "C:/Users/Alexander/Documents/Work/Site/taratorkin-studio-v2",
+        "run",
+        "preview",
+        "--",
+        "--port",
+        "4322"
+      ],
+      "port": 4322
+    },
+    {
+      "name": "studio-v3-preview",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "C:/Users/Alexander/Documents/Work/Site/taratorkin-studio-v3",
+        "run",
+        "preview",
+        "--",
+        "--port",
+        "4323"
+      ],
+      "port": 4323
+    }
+  ]
+}
