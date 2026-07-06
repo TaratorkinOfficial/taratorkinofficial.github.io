@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /roadmap
+
+Sitemap: https://taratorkinofficial.github.io/sitemap-index.xml
