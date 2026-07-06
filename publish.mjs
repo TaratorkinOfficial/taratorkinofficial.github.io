@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 /**
- * Builds the site into docs/ — GitHub Pages serves that folder
- * (Settings → Pages → Deploy from a branch → main → /docs).
+ * Builds the site to the REPO ROOT — GitHub Pages serves the repo root by
+ * default (Settings → Pages → Deploy from a branch → main → / (root)).
+ * No Pages folder setting to change: the generated HTML sits next to the
+ * tooling, and the design sources stay tucked away in sources/.
  *
  *   node publish.mjs            → legacy (old) site at root, design mirrors
  *                                 at /v1 /v2 /v3
@@ -17,8 +19,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const ROOT = path.dirname(fileURLToPath(import.meta.url)); // the repo itself
-const DOCS = path.join(ROOT, 'docs');
+const ROOT = path.dirname(fileURLToPath(import.meta.url)); // the repo itself = output dir
 const LEGACY_TAG = 'legacy-site';
 const CF_TOKEN = '4f0e8def1e514737a965ca85fcda51ab';
 const PROJECTS = {
@@ -26,6 +27,23 @@ const PROJECTS = {
   v2: path.join(ROOT, 'sources', 'v2'),
   v3: path.join(ROOT, 'sources', 'v3'),
 };
+
+// Repo-root entries that are TOOLING/SOURCES, never touched by a rebuild.
+// Everything else at the root is generated site output and is wiped each run.
+const KEEP = new Set([
+  '.git',
+  '.gitignore',
+  '.github',
+  '.claude',
+  'README.md',
+  'sources',
+  'node_modules',
+  'publish.mjs',
+  'publish-legacy.bat',
+  'publish-v1.bat',
+  'publish-v2.bat',
+  'publish-v3.bat',
+]);
 
 const rootDesign = (process.argv[2] || 'legacy').toLowerCase();
 if (rootDesign !== 'legacy' && !PROJECTS[rootDesign]) {
@@ -52,25 +70,38 @@ for (const d of mirrors) {
   run('npm run build', PROJECTS[d], { BASE_PATH: `/${d}` });
 }
 
-// 2) reset docs/
-console.log('\n> resetting docs/');
-fs.rmSync(DOCS, { recursive: true, force: true });
-fs.mkdirSync(DOCS, { recursive: true });
+// 2) wipe generated output at the repo root (keep tooling + sources)
+console.log('\n> clearing generated files at repo root');
+for (const entry of fs.readdirSync(ROOT)) {
+  if (KEEP.has(entry)) continue;
+  fs.rmSync(path.join(ROOT, entry), { recursive: true, force: true });
+}
 
 // 3) root content
 if (rootDesign === 'legacy') {
-  console.log(`> extracting legacy site (${LEGACY_TAG}) → docs/`);
+  console.log(`> extracting legacy site (${LEGACY_TAG}) → /`);
+  const tmp = path.join(ROOT, '_legacy_tmp');
+  fs.rmSync(tmp, { recursive: true, force: true });
+  fs.mkdirSync(tmp);
   // relative paths on purpose: GNU tar treats "C:\..." as a remote host
   run(`git archive --format=tar -o legacy-tmp.tar ${LEGACY_TAG}`, ROOT);
-  run('tar -xf legacy-tmp.tar -C docs', ROOT);
+  run('tar -xf legacy-tmp.tar -C _legacy_tmp', ROOT);
   fs.rmSync(path.join(ROOT, 'legacy-tmp.tar'), { force: true });
+
+  // copy the legacy SITE files to root, but never clobber the monorepo tooling
+  const SKIP = new Set(['README.md', '.gitignore', '.github']);
+  for (const entry of fs.readdirSync(tmp)) {
+    if (SKIP.has(entry)) continue;
+    fs.cpSync(path.join(tmp, entry), path.join(ROOT, entry), { recursive: true });
+  }
+  fs.rmSync(tmp, { recursive: true, force: true });
 
   // the legacy HTML predates the analytics beacon — inject it
   const BEACON =
     `<script defer src='https://static.cloudflareinsights.com/beacon.min.js' ` +
     `data-cf-beacon='{"token": "${CF_TOKEN}"}'></script>`;
-  for (const f of fs.readdirSync(DOCS).filter((n) => n.endsWith('.html'))) {
-    const p = path.join(DOCS, f);
+  for (const f of fs.readdirSync(ROOT).filter((n) => n.endsWith('.html'))) {
+    const p = path.join(ROOT, f);
     let html = fs.readFileSync(p, 'utf8');
     if (!html.includes('cloudflareinsights') && html.includes('</head>')) {
       html = html.replace('</head>', `${BEACON}\n</head>`);
@@ -79,18 +110,18 @@ if (rootDesign === 'legacy') {
   }
   console.log('> beacon injected into legacy pages');
 } else {
-  console.log(`> copying ${rootDesign} → docs/`);
-  copyDir(path.join(PROJECTS[rootDesign], 'dist'), DOCS);
+  console.log(`> copying ${rootDesign} → /`);
+  copyDir(path.join(PROJECTS[rootDesign], 'dist'), ROOT);
 }
 
 // 4) mirrors
 for (const d of mirrors) {
-  console.log(`> copying ${d} → docs/${d}`);
-  copyDir(path.join(PROJECTS[d], 'dist'), path.join(DOCS, d));
+  console.log(`> copying ${d} → /${d}`);
+  copyDir(path.join(PROJECTS[d], 'dist'), path.join(ROOT, d));
 }
 
 // 5) keep the mirrors out of search results
-const robots = path.join(DOCS, 'robots.txt');
+const robots = path.join(ROOT, 'robots.txt');
 if (fs.existsSync(robots)) {
   let txt = fs.readFileSync(robots, 'utf8');
   const disallows = mirrors.map((d) => `Disallow: /${d}/`).filter((l) => !txt.includes(l));
@@ -101,9 +132,7 @@ if (fs.existsSync(robots)) {
 }
 
 // GitHub Pages runs Jekyll unless told not to — _astro/ dirs need this
-if (!fs.existsSync(path.join(DOCS, '.nojekyll'))) {
-  fs.writeFileSync(path.join(DOCS, '.nojekyll'), '');
-}
+fs.writeFileSync(path.join(ROOT, '.nojekyll'), '');
 
 // 6) commit (push is left to you)
 run('git add -A', ROOT);
@@ -116,7 +145,7 @@ try {
   console.log('> nothing new to commit');
 }
 
-console.log(`\n✔ Done. docs/ assembled:
+console.log(`\n✔ Done. Site assembled at repo root:
    /      → ${rootDesign}
 ${mirrors.map((d) => `   /${d}    → ${d}`).join('\n')}
  Push to publish (GitHub Desktop → Push origin). Live in ~1–5 min.`);

@@ -9,7 +9,8 @@ sources/
   v1/             ← design: orange editorial print
   v2/             ← design: blue riso, tactile depth
   v3/             ← design: premium dark glass
-docs/             ← the built site — GitHub Pages serves this folder
+index.html, v1/, v2/, v3/, assets/, ...  ← the built site, at the repo root
+                                            (GitHub Pages serves the root)
 ```
 
 The old (pre-rebuild) site is preserved in git history under the tag
@@ -45,10 +46,12 @@ Edit the same file in each design you keep alive, then run a publish button.
 `sources/v1|v2|v3/dev-preview.bat` — double-click, browser opens with live
 reload (every file save refreshes the page). Close the window to stop.
 
-## One-time GitHub setting
+## GitHub setting
 
-Settings → Pages → Build and deployment → Deploy from a branch →
-Branch: `main`, Folder: `/docs` → Save.
+None needed. GitHub Pages serves the repo root by default
+(Settings → Pages → Deploy from a branch → `main` / `/ (root)` — the
+default). The build is written straight to the root, so publishing is just:
+double-click a `publish-*.bat`, then Push.
 
 ## Analytics
 

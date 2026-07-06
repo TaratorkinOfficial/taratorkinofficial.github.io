@@ -9,3 +9,4 @@ sources/*/npm-debug.log*
 
 # temp
 legacy-tmp.tar
+_legacy_tmp/
