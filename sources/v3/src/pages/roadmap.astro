@@ -36,7 +36,7 @@ const year = new Date().getFullYear();
 >
   <div class="rm container">
     <!-- hero -->
-    <header class="rm-hero">
+    <header class="rm-hero reveal">
       <div>
         <p class="eyebrow eyebrow--accent" data-ru={t('eyebrow', 'ru')} data-en={t('eyebrow', 'en')}>
           {t('eyebrow', 'ru')}
@@ -173,7 +173,7 @@ const year = new Date().getFullYear();
       <ol class="flow">
         {
           FLOW.map((f, i) => (
-            <li class="flow__step">
+            <li class="flow__step reveal" style={`--d: ${i * 60}ms`}>
               <span class="flow__num mono">{i + 1}</span>
               <span class="flow__lbl" data-ru={f.lbl.ru} data-en={f.lbl.en}>{f.lbl.ru}</span>
               <span class="flow__desc" data-ru={f.desc.ru} data-en={f.desc.en}>{f.desc.ru}</span>
@@ -181,7 +181,7 @@ const year = new Date().getFullYear();
           ))
         }
       </ol>
-      <p class="ios-note">
+      <p class="ios-note reveal">
         <span class="ios-note__badge">iOS QA</span>
         <span>
           <strong data-ru={t('iosStrong','ru')} data-en={t('iosStrong','en')}>{t('iosStrong','ru')}</strong><span data-ru={t('iosText','ru')} data-en={t('iosText','en')}>{t('iosText','ru')}</span>
@@ -200,8 +200,8 @@ const year = new Date().getFullYear();
       </div>
       <div class="rules">
         {
-          RULES.map((r) => (
-            <article class="rule">
+          RULES.map((r, i) => (
+            <article class="rule reveal" style={`--d: ${i * 60}ms`}>
               <span class="mono rule__num">{r.num}</span>
               <h3 data-ru={r.h3.ru} data-en={r.h3.en}>{r.h3.ru}</h3>
               <p data-ru={r.p.ru} data-en={r.p.en}>{r.p.ru}</p>
@@ -837,6 +837,100 @@ const year = new Date().getFullYear();
 
   .rm-footer__sig {
     letter-spacing: 0.02em;
+  }
+
+  /* ============================================================
+     motion & interactive accents
+     ============================================================ */
+
+  /* staggered scroll-in: delay only the entrance (opacity/transform),
+     so hover feedback on the same elements stays instant */
+  .flow__step,
+  .rule {
+    transition:
+      opacity 0.7s var(--ease) var(--d, 0ms),
+      transform 0.7s var(--ease) var(--d, 0ms),
+      border-color 0.2s ease,
+      box-shadow 0.25s var(--ease);
+  }
+
+  .flow__step:hover,
+  .rule:hover {
+    border-color: var(--line-2);
+    box-shadow: var(--shadow), 0 0 26px -12px var(--accent);
+  }
+
+  .flow__step:hover .flow__num {
+    box-shadow: 0 8px 22px -6px var(--glow);
+  }
+
+  /* week tabs light up in their own phase colour */
+  .wk {
+    transition:
+      transform 0.25s var(--spring),
+      border-color 0.2s ease,
+      box-shadow 0.25s var(--ease);
+  }
+
+  .wk:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--wc) 55%, var(--line-2));
+    box-shadow: var(--shadow), 0 0 24px -10px var(--wc);
+  }
+
+  /* calendar cells give colour feedback on hover */
+  .cell {
+    transition:
+      transform 0.2s var(--spring),
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .cell:hover {
+    transform: translateY(-2px);
+    border-color: var(--cc);
+    box-shadow: 0 0 20px -6px var(--cc);
+  }
+
+  /* stat + legend chips */
+  .rm-stats div,
+  .legend__chip {
+    transition:
+      transform 0.25s var(--spring),
+      border-color 0.2s ease,
+      box-shadow 0.25s var(--ease);
+  }
+
+  .rm-stats div:hover {
+    transform: translateY(-2px);
+    border-color: var(--line-2);
+    box-shadow: var(--shadow), 0 0 20px -10px var(--accent);
+  }
+
+  .legend__chip:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--lc, var(--accent)) 50%, var(--line-2));
+    box-shadow: 0 0 16px -8px var(--lc, var(--accent));
+  }
+
+  /* checkpoints breathe so the eye lands on the milestones */
+  .cp__dot {
+    --dot: var(--ph-buf);
+    animation: cpPulse 2.6s var(--ease) infinite;
+  }
+
+  .cp--release .cp__dot {
+    --dot: var(--ph-polish);
+  }
+
+  @keyframes cpPulse {
+    0%,
+    100% {
+      box-shadow: 0 0 12px var(--dot);
+    }
+    50% {
+      box-shadow: 0 0 24px 4px var(--dot);
+    }
   }
 </style>
 

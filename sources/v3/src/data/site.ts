@@ -21,5 +21,4 @@ export const STATS = [
   { value: '19', suffix: '', label: 'Games published' },
   { value: '10', suffix: 'M+', label: 'Downloads' },
   { value: '2020', suffix: '', label: 'Studio founded' },
-  { value: '4', suffix: '', label: 'People, full stack' },
 ] as const;

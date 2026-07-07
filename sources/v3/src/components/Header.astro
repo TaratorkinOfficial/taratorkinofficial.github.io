@@ -11,7 +11,6 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 const nav = [
   { label: 'Work', href: base + '#work' },
   { label: 'Studio', href: base + '#studio' },
-  { label: 'Team', href: base + '#team' },
   { label: 'Contact', href: base + '#contact' },
 ];
 
@@ -23,8 +22,8 @@ const onPitch = Astro.url.pathname
   .endsWith('/pitch');
 ---
 
-<header class="header">
-  <div class="header__pill glass">
+<header class="header" data-header>
+  <div class="header__pill">
     <a href={base} class="wordmark" aria-label="Taratorkin Official — home">
       <Image src={logo} alt="" width={64} densities={[1, 2]} class="wordmark__logo" />
       <span class="wordmark__text">Taratorkin&nbsp;Official</span>
@@ -50,35 +49,12 @@ const onPitch = Astro.url.pathname
 <style>
   .header {
     position: sticky;
-    top: 12px;
+    top: 14px;
     z-index: 50;
     display: flex;
     justify-content: center;
     padding-inline: 16px;
     height: 0; /* pill floats without reserving layout height beyond itself */
-  }
-
-  /* progressive-blur scrim: scrolled content dissolves toward the viewport
-     edge instead of showing as a raw strip above the floating pill */
-  .header::before {
-    content: '';
-    position: absolute;
-    top: -12px;
-    left: 0;
-    right: 0;
-    height: 108px;
-    background: linear-gradient(
-      to bottom,
-      var(--bg) 0%,
-      color-mix(in srgb, var(--bg) 82%, transparent) 40%,
-      transparent 100%
-    );
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    mask-image: linear-gradient(to bottom, #000 35%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent 100%);
-    pointer-events: none;
-    z-index: -1;
   }
 
   .header__pill {
@@ -87,13 +63,29 @@ const onPitch = Astro.url.pathname
     justify-content: space-between;
     gap: clamp(14px, 2.5vw, 36px);
     width: min(var(--container), 100%);
-    padding: 10px 12px 10px 16px;
+    height: 58px;
+    padding: 0 10px 0 18px;
     border-radius: 999px;
-    /* the one place real backdrop blur earns its keep: content scrolls
-       beneath the floating pill */
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    /* Chrome is invisible at the top of the page — the pill floats cleanly over
+       the hero. Background, border and blur fade in only once the page scrolls,
+       so there is never a flat "strip" sitting over the coloured hero. */
+    border: 1px solid transparent;
+    background: transparent;
+    box-shadow: 0 0 0 0 transparent;
     transform: translateZ(0);
+    transition:
+      background 0.3s var(--ease),
+      border-color 0.3s var(--ease),
+      box-shadow 0.3s var(--ease),
+      backdrop-filter 0.3s var(--ease);
+  }
+
+  .header[data-scrolled] .header__pill {
+    background: color-mix(in srgb, var(--bg-2) 72%, transparent);
+    border-color: var(--line-2);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
   }
 
   .wordmark {
@@ -120,20 +112,42 @@ const onPitch = Astro.url.pathname
   .nav {
     display: flex;
     align-items: center;
-    gap: clamp(10px, 2vw, 26px);
+    gap: clamp(4px, 1.4vw, 12px);
   }
 
   .nav a {
+    position: relative;
     font-size: 14px;
     font-weight: 550;
     text-decoration: none;
     color: var(--text-2);
-    padding: 6px 4px;
-    transition: color 0.15s ease;
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition:
+      color 0.15s ease,
+      background 0.15s ease;
+  }
+
+  .nav a::after {
+    content: '';
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 4px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s var(--ease);
   }
 
   .nav a:hover {
     color: var(--text);
+  }
+
+  .nav a:hover::after {
+    transform: scaleX(1);
   }
 
   .header__actions {
@@ -149,7 +163,7 @@ const onPitch = Astro.url.pathname
     white-space: nowrap;
     color: var(--accent-contrast);
     background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 130%);
-    padding: 9px 18px;
+    padding: 10px 18px;
     border-radius: 999px;
     box-shadow: 0 8px 22px -8px var(--glow);
     transition:
@@ -158,7 +172,7 @@ const onPitch = Astro.url.pathname
   }
 
   .nav__pitch:hover {
-    transform: translateY(-1px) scale(1.03);
+    transform: translateY(-1px);
     box-shadow: 0 12px 30px -8px var(--glow);
   }
 
@@ -175,7 +189,26 @@ const onPitch = Astro.url.pathname
 
     .nav__pitch {
       font-size: 12.5px;
-      padding: 8px 14px;
+      padding: 9px 14px;
     }
   }
 </style>
+
+<script>
+  // Fade the header chrome in only after the page leaves the top, so the pill
+  // floats invisibly over the hero and never reads as a flat strip.
+  function initHeaderScroll() {
+    const header = document.querySelector<HTMLElement>('[data-header]');
+    if (!header || header.hasAttribute('data-header-ready')) return;
+    header.setAttribute('data-header-ready', '');
+
+    const onScroll = () => {
+      header.toggleAttribute('data-scrolled', window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  initHeaderScroll();
+  document.addEventListener('astro:page-load', initHeaderScroll);
+</script>

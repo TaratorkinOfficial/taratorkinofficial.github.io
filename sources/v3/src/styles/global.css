@@ -286,12 +286,14 @@ html[data-theme='light'] .glass {
 }
 
 .btn:hover {
-  transform: translateY(-2px) scale(1.02);
+  /* lift only — no scale(): scaling a rounded, gradient-filled pill re-rasters
+     the border-radius on Windows/Chromium and the edge tears/jitters mid-hover */
+  transform: translateY(-2px);
   box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.5);
 }
 
 .btn:active {
-  transform: translateY(0) scale(0.98);
+  transform: translateY(0);
 }
 
 .btn--accent {

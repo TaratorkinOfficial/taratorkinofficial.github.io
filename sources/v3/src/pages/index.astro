@@ -61,26 +61,23 @@ const jsonLd = {
         <a href="#work" class="btn btn--accent">See the work</a>
         <a href={base + 'pitch'} class="btn">Publisher pitch</a>
       </div>
+
+      <dl class="hero__stats" aria-label="Studio in numbers">
+        {
+          STATS.map((s) => (
+            <div class="hero__stat">
+              <dt class="hero__stat-value display">
+                <span data-countup={s.value}>{s.value}</span>{s.suffix}
+              </dt>
+              <dd class="hero__stat-label">{s.label}</dd>
+            </div>
+          ))
+        }
+      </dl>
     </div>
 
     <div class="hero__wall">
       <Marquee />
-    </div>
-  </section>
-
-  <!-- ===== STATS BENTO ===== -->
-  <section class="stats container" aria-label="Studio in numbers">
-    <div class="stats__bento">
-      {
-        STATS.map((s) => (
-          <div class="stats__cell glass reveal">
-            <span class="stats__value display">
-              <span data-countup={s.value}>{s.value}</span>{s.suffix}
-            </span>
-            <span class="stats__label">{s.label}</span>
-          </div>
-        ))
-      }
     </div>
   </section>
 
@@ -164,53 +161,31 @@ const jsonLd = {
           }
         </ol>
       </div>
-    </div>
-  </section>
 
-  <!-- ===== TEAM ===== -->
-  <section class="section" id="team">
-    <div class="container">
-      <div class="section-head">
-        <span class="idx">03 · People</span>
-        <h2 class="section-title">Four people. <em>Full stack.</em></h2>
-      </div>
-
-      <div class="team">
-        {
-          TEAM.map((m, i) => (
-            <article class="member glass reveal">
-              <span class="member__num display" aria-hidden="true">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <Image
-                src={m.photo}
-                alt={`Portrait of ${m.name}`}
-                width={400}
-                widths={[200, 400]}
-                sizes="(max-width: 640px) 96px, 132px"
-                class="member__photo"
-                loading="lazy"
-              />
-              <div class="member__body">
-                <h3 class="member__name">{m.name}</h3>
-                <p class="member__role">{m.role}</p>
-                <p class="member__bio">{m.bio}</p>
-                <p class="member__tags">
-                  {m.tags.map((t) => (
-                    <span>{t}</span>
-                  ))}
-                </p>
-                <p class="member__links">
-                  {m.links.map((l) => (
-                    <a href={l.url} target="_blank" rel="noopener" class="link">
-                      {l.label} ↗
-                    </a>
-                  ))}
-                </p>
-              </div>
-            </article>
-          ))
-        }
+      <!-- compact team strip — merged into the studio section -->
+      <div class="team-strip">
+        <p class="team-strip__head eyebrow">The four people behind every title</p>
+        <div class="team-strip__grid">
+          {
+            TEAM.map((m) => (
+              <article class="tmember glass reveal">
+                <Image
+                  src={m.photo}
+                  alt={`Portrait of ${m.name}`}
+                  width={220}
+                  widths={[110, 220]}
+                  sizes="104px"
+                  class="tmember__photo"
+                  loading="lazy"
+                />
+                <div class="tmember__body">
+                  <h3 class="tmember__name">{m.name.split(' ')[0]}</h3>
+                  <p class="tmember__role">{m.role}</p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
       </div>
     </div>
   </section>
@@ -232,7 +207,7 @@ const jsonLd = {
   <section class="section" id="contact">
     <div class="container">
       <div class="section-head">
-        <span class="idx">04 · Contact</span>
+        <span class="idx">03 · Contact</span>
         <h2 class="section-title">Let's <em>talk</em></h2>
       </div>
 
@@ -256,7 +231,13 @@ const jsonLd = {
   /* ===== hero ===== */
   .hero {
     position: relative;
-    padding-top: calc(var(--header-h) + clamp(48px, 8vw, 110px));
+    /* fill the viewport like the legacy hero, so the ambient background and
+       spotlight span a full screen; text centers in the space above the wall,
+       the icon wall sits at the bottom edge */
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    padding-top: calc(var(--header-h) + clamp(28px, 5vw, 64px));
     padding-bottom: clamp(40px, 6vw, 80px);
     overflow: hidden;
   }
@@ -276,6 +257,9 @@ const jsonLd = {
 
   .hero__inner {
     position: relative;
+    /* grow to fill the space above the wall and center the copy within it */
+    flex: 1 1 auto;
+    align-content: center;
     text-align: center;
     display: grid;
     justify-items: center;
@@ -346,26 +330,24 @@ const jsonLd = {
     }
   }
 
-  /* ===== stats bento ===== */
-  .stats {
-    padding-block: clamp(28px, 4vw, 56px);
+  /* ===== hero stats (inline row inside the hero) ===== */
+  .hero__stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(26px, 6vw, 72px);
+    margin-top: clamp(36px, 5vw, 52px);
   }
 
-  .stats__bento {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 16px;
-  }
-
-  .stats__cell {
-    padding: clamp(22px, 3vw, 36px);
+  .hero__stat {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    align-items: center;
+    gap: 5px;
   }
 
-  .stats__value {
-    font-size: clamp(34px, 4.4vw, 58px);
+  .hero__stat-value {
+    font-size: clamp(30px, 4vw, 46px);
     line-height: 1;
     background: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 100%);
     -webkit-background-clip: text;
@@ -374,15 +356,11 @@ const jsonLd = {
     font-variant-numeric: tabular-nums;
   }
 
-  .stats__label {
-    font-size: 14px;
+  .hero__stat-label {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--text-2);
-  }
-
-  @media (max-width: 860px) {
-    .stats__bento {
-      grid-template-columns: repeat(2, 1fr);
-    }
   }
 
   /* ===== filters + work grid ===== */
@@ -507,112 +485,72 @@ const jsonLd = {
     }
   }
 
-  /* ===== team: stacked dossier rows ===== */
-  .team {
+  /* ===== team strip (merged into studio) ===== */
+  .team-strip {
+    margin-top: clamp(28px, 4vw, 44px);
+    padding-top: clamp(24px, 3.5vw, 40px);
+    border-top: 1px solid var(--line);
+  }
+
+  .team-strip__head {
+    margin-bottom: 18px;
+  }
+
+  .team-strip__grid {
     display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 16px;
   }
 
-  .member {
-    position: relative;
-    display: grid;
-    grid-template-columns: 132px minmax(0, 1fr);
-    gap: clamp(20px, 3vw, 32px);
-    align-items: start;
-    padding: clamp(22px, 3vw, 34px);
+  .tmember {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    padding: clamp(24px, 3vw, 34px) 18px;
     transition:
       transform 0.25s var(--spring),
       border-color 0.2s ease;
   }
 
-  .member:hover {
-    transform: translateY(-3px);
+  .tmember:hover {
+    transform: translateY(-4px);
     border-color: var(--line-2);
   }
 
-  /* oversized index number, watermark-style */
-  .member__num {
-    position: absolute;
-    top: 16px;
-    right: 24px;
-    font-size: clamp(30px, 4vw, 46px);
-    line-height: 1;
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 130%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    opacity: 0.3;
-    user-select: none;
-  }
-
-  .member :global(.member__photo) {
-    width: 132px;
-    height: 132px;
+  .tmember :global(.tmember__photo) {
+    width: clamp(88px, 9vw, 104px);
+    height: clamp(88px, 9vw, 104px);
     object-fit: cover;
-    border-radius: var(--radius);
+    border-radius: 50%;
     border: 1px solid var(--line-2);
   }
 
-  .member__body {
+  .tmember__body {
     display: grid;
-    gap: 12px;
-    justify-items: start;
-  }
-
-  .member__name {
-    font-family: var(--font-display);
-    font-size: clamp(18px, 2vw, 21px);
-    font-weight: 650;
-    /* keep clear of the watermark number */
-    padding-right: 64px;
-  }
-
-  .member__role {
-    font-size: 12.5px;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--accent-ink);
-    margin-top: -6px;
-  }
-
-  .member__bio {
-    font-size: 15px;
-    line-height: 1.7;
-    color: var(--text-2);
-    max-width: 78ch;
-  }
-
-  .member__tags {
-    display: flex;
-    flex-wrap: wrap;
     gap: 6px;
   }
 
-  .member__tags span {
-    font-size: 12px;
-    font-weight: 550;
-    padding: 5px 12px;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: var(--glass);
-    color: var(--text-2);
+  .tmember__name {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 650;
+    line-height: 1.25;
   }
 
-  .member__links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
+  .tmember__role {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    line-height: 1.4;
   }
 
-  @media (max-width: 640px) {
-    .member {
-      grid-template-columns: 1fr;
-    }
-
-    .member :global(.member__photo) {
-      width: 96px;
-      height: 96px;
+  @media (max-width: 760px) {
+    .team-strip__grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
