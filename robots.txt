@@ -2,7 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /v1/
 Disallow: /v2/
-Disallow: /v3/
-Disallow: /sprint_roadmap.html
+Disallow: /roadmap
 
-Sitemap: https://taratorkinofficial.github.io/sitemap.xml
+Sitemap: https://taratorkinofficial.github.io/sitemap-index.xml
