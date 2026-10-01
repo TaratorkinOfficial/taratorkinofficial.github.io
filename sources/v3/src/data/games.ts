@@ -12,6 +12,11 @@ import harborkeepers from '../assets/games/harborkeepers.webp';
 import balloontravel from '../assets/games/balloontravel.webp';
 import spacetrouble from '../assets/games/spacetrouble.webp';
 import virusrunner from '../assets/games/virusrunner.webp';
+import deadweight from '../assets/games/deadweight.webp';
+import kickback from '../assets/games/kickback.webp';
+import lodestone from '../assets/games/lodestone.webp';
+import wreckingduel from '../assets/games/wreckingduel.webp';
+import roachhunter from '../assets/games/roachhunter.webp';
 import rageofgiants from '../assets/games/rageofgiants.webp';
 import frontline from '../assets/games/frontline.webp';
 import prismatrix from '../assets/games/prismatrix.webp';
@@ -153,6 +158,41 @@ export const GAMES: Game[] = [
     group: 'studio',
     googlePlay: 'https://play.google.com/store/apps/details?id=com.TaratorkinOfficial.VirusRunner',
     appStore: 'https://apps.apple.com/us/app/neurophage-runner/id6763154550',
+  },
+  {
+    title: 'Deadweight',
+    description: 'Real-time ragdoll duel — blast bodies onto the bomb and shove it onto the rival tower.',
+    cover: deadweight,
+    group: 'studio',
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.deadweight',
+  },
+  {
+    title: 'Kickback',
+    description: 'Turn-based gold duel — hit hard to cash in, but every hard hit feeds your rival.',
+    cover: kickback,
+    group: 'studio',
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.kickback',
+  },
+  {
+    title: 'Lodestone',
+    description: 'Turn-based magnet duel — snap the iron, weld your claim, outscore your rival.',
+    cover: lodestone,
+    group: 'studio',
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.lodestone',
+  },
+  {
+    title: 'Wrecking Duel',
+    description: 'Turn-based tower duels — break the supports and drop your rival’s tower first.',
+    cover: wreckingduel,
+    group: 'studio',
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.wreckingduel',
+  },
+  {
+    title: 'Roach Hunter: Pest Control',
+    description: 'Hunt mutated cockroaches, unlock weapons, and save your home from infestation.',
+    cover: roachhunter,
+    group: 'studio',
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.roachhunter',
   },
 
   // — Team experience —
