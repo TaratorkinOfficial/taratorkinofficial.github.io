@@ -22,11 +22,11 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.dirname(fileURLToPath(import.meta.url)); // the repo itself = output dir
 const LEGACY_TAG = 'legacy-site';
 const CF_TOKEN = '4f0e8def1e514737a965ca85fcda51ab';
-// The ONE source of app-ads.txt. Facebook reads only the root copy; every build
-// (legacy tag, v1, v2, v3) gets this file written over it, so a line added here
-// can never be wiped by switching the root design again (lost Lodestone,
-// Deadweight lines in Sept 2026 exactly that way).
-const APP_ADS = path.join(ROOT, 'shared', 'app-ads.txt');
+// app-ads.txt lives at the repo ROOT and is edited right there — that is the file
+// Facebook reads. A rebuild never wipes or overwrites it (KEEP below, skipped when
+// extracting the legacy tag) and only copies it into the mirrors. Before this, five
+// copies drifted and a publish wiped the Lodestone and Deadweight lines (Sept 2026).
+const APP_ADS = path.join(ROOT, 'app-ads.txt');
 if (!fs.existsSync(APP_ADS)) {
   console.error(`Missing ${APP_ADS} — the single source of app-ads.txt`);
   process.exit(1);
@@ -46,7 +46,7 @@ const KEEP = new Set([
   '.claude',
   'README.md',
   'sources',
-  'shared',
+  'app-ads.txt',
   'node_modules',
   'publish.mjs',
   'publish-legacy.bat',
@@ -99,7 +99,7 @@ if (rootDesign === 'legacy') {
   fs.rmSync(path.join(ROOT, 'legacy-tmp.tar'), { force: true });
 
   // copy the legacy SITE files to root, but never clobber the monorepo tooling
-  const SKIP = new Set(['README.md', '.gitignore', '.github']);
+  const SKIP = new Set(['README.md', '.gitignore', '.github', 'app-ads.txt']);
   for (const entry of fs.readdirSync(tmp)) {
     if (SKIP.has(entry)) continue;
     fs.cpSync(path.join(tmp, entry), path.join(ROOT, entry), { recursive: true });
@@ -130,12 +130,12 @@ for (const d of mirrors) {
   copyDir(path.join(PROJECTS[d], 'dist'), path.join(ROOT, d));
 }
 
-// 4b) app-ads.txt from the single source — root and every mirror
-for (const dir of ['', ...mirrors]) {
-  fs.copyFileSync(APP_ADS, path.join(ROOT, dir, 'app-ads.txt'));
+// 4b) root app-ads.txt stays as is; mirrors get a copy of it
+for (const d of mirrors) {
+  fs.copyFileSync(APP_ADS, path.join(ROOT, d, 'app-ads.txt'));
 }
 const adsLines = fs.readFileSync(APP_ADS, 'utf8').trim().split(String.fromCharCode(10)).length;
-console.log(`> app-ads.txt (${adsLines} lines) → / ${mirrors.map((d) => '/' + d).join(' ')}`);
+console.log(`> app-ads.txt (${adsLines} lines): root kept, copied → ${mirrors.map((d) => '/' + d).join(' ')}`);
 
 // 5) keep the mirrors out of search results
 const robots = path.join(ROOT, 'robots.txt');
