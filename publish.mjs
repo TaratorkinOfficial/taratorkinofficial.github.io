@@ -22,6 +22,15 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.dirname(fileURLToPath(import.meta.url)); // the repo itself = output dir
 const LEGACY_TAG = 'legacy-site';
 const CF_TOKEN = '4f0e8def1e514737a965ca85fcda51ab';
+// The ONE source of app-ads.txt. Facebook reads only the root copy; every build
+// (legacy tag, v1, v2, v3) gets this file written over it, so a line added here
+// can never be wiped by switching the root design again (lost Lodestone,
+// Deadweight lines in Sept 2026 exactly that way).
+const APP_ADS = path.join(ROOT, 'shared', 'app-ads.txt');
+if (!fs.existsSync(APP_ADS)) {
+  console.error(`Missing ${APP_ADS} — the single source of app-ads.txt`);
+  process.exit(1);
+}
 const PROJECTS = {
   v1: path.join(ROOT, 'sources', 'v1'),
   v2: path.join(ROOT, 'sources', 'v2'),
@@ -37,6 +46,7 @@ const KEEP = new Set([
   '.claude',
   'README.md',
   'sources',
+  'shared',
   'node_modules',
   'publish.mjs',
   'publish-legacy.bat',
@@ -119,6 +129,13 @@ for (const d of mirrors) {
   console.log(`> copying ${d} → /${d}`);
   copyDir(path.join(PROJECTS[d], 'dist'), path.join(ROOT, d));
 }
+
+// 4b) app-ads.txt from the single source — root and every mirror
+for (const dir of ['', ...mirrors]) {
+  fs.copyFileSync(APP_ADS, path.join(ROOT, dir, 'app-ads.txt'));
+}
+const adsLines = fs.readFileSync(APP_ADS, 'utf8').trim().split(String.fromCharCode(10)).length;
+console.log(`> app-ads.txt (${adsLines} lines) → / ${mirrors.map((d) => '/' + d).join(' ')}`);
 
 // 5) keep the mirrors out of search results
 const robots = path.join(ROOT, 'robots.txt');
