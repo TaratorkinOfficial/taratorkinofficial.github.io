@@ -11,7 +11,7 @@ html[data-theme='dark'] {
   --bg-2: #0e1119;
   --text: #f2f4f8;
   --text-2: #9aa3b4;
-  --text-3: #5d6575;
+  --text-3: #838c9e;
   --line: rgba(255, 255, 255, 0.08);
   --line-2: rgba(255, 255, 255, 0.14);
   --glass: rgba(255, 255, 255, 0.045);
@@ -20,6 +20,10 @@ html[data-theme='dark'] {
   --accent-2: #8b5cf6;
   --accent-ink: #7c9dff;
   --accent-contrast: #ffffff;
+  /* filled-button gradient: a notch deeper than the accent so white label
+     text clears WCAG AA (4.5:1) at button sizes */
+  --btn-1: #3a66ee;
+  --btn-2: #7246f0;
   --glow: rgba(77, 124, 255, 0.35);
   --shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.65);
 
@@ -57,7 +61,7 @@ html[data-theme='light'] {
   --bg-2: #ffffff;
   --text: #0d1220;
   --text-2: #4b5468;
-  --text-3: #8b93a5;
+  --text-3: #646c7f;
   --line: rgba(13, 18, 32, 0.09);
   --line-2: rgba(13, 18, 32, 0.16);
   --glass: rgba(255, 255, 255, 0.62);
@@ -66,6 +70,8 @@ html[data-theme='light'] {
   --accent-2: #7c3aed;
   --accent-ink: #1d43d8;
   --accent-contrast: #ffffff;
+  --btn-1: #2b5cff;
+  --btn-2: #7c3aed;
   --glow: rgba(43, 92, 255, 0.22);
   --shadow: 0 18px 44px -18px rgba(13, 18, 32, 0.22);
 
@@ -297,7 +303,7 @@ html[data-theme='light'] .glass {
 }
 
 .btn--accent {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 120%);
+  background: linear-gradient(135deg, var(--btn-1) 0%, var(--btn-2) 120%);
   border-color: transparent;
   color: var(--accent-contrast);
   box-shadow: 0 10px 30px -8px var(--glow);

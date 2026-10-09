@@ -29,8 +29,15 @@ const onPitch = Astro.url.pathname
       <span class="wordmark__text">Taratorkin&nbsp;Official</span>
     </a>
 
-    <nav class="nav" aria-label="Main">
+    <nav class="nav" id="site-nav" aria-label="Main">
       {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      {
+        onPitch ? (
+          <a href={`mailto:${SITE.email}`} class="nav__extra">Email us</a>
+        ) : (
+          <a href={base + 'pitch'} class="nav__extra">For publishers</a>
+        )
+      }
     </nav>
 
     <div class="header__actions">
@@ -42,6 +49,16 @@ const onPitch = Astro.url.pathname
         )
       }
       <ThemeToggle />
+      <button
+        type="button"
+        class="menu-btn"
+        aria-controls="site-nav"
+        aria-expanded="false"
+        aria-label="Open menu"
+        data-menu-toggle
+      >
+        <span class="menu-btn__bars" aria-hidden="true"></span>
+      </button>
     </div>
   </div>
 </header>
@@ -162,7 +179,7 @@ const onPitch = Astro.url.pathname
     text-decoration: none;
     white-space: nowrap;
     color: var(--accent-contrast);
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 130%);
+    background: linear-gradient(135deg, var(--btn-1) 0%, var(--btn-2) 130%);
     padding: 10px 18px;
     border-radius: 999px;
     box-shadow: 0 8px 22px -8px var(--glow);
@@ -176,20 +193,144 @@ const onPitch = Astro.url.pathname
     box-shadow: 0 12px 30px -8px var(--glow);
   }
 
+  /* the CTA lives in the header bar on wide screens; the dropdown carries it on phones */
+  .nav__extra {
+    display: none;
+  }
+
+  .menu-btn {
+    display: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--glass);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .menu-btn__bars,
+  .menu-btn__bars::before,
+  .menu-btn__bars::after {
+    display: block;
+    width: 16px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--text);
+    transition:
+      transform 0.25s var(--ease),
+      opacity 0.2s ease;
+  }
+
+  .menu-btn__bars {
+    position: relative;
+  }
+
+  .menu-btn__bars::before,
+  .menu-btn__bars::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+
+  .menu-btn__bars::before {
+    top: -5px;
+  }
+
+  .menu-btn__bars::after {
+    top: 5px;
+  }
+
+  .header[data-menu-open] .menu-btn__bars {
+    background: transparent;
+  }
+
+  .header[data-menu-open] .menu-btn__bars::before {
+    transform: translateY(5px) rotate(45deg);
+  }
+
+  .header[data-menu-open] .menu-btn__bars::after {
+    transform: translateY(-5px) rotate(-45deg);
+  }
+
   @media (max-width: 860px) {
+    .header__pill {
+      position: relative;
+    }
+
+    .menu-btn {
+      display: inline-flex;
+    }
+
+    /* dropdown panel under the pill */
     .nav {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 2px;
+      padding: 8px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line-2);
+      background: color-mix(in srgb, var(--bg-2) 94%, transparent);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px) saturate(1.4);
+      -webkit-backdrop-filter: blur(16px) saturate(1.4);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition:
+        opacity 0.2s ease,
+        transform 0.25s var(--ease),
+        visibility 0s linear 0.25s;
+    }
+
+    .header[data-menu-open] .nav {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition:
+        opacity 0.2s ease,
+        transform 0.25s var(--ease);
+    }
+
+    /* the bar must be solid while the menu is open, even at the top of the page */
+    .header[data-menu-open] .header__pill {
+      background: color-mix(in srgb, var(--bg-2) 94%, transparent);
+      border-color: var(--line-2);
+    }
+
+    .nav a {
+      font-size: 16px;
+      color: var(--text);
+      padding: 14px 16px;
+      border-radius: 14px;
+    }
+
+    .nav a::after {
       display: none;
+    }
+
+    .nav a:hover {
+      background: var(--glass-2);
     }
   }
 
   @media (max-width: 480px) {
-    .wordmark__text {
+    .header__pill {
+      padding-left: 14px;
+    }
+
+    .header__actions .nav__pitch {
       display: none;
     }
 
-    .nav__pitch {
-      font-size: 12.5px;
-      padding: 9px 14px;
+    .nav__extra {
+      display: block;
+      color: var(--accent-ink) !important;
+      font-weight: 650 !important;
     }
   }
 </style>
@@ -209,6 +350,37 @@ const onPitch = Astro.url.pathname
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  initHeaderScroll();
-  document.addEventListener('astro:page-load', initHeaderScroll);
+  // Mobile menu: one toggle button, closes on link tap, Escape or outside tap.
+  function initMenu() {
+    const header = document.querySelector<HTMLElement>('[data-header]');
+    const btn = header?.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+    if (!header || !btn || btn.hasAttribute('data-menu-ready')) return;
+    btn.setAttribute('data-menu-ready', '');
+
+    const setOpen = (open: boolean) => {
+      header.toggleAttribute('data-menu-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+
+    btn.addEventListener('click', () => setOpen(!header.hasAttribute('data-menu-open')));
+    header.querySelectorAll('.nav a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && header.hasAttribute('data-menu-open')) {
+        setOpen(false);
+        btn.focus();
+      }
+    });
+    document.addEventListener('click', (e) => {
+      if (header.hasAttribute('data-menu-open') && !header.contains(e.target as Node)) setOpen(false);
+    });
+  }
+
+  function initHeader() {
+    initHeaderScroll();
+    initMenu();
+  }
+
+  initHeader();
+  document.addEventListener('astro:page-load', initHeader);
 </script>

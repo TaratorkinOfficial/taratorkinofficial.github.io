@@ -20,6 +20,9 @@ const SERVICES = [
 ];
 
 const groupOrder: GameGroup[] = ['collab', 'studio', 'experience'];
+
+/** How many cards "All" shows before the "Show all" button (3 full rows on desktop). */
+const INITIAL_CARDS = 9;
 const groupCounts = Object.fromEntries(
   groupOrder.map((g) => [g, GAMES.filter((x) => x.group === g).length]),
 ) as Record<GameGroup, number>;
@@ -48,7 +51,9 @@ const jsonLd = {
     <div class="hero__spotlight" aria-hidden="true"></div>
     <div class="container hero__inner">
       <p class="hero__eyebrow eyebrow eyebrow--accent">
-        <span class="hero__dot"></span> Independent games studio · est. {SITE.foundingYear}
+        <span class="hero__dot"></span>
+        <span class="hero__eyebrow-long">Independent games studio · est. {SITE.foundingYear}</span>
+        <span class="hero__eyebrow-short">Indie games studio · {SITE.foundingYear}</span>
       </p>
       <h1 class="hero__title display">
         We make mobile games<br class="hero__br" /> people come <em>back</em> to.
@@ -106,7 +111,13 @@ const jsonLd = {
       </p>
 
       <div class="work-grid" data-games-grid>
-        {GAMES.map((game) => <GameCard game={game} />)}
+        {GAMES.map((game, i) => <GameCard game={game} extra={i >= INITIAL_CARDS} />)}
+      </div>
+
+      <div class="work-more">
+        <button type="button" class="btn" data-show-all aria-controls="work">
+          Show all {GAMES.length} titles
+        </button>
       </div>
     </div>
   </section>
@@ -122,28 +133,18 @@ const jsonLd = {
       <div class="about">
         <div class="about__copy glass">
           <p>
-            <strong>Taratorkin Official</strong> is an independent mobile games studio with a
-            clear focus: build polished, retention-driven experiences that players return to.
-            Since 2020 our core team has been designing, prototyping and shipping titles across
-            the hyper, hybrid, and casual space.
+            <strong>Taratorkin Official</strong> is an independent mobile games studio. Since 2020
+            our four-person core team has designed, prototyped and shipped hyper, hybrid and
+            casual titles, from the first playable build to long-term live-ops.
           </p>
           <p>
-            We combine fast iteration with production discipline to deliver both hits and
-            steady-grossing live games. Our approach blends creative design, lean engineering
-            and data-informed live-ops.
+            Our founder shipped prototypes for CrazyLabs, so we build to publisher quality bars
+            from day one: 4-week sprints, Android and iOS builds, UA creatives included.
           </p>
           <p>
-            <strong>AI is part of our pipeline.</strong> We use it to multiply creative variants,
-            accelerate balance passes, and rapidly iterate on UA hooks — but every AI-generated
-            output is benchmarked against a human-made baseline before shipping. Speed never
-            comes at the cost of quality, and a compact team operates at the throughput of a
-            much larger studio.
-          </p>
-          <p>
-            From rapid prototyping to full production and long-term live-ops, we cover the
-            entire lifecycle of a mobile game. Our toolbox spans A/B testing, event-driven
-            content, retention & LTV optimization, IAP economy design, and rewarded-ad
-            mediation — across hyper, hybrid, and casual genres, all under one roof.
+            <strong>AI is part of our pipeline</strong> for creative variants, balance passes
+            and UA hooks. Every AI-made output is benchmarked against a human-made baseline
+            before it ships.
           </p>
         </div>
 
@@ -276,6 +277,25 @@ const jsonLd = {
     margin-bottom: 30px;
   }
 
+  .hero__eyebrow-short {
+    display: none;
+  }
+
+  @media (max-width: 480px) {
+    .hero__eyebrow {
+      letter-spacing: 0.12em;
+      padding: 7px 14px;
+    }
+
+    .hero__eyebrow-long {
+      display: none;
+    }
+
+    .hero__eyebrow-short {
+      display: inline;
+    }
+  }
+
   .hero__dot {
     width: 8px;
     height: 8px;
@@ -391,7 +411,7 @@ const jsonLd = {
   }
 
   .filters__btn.is-active {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 130%);
+    background: linear-gradient(135deg, var(--btn-1) 0%, var(--btn-2) 130%);
     border-color: transparent;
     color: var(--accent-contrast);
     box-shadow: 0 8px 24px -8px var(--glow);
@@ -414,6 +434,21 @@ const jsonLd = {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 22px;
     margin-top: 32px;
+  }
+
+  /* collapsed "All" view: only the first rows show until "Show all" is pressed */
+  .work-grid:not([data-expanded]) > :global([data-extra]) {
+    display: none;
+  }
+
+  .work-more {
+    display: flex;
+    justify-content: center;
+    margin-top: 36px;
+  }
+
+  .work-grid[data-expanded] + .work-more {
+    display: none;
   }
 
   /* ===== about + services ===== */
@@ -540,12 +575,11 @@ const jsonLd = {
   }
 
   .tmember__role {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    color: var(--accent-ink);
-    line-height: 1.4;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text-2);
+    line-height: 1.45;
+    text-wrap: balance;
   }
 
   @media (max-width: 760px) {
@@ -686,9 +720,18 @@ const jsonLd = {
     const note = document.querySelector<HTMLElement>('[data-filter-note]');
     const cards = grid.querySelectorAll<HTMLElement>('[data-group]');
 
+    const showAll = document.querySelector<HTMLButtonElement>('[data-show-all]');
+    showAll?.addEventListener('click', () => {
+      grid.setAttribute('data-expanded', '');
+      // move focus to the first newly revealed card's link for keyboard users
+      grid.querySelector<HTMLElement>('[data-extra] a')?.focus({ preventScroll: true });
+    });
+
     buttons.forEach((btn) => {
       btn.addEventListener('click', () => {
         const filter = btn.dataset.filter!;
+        // a filtered view is short enough to show in full
+        grid.setAttribute('data-expanded', '');
         buttons.forEach((b) => {
           const active = b === btn;
           b.classList.toggle('is-active', active);

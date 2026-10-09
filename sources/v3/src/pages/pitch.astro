@@ -349,7 +349,7 @@ const studioGames = GAMES.filter((g) => g.group === 'studio');
     margin-top: 14px;
   }
 
-  .agenda a {
+  .agenda a:not(.agenda__cta) {
     display: flex;
     gap: 10px;
     padding: 9px 2px;
@@ -360,7 +360,7 @@ const studioGames = GAMES.filter((g) => g.group === 'studio');
     transition: color 0.15s ease;
   }
 
-  .agenda a:hover {
+  .agenda a:not(.agenda__cta):hover {
     color: var(--text);
   }
 

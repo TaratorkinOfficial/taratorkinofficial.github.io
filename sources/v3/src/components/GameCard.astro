@@ -6,16 +6,18 @@ import appleIcon from '../assets/store/appstore.svg';
 
 interface Props {
   game: Game;
+  /** cards past the initial set start collapsed behind "Show all" */
+  extra?: boolean;
 }
 
-const { game } = Astro.props;
+const { game, extra = false } = Astro.props;
 
 const stores: { label: string; url: string; icon: string }[] = [];
 if (game.googlePlay) stores.push({ label: 'Google Play', url: game.googlePlay, icon: playIcon.src });
 if (game.appStore) stores.push({ label: 'App Store', url: game.appStore, icon: appleIcon.src });
 ---
 
-<article class="card" data-group={game.group} data-tilt>
+<article class="card" data-group={game.group} data-extra={extra ? '' : undefined} data-tilt>
   <!-- ambilight: blurred copy of the art glows behind the card -->
   <div class="card__ambilight" aria-hidden="true">
     <Image src={game.cover} alt="" width={320} loading="lazy" />
@@ -42,24 +44,31 @@ if (game.appStore) stores.push({ label: 'App Store', url: game.appStore, icon: a
         <div class="card__reveal">
           <div class="card__reveal-inner">
             <p class="card__desc">{game.description}</p>
-            {
-              (stores.length > 0 || game.external) && (
-                <p class="card__stores">
-                  {stores.map((s) => (
-                    <a href={s.url} target="_blank" rel="noopener" aria-label={s.label} title={s.label}>
-                      <img src={s.icon} alt={s.label} width="40" height="40" loading="lazy" />
-                    </a>
-                  ))}
-                  {game.external && (
-                    <a href={game.external.url} target="_blank" rel="noopener" class="card__ext">
-                      {game.external.label} ↗
-                    </a>
-                  )}
-                </p>
-              )
-            }
           </div>
         </div>
+        {
+          /* store links stay visible at all times — they are the card's main action */
+          (stores.length > 0 || game.external) && (
+            <p class="card__stores">
+              {stores.map((s) => (
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener"
+                  aria-label={`${game.title} on ${s.label}`}
+                  title={s.label}
+                >
+                  <img src={s.icon} alt="" width="34" height="34" loading="lazy" />
+                </a>
+              ))}
+              {game.external && (
+                <a href={game.external.url} target="_blank" rel="noopener" class="card__ext">
+                  {game.external.label} ↗
+                </a>
+              )}
+            </p>
+          )
+        }
       </div>
     </div>
   </div>
@@ -195,7 +204,7 @@ if (game.appStore) stores.push({ label: 'App Store', url: game.appStore, icon: a
   }
 
   .card__chip--new {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 130%);
+    background: linear-gradient(135deg, var(--btn-1) 0%, var(--btn-2) 130%);
     border-color: transparent;
   }
 
@@ -262,13 +271,13 @@ if (game.appStore) stores.push({ label: 'App Store', url: game.appStore, icon: a
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     margin-top: 12px;
   }
 
   .card__stores img {
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
     display: block;
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
     transition: transform 0.2s var(--spring);
@@ -292,8 +301,14 @@ if (game.appStore) stores.push({ label: 'App Store', url: game.appStore, icon: a
     background: rgba(255, 255, 255, 0.28);
   }
 
-  /* touch / no-hover: reveal details permanently, they can't hover to see them */
+  /* touch / no-hover: reveal details permanently, they can't hover to see them.
+     The card grows a little taller than square so title + text + store links
+     always fit inside the art instead of being clipped at the bottom edge. */
   @media (hover: none) {
+    .card__media {
+      aspect-ratio: 4 / 5;
+    }
+
     .card__reveal {
       grid-template-rows: 1fr;
       opacity: 1;
