@@ -6,7 +6,7 @@ import { GAMES } from '../data/games';
  * Single-row cover wall drifting sideways. Pure CSS animation,
  * horizontal scroll under reduced motion.
  */
-const rowA = GAMES.filter((g) => g.group !== 'experience').map((g) => g.cover);
+const rowA = GAMES.filter((g) => g.group !== 'experience' && g.cover).map((g) => g.cover!);
 ---
 
 <div class="wall" aria-hidden="true">

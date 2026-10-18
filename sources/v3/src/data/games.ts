@@ -31,10 +31,13 @@ export type GameGroup = 'collab' | 'studio' | 'experience';
 export interface Game {
   title: string;
   description: string;
-  cover: ImageMetadata;
+  /** optional for titles not yet released (no key art to show yet) */
+  cover?: ImageMetadata;
   group: GameGroup;
   badge?: string;
   isNew?: boolean;
+  /** announced / in production, not yet on the stores */
+  isSoon?: boolean;
   googlePlay?: string;
   appStore?: string;
   external?: { label: string; url: string };
@@ -109,12 +112,17 @@ export const GAMES: Game[] = [
 
   // — Studio titles —
   {
+    title: 'Climb & Grab',
+    description: 'In production — coming soon to the stores.',
+    group: 'studio',
+    isSoon: true,
+  },
+  {
     title: 'Colony Defender',
     description:
       'A light strategy. Manage a growing settlement, build units from cards, and survive monster waves.',
     cover: colonydefender,
     group: 'studio',
-    isNew: true,
     googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.colonydefender',
     appStore: 'https://apps.apple.com/us/app/myrion-bastion/id6761761954',
   },
@@ -123,7 +131,6 @@ export const GAMES: Game[] = [
     description: 'Merge cocktails and unlock stylish tropical destinations.',
     cover: timetochill,
     group: 'studio',
-    isNew: true,
     googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.timetochill',
   },
   {
@@ -131,7 +138,6 @@ export const GAMES: Game[] = [
     description: 'Tower defense — protect your island from pirate invasions.',
     cover: harborkeepers,
     group: 'studio',
-    isNew: true,
     googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.harborkeepers',
     appStore: 'https://apps.apple.com/us/app/harbor-keepers/id6762597951',
   },
@@ -164,6 +170,7 @@ export const GAMES: Game[] = [
     description: 'Real-time ragdoll duel — blast bodies onto the bomb and shove it onto the rival tower.',
     cover: deadweight,
     group: 'studio',
+    isNew: true,
     googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.deadweight',
   },
   {
@@ -171,6 +178,7 @@ export const GAMES: Game[] = [
     description: 'Turn-based gold duel — hit hard to cash in, but every hard hit feeds your rival.',
     cover: kickback,
     group: 'studio',
+    isNew: true,
     googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.kickback',
   },
   {
@@ -178,6 +186,7 @@ export const GAMES: Game[] = [
     description: 'Turn-based magnet duel — snap the iron, weld your claim, outscore your rival.',
     cover: lodestone,
     group: 'studio',
+    isNew: true,
     googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.lodestone',
   },
   {
@@ -185,6 +194,7 @@ export const GAMES: Game[] = [
     description: 'Turn-based tower duels — break the supports and drop your rival’s tower first.',
     cover: wreckingduel,
     group: 'studio',
+    isNew: true,
     googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.wreckingduel',
   },
   {
