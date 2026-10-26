@@ -12,6 +12,7 @@ import harborkeepers from '../assets/games/harborkeepers.webp';
 import balloontravel from '../assets/games/balloontravel.webp';
 import spacetrouble from '../assets/games/spacetrouble.webp';
 import virusrunner from '../assets/games/virusrunner.webp';
+import stonesmash from '../assets/games/stonesmash.webp';
 import deadweight from '../assets/games/deadweight.webp';
 import kickback from '../assets/games/kickback.webp';
 import lodestone from '../assets/games/lodestone.webp';
@@ -111,6 +112,14 @@ export const GAMES: Game[] = [
   },
 
   // — Studio titles —
+  {
+    title: 'Stone Smash',
+    description: 'A 1v1 tower duel — smash the rival stone tower with volcano rocks before the eruption ends.',
+    cover: stonesmash,
+    group: 'studio',
+    isNew: true,
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.stonesmash',
+  },
   {
     title: 'Climb & Grab',
     description: 'In production — coming soon to the stores.',
