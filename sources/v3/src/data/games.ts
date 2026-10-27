@@ -12,6 +12,7 @@ import harborkeepers from '../assets/games/harborkeepers.webp';
 import balloontravel from '../assets/games/balloontravel.webp';
 import spacetrouble from '../assets/games/spacetrouble.webp';
 import virusrunner from '../assets/games/virusrunner.webp';
+import climbgrab from '../assets/games/climbgrab.webp';
 import stonesmash from '../assets/games/stonesmash.webp';
 import yardwars from '../assets/games/yardwars.webp';
 import ricochetrivals from '../assets/games/ricochetrivals.webp';
@@ -140,9 +141,11 @@ export const GAMES: Game[] = [
   },
   {
     title: 'Climb & Grab',
-    description: 'In production — coming soon to the stores.',
+    description: 'A 1v1 climbing race up an ancient shaft - dodge rocks, blast your rival and grab the golden idol.',
+    cover: climbgrab,
     group: 'studio',
-    isSoon: true,
+    isNew: true,
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.climbgrab',
   },
   {
     title: 'Colony Defender',
