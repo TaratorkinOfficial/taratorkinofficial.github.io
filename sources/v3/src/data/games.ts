@@ -13,6 +13,8 @@ import balloontravel from '../assets/games/balloontravel.webp';
 import spacetrouble from '../assets/games/spacetrouble.webp';
 import virusrunner from '../assets/games/virusrunner.webp';
 import stonesmash from '../assets/games/stonesmash.webp';
+import yardwars from '../assets/games/yardwars.webp';
+import ricochetrivals from '../assets/games/ricochetrivals.webp';
 import deadweight from '../assets/games/deadweight.webp';
 import kickback from '../assets/games/kickback.webp';
 import lodestone from '../assets/games/lodestone.webp';
@@ -112,6 +114,22 @@ export const GAMES: Game[] = [
   },
 
   // — Studio titles —
+  {
+    title: 'Yard Wars',
+    description: 'A backyard zombie duel - grab zombies, toss them over the fence and wreck your neighbor’s house.',
+    cover: yardwars,
+    group: 'studio',
+    isNew: true,
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.yardwars',
+  },
+  {
+    title: 'Ricochet Rivals',
+    description: 'A 1v1 saloon gunfight - bounce bullets off the walls and knock your rival’s hat off.',
+    cover: ricochetrivals,
+    group: 'studio',
+    isNew: true,
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.ricochetrivals',
+  },
   {
     title: 'Stone Smash',
     description: 'A 1v1 tower duel — smash the rival stone tower with volcano rocks before the eruption ends.',

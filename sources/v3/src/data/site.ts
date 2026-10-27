@@ -18,7 +18,7 @@ export const SITE = {
 export const CF_ANALYTICS_TOKEN = '4f0e8def1e514737a965ca85fcda51ab';
 
 export const STATS = [
-  { value: '26', suffix: '', label: 'Titles shipped' },
+  { value: '28', suffix: '', label: 'Titles shipped' },
   { value: '10', suffix: 'M+', label: 'Downloads' },
   { value: '2020', suffix: '', label: 'Studio founded' },
 ] as const;
