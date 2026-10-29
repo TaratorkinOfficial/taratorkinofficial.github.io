@@ -63,40 +63,7 @@ export const GROUPS: Record<GameGroup, { label: string; note: string }> = {
 };
 
 export const GAMES: Game[] = [
-  // — Collaborations —
-  {
-    title: 'My Cinema World',
-    description: 'Simulation/management for cinema fans. Build and manage your dream cinema empire.',
-    cover: cinemaworld,
-    group: 'collab',
-    badge: '5M+ downloads',
-    googlePlay: 'https://play.google.com/store/apps/details?id=com.creauctopus.cinemaworld',
-    appStore: 'https://apps.apple.com/us/app/my-cinema-world/id6479268268',
-  },
-  {
-    title: 'Word Maker: Words Games Puzzle',
-    description: 'Word Maker — a word game app. Challenge your vocabulary with fun puzzles.',
-    cover: wordmaker,
-    group: 'collab',
-    badge: '5M+ downloads',
-    googlePlay: 'https://play.google.com/store/apps/details?id=com.aaaudi.wordmaker',
-  },
-  {
-    title: 'Kings Landing',
-    description: 'A strategy/management title. Rule your kingdom and expand your territory.',
-    cover: kingslanding,
-    group: 'collab',
-    badge: '100K+ downloads',
-    googlePlay: 'https://play.google.com/store/apps/details?id=com.Creauctopus.KingsLanding',
-    appStore: 'https://apps.apple.com/us/app/kings-landing-idle-arcade/id6478125091',
-  },
-  {
-    title: 'Food Battles',
-    description: 'Competitive cooking arcade. Battle chefs in fast-paced culinary challenges.',
-    cover: foodbattles,
-    group: 'collab',
-    googlePlay: 'https://play.google.com/store/apps/details?id=com.creauctopus.foodbattles',
-  },
+  // — Collaborations (newest first, by first store release) —
   {
     title: 'Magic Box Defender',
     description: 'Tower defense style action. Defend your realm with magical powers.',
@@ -113,8 +80,41 @@ export const GAMES: Game[] = [
     googlePlay: 'https://play.google.com/store/apps/details?id=com.creauctopus.battlesimulator',
     appStore: 'https://apps.apple.com/us/app/battle-gangs/id6752643126',
   },
+  {
+    title: 'My Cinema World',
+    description: 'Simulation/management for cinema fans. Build and manage your dream cinema empire.',
+    cover: cinemaworld,
+    group: 'collab',
+    badge: '5M+ downloads',
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.creauctopus.cinemaworld',
+    appStore: 'https://apps.apple.com/us/app/my-cinema-world/id6479268268',
+  },
+  {
+    title: 'Kings Landing',
+    description: 'A strategy/management title. Rule your kingdom and expand your territory.',
+    cover: kingslanding,
+    group: 'collab',
+    badge: '100K+ downloads',
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.Creauctopus.KingsLanding',
+    appStore: 'https://apps.apple.com/us/app/kings-landing-idle-arcade/id6478125091',
+  },
+  {
+    title: 'Word Maker: Words Games Puzzle',
+    description: 'Word Maker — a word game app. Challenge your vocabulary with fun puzzles.',
+    cover: wordmaker,
+    group: 'collab',
+    badge: '5M+ downloads',
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.aaaudi.wordmaker',
+  },
+  {
+    title: 'Food Battles',
+    description: 'Competitive cooking arcade. Battle chefs in fast-paced culinary challenges.',
+    cover: foodbattles,
+    group: 'collab',
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.creauctopus.foodbattles',
+  },
 
-  // — Studio titles —
+  // — Studio titles (newest first, by first store release) —
   {
     title: 'Yard Wars',
     description: 'A backyard zombie duel - grab zombies, toss them over the fence and wreck your neighbor’s house.',
@@ -146,54 +146,6 @@ export const GAMES: Game[] = [
     group: 'studio',
     isNew: true,
     googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.climbgrab',
-  },
-  {
-    title: 'Colony Defender',
-    description:
-      'A light strategy. Manage a growing settlement, build units from cards, and survive monster waves.',
-    cover: colonydefender,
-    group: 'studio',
-    googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.colonydefender',
-    appStore: 'https://apps.apple.com/us/app/myrion-bastion/id6761761954',
-  },
-  {
-    title: 'Time To Chill',
-    description: 'Merge cocktails and unlock stylish tropical destinations.',
-    cover: timetochill,
-    group: 'studio',
-    googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.timetochill',
-  },
-  {
-    title: 'Harbor Keepers',
-    description: 'Tower defense — protect your island from pirate invasions.',
-    cover: harborkeepers,
-    group: 'studio',
-    googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.harborkeepers',
-    appStore: 'https://apps.apple.com/us/app/harbor-keepers/id6762597951',
-  },
-  {
-    title: 'Balloon Travel 3D',
-    description: 'A relaxing balloon arcade. Float through beautiful landscapes.',
-    cover: balloontravel,
-    group: 'studio',
-    googlePlay: 'https://play.google.com/store/apps/details?id=com.TaratorkinOfficial.BalloonTravel3D',
-    appStore: 'https://apps.apple.com/us/app/balloon-travel-3d/id6763124242',
-  },
-  {
-    title: 'Space Trouble 3D',
-    description: 'Fast-paced space runner with explosive obstacles.',
-    cover: spacetrouble,
-    group: 'studio',
-    googlePlay: 'https://play.google.com/store/apps/details?id=com.TaratorkinOfficial.SpaceThrone3D',
-    appStore: 'https://apps.apple.com/us/app/space-trouble-3d/id6762308603',
-  },
-  {
-    title: 'Virus Runner',
-    description: 'Dynamic runner with progression. Evolve and survive.',
-    cover: virusrunner,
-    group: 'studio',
-    googlePlay: 'https://play.google.com/store/apps/details?id=com.TaratorkinOfficial.VirusRunner',
-    appStore: 'https://apps.apple.com/us/app/neurophage-runner/id6763154550',
   },
   {
     title: 'Deadweight',
@@ -234,8 +186,92 @@ export const GAMES: Game[] = [
     group: 'studio',
     googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.roachhunter',
   },
+  {
+    title: 'Harbor Keepers',
+    description: 'Tower defense — protect your island from pirate invasions.',
+    cover: harborkeepers,
+    group: 'studio',
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.harborkeepers',
+    appStore: 'https://apps.apple.com/us/app/harbor-keepers/id6762597951',
+  },
+  {
+    title: 'Time To Chill',
+    description: 'Merge cocktails and unlock stylish tropical destinations.',
+    cover: timetochill,
+    group: 'studio',
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.timetochill',
+  },
+  {
+    title: 'Colony Defender',
+    description:
+      'A light strategy. Manage a growing settlement, build units from cards, and survive monster waves.',
+    cover: colonydefender,
+    group: 'studio',
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.colonydefender',
+    appStore: 'https://apps.apple.com/us/app/myrion-bastion/id6761761954',
+  },
+  {
+    title: 'Space Trouble 3D',
+    description: 'Fast-paced space runner with explosive obstacles.',
+    cover: spacetrouble,
+    group: 'studio',
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.TaratorkinOfficial.SpaceThrone3D',
+    appStore: 'https://apps.apple.com/us/app/space-trouble-3d/id6762308603',
+  },
+  {
+    title: 'Balloon Travel 3D',
+    description: 'A relaxing balloon arcade. Float through beautiful landscapes.',
+    cover: balloontravel,
+    group: 'studio',
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.TaratorkinOfficial.BalloonTravel3D',
+    appStore: 'https://apps.apple.com/us/app/balloon-travel-3d/id6763124242',
+  },
+  {
+    title: 'Virus Runner',
+    description: 'Dynamic runner with progression. Evolve and survive.',
+    cover: virusrunner,
+    group: 'studio',
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.TaratorkinOfficial.VirusRunner',
+    appStore: 'https://apps.apple.com/us/app/neurophage-runner/id6763154550',
+  },
 
-  // — Team experience —
+  // — Team experience (newest first, by first store release) —
+  {
+    title: 'Nile Valley: Farm Adventure',
+    description: 'City builder with idle farming, set in ancient Egypt.',
+    cover: nilevalley,
+    group: 'experience',
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.eightkgames.nilevalley',
+  },
+  {
+    title: 'Prismatrix',
+    description: 'Puzzle / arcade experiment. Solve colorful challenges.',
+    cover: prismatrix,
+    group: 'experience',
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.GaForCompany.Prismatrix',
+  },
+  {
+    title: 'Cross Stitch Coloring Art',
+    description: 'Cross-stitch coloring art for casual creativity.',
+    cover: crossstitchcoloringart,
+    group: 'experience',
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.playcus.crosstitchcoloringart',
+  },
+  {
+    title: 'Cross Stitch Coloring Mandala',
+    description: 'Mandala cross-stitch coloring with calming progression.',
+    cover: crossstitchmandala,
+    group: 'experience',
+    googlePlay:
+      'https://play.google.com/store/apps/details?id=com.playcus.crossstitch.coloring.mandala',
+  },
+  {
+    title: 'Cross-Stitch: Coloring Book',
+    description: 'Relaxing pixel-art cross-stitch coloring book.',
+    cover: crossstitchcoloringbook,
+    group: 'experience',
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.playcus.crossstitchcoloringbook',
+  },
   {
     title: 'Rage Of Giants',
     description: 'Island wars and giant battles. Unleash epic destruction.',
@@ -255,20 +291,6 @@ export const GAMES: Game[] = [
     },
   },
   {
-    title: 'Prismatrix',
-    description: 'Puzzle / arcade experiment. Solve colorful challenges.',
-    cover: prismatrix,
-    group: 'experience',
-    googlePlay: 'https://play.google.com/store/apps/details?id=com.GaForCompany.Prismatrix',
-  },
-  {
-    title: 'Nile Valley: Farm Adventure',
-    description: 'City builder with idle farming, set in ancient Egypt.',
-    cover: nilevalley,
-    group: 'experience',
-    googlePlay: 'https://play.google.com/store/apps/details?id=com.eightkgames.nilevalley',
-  },
-  {
     title: 'Matchland: Build a Theme Park',
     description: 'Match-3 game with theme park build meta-game.',
     cover: matchland,
@@ -277,27 +299,5 @@ export const GAMES: Game[] = [
       label: 'App Store (archive)',
       url: 'https://web.archive.org/web/20240518013613/https://apps.apple.com/us/app/matchland-build-a-theme-park/id1445039832',
     },
-  },
-  {
-    title: 'Cross-Stitch: Coloring Book',
-    description: 'Relaxing pixel-art cross-stitch coloring book.',
-    cover: crossstitchcoloringbook,
-    group: 'experience',
-    googlePlay: 'https://play.google.com/store/apps/details?id=com.playcus.crossstitchcoloringbook',
-  },
-  {
-    title: 'Cross Stitch Coloring Art',
-    description: 'Cross-stitch coloring art for casual creativity.',
-    cover: crossstitchcoloringart,
-    group: 'experience',
-    googlePlay: 'https://play.google.com/store/apps/details?id=com.playcus.crosstitchcoloringart',
-  },
-  {
-    title: 'Cross Stitch Coloring Mandala',
-    description: 'Mandala cross-stitch coloring with calming progression.',
-    cover: crossstitchmandala,
-    group: 'experience',
-    googlePlay:
-      'https://play.google.com/store/apps/details?id=com.playcus.crossstitch.coloring.mandala',
   },
 ];
