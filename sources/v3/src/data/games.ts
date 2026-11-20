@@ -12,6 +12,9 @@ import harborkeepers from '../assets/games/harborkeepers.webp';
 import balloontravel from '../assets/games/balloontravel.webp';
 import spacetrouble from '../assets/games/spacetrouble.webp';
 import virusrunner from '../assets/games/virusrunner.webp';
+import capturetower from '../assets/games/capturetower.webp';
+import ghostvac from '../assets/games/ghostvac.webp';
+import fortraid from '../assets/games/fortraid.webp';
 import climbgrab from '../assets/games/climbgrab.webp';
 import stonesmash from '../assets/games/stonesmash.webp';
 import yardwars from '../assets/games/yardwars.webp';
@@ -115,6 +118,30 @@ export const GAMES: Game[] = [
   },
 
   // — Studio titles (newest first, by first store release) —
+  {
+    title: 'Capture Tower',
+    description: 'A 1v1 tower war - swipe your knights between towers, wake the dragon and out-crown your rival in 3 minutes.',
+    cover: capturetower,
+    group: 'studio',
+    isNew: true,
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.capturetower',
+  },
+  {
+    title: 'Ghost Vac',
+    description: 'A 1v1 ghost-hunting duel - vacuum up ghosts, burst your rival’s glass tank and bank the loot first.',
+    cover: ghostvac,
+    group: 'studio',
+    isNew: true,
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.ghostvac',
+  },
+  {
+    title: 'Fort Raid',
+    description: 'A 1v1 viking siege - launch your raiders over the wall, steal their gold and drag it home.',
+    cover: fortraid,
+    group: 'studio',
+    isNew: true,
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.taratorkinofficial.fortraid',
+  },
   {
     title: 'Yard Wars',
     description: 'A backyard zombie duel - grab zombies, toss them over the fence and wreck your neighbor’s house.',
